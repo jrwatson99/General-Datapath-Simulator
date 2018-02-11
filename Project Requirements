@@ -1,0 +1,40 @@
+	Requirements:
+
+	Problem Statement:
+		It is difficult to visualize and predict the flow of data in a processor datapath. There are few tools that assist with this, but all of them
+		are difficult to use, are riddled with bugs, and do not support all of the features we would like.
+
+	Solution:
+		We will design and write software which will allow the user to design a CPU datapath. A GUI will be implemented which will allow the user to drag and drop general components, specify the details of each component, and connect those components together with wire.
+		The following components will be included in the initial implementation:
+			Multiplexor
+			Arithmetic Logic Unit
+			Adder
+			Comparator
+			Register File
+			Control Unit
+			//FIXME: FINISH LIST
+
+	Inputs:
+		User-GUI interaction
+			Drag and drop components
+			Connect components by dragging wire between ports - wires can connect to many ports
+			Each component instance has a relevant options panel
+		Text file
+			User can step through clock cycles to simulate data flow according to instructions in a text file which populate instruction memory at runtime
+		
+	Outputs:
+		Data values on wires and component ports - should be able to view values in binary, decimal, or hexadecimal format
+		
+	Security:
+		Unimportant during this phase
+		Design for manageable future changes
+	
+	Reliability:
+		Should not have any major bugs
+		A few minor bugs acceptable, given that they are fixed in next phase
+		Warning messages display to user when they have made a mistake or try to access an unimplemented feature
+	
+	Design Maintainability:
+		Designed for scalability and optimization
+		Modularity, encapsulation, and information hiding must be practiced
