@@ -21,4 +21,16 @@ Architecture:
 		Graphics
 			GUI
 			ComponentGraphics
+				ALUGraphic
+				MUXGraphic
+				MemoryGraphic
+				AdderGraphic
+				RegisterGraphic
+				ComparatorGraphic
+				ConstantValueGraphic
+				BitShifterGraphic
+				BitExtenderGraphic
+				WireGraphic
+				WireJunctionGraphic
+				
 		
