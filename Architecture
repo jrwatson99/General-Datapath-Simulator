@@ -1,0 +1,24 @@
+Architecture:
+
+	Packages:
+		Logic
+			Component
+				ALU
+				MUX
+				Memory
+					DataMemory
+					RegisterFile
+				Adder
+				Register
+				Comparator
+				ConstantValue
+				BitShifter
+				BitExtender
+			Wire
+			WireJunction
+			ExecutionEnvironment
+			LogicInterface
+		Graphics
+			GUI
+			ComponentGraphics
+		
