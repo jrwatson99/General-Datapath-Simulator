@@ -9,7 +9,7 @@ public abstract class Component {
 	public Component() {
 	}
 	
-	/**Update
+	/**
 	 * Virtual routine wherein each component subclass computes the appropriate output values based on it's input values.
 	 * @author Jonathan Watson
 	 * @version 0.1
@@ -18,7 +18,7 @@ public abstract class Component {
 	public abstract void Update();	
 	
 	
-	/**isValidUnsignedBitLength
+	/**
 	 * Checks to see if the given bit length is large enough to contain the given data value.<br>
 	 * Only useful for unsigned values. For signed values, see {@link #isValidSignedBitLength(int data, int numBits)}
 	 * @author Jonathan Watson
@@ -36,7 +36,7 @@ public abstract class Component {
 		return isValid;
 	}
 	
-	/** isValidSignedBitLength
+	/**
 	 * Checks to see if the given bit length is large enough to contain the given data value.<br>
 	 * Only useful for signed values. For unsigned values, see {@link #isValidUnsignedBitLength(int data, int numBits)}
 	 * @author Jonathan Watson
