@@ -8,11 +8,12 @@ package logic.components;
 
 
 public class Adder extends Component {
+	
 	public Adder() {
 		super();
 	}
 	
-	public void update() {
-		output=inputs.get(1)+inputs.get(2);
+	public void Update() {
+		
 	}
 }
