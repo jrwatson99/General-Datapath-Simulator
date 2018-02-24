@@ -7,9 +7,9 @@ import java.math.BigInteger;
  * @author Jonathan Watson
  *
  */
-public class dataValue extends BigInteger {
+public class DataValue extends BigInteger {
 
-	public dataValue(String value) {
+	public DataValue(String value) {
 		super(value);
 	}
 }

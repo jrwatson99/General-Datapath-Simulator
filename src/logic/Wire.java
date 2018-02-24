@@ -1,8 +1,8 @@
 package logic;
 
 public class Wire {
-	private dataValue value;
+	private DataValue value;
 	
-	public void setValue(dataValue newValue) {value = newValue;}
-	public dataValue getValue() {return value;}
+	public void setValue(DataValue newValue) {value = newValue;}
+	public DataValue getValue() {return value;}
 }
