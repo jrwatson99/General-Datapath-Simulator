@@ -8,6 +8,12 @@ import logic.DataValue;
 
 public abstract class Component {
 	
+	
+	protected Signedness signedness;
+	
+	public void setSignedness(Signedness newSignedness) {signedness = newSignedness;}
+	public Signedness getSignedness() {return signedness;}
+	
 	/**
 	 * A value can be considered as signed or unsigned
 	 * @author Jonathan Watson
@@ -19,6 +25,7 @@ public abstract class Component {
 	}
 	
 	public Component() {
+		setSignedness(Signedness.SIGNED);
 	}
 	
 	/**
@@ -70,6 +77,28 @@ public abstract class Component {
 			isValid = (data.divide((new DataValue("2")).pow(numBits - 1)).compareTo(new DataValue("-1")) > 0);
 		}
 		return isValid;
+	}
+	
+	/**
+	 * Determines the validity of the data's ability to be represented by the given number of bits.
+	 * Considers signedness
+	 * @param dataVal
+	 * @param bitLength
+	 * @return validity
+	 * @throws Exception
+	 */
+	protected boolean determineBitValidity(DataValue dataVal, int bitLength) throws Exception {
+		boolean validity = false;
+		if (getSignedness() == Signedness.SIGNED) {
+			validity = isValidSignedBitLength(dataVal, bitLength);
+		}
+		else if (getSignedness() == Signedness.UNSIGNED) {
+			validity = isValidUnsignedBitLength(dataVal, bitLength);
+		}
+		else {
+			throw new Exception("ERROR: Invalid enum Signedness value");
+		}
+		return validity;
 	}
 	
 }
