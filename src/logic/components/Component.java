@@ -21,7 +21,7 @@ public abstract class Component {
 	 */
 	protected enum Signedness {
 		UNSIGNED,
-		SIGNED;
+		SIGNED
 	}
 	
 	public Component() {
