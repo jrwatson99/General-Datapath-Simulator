@@ -85,13 +85,13 @@ public class ALU extends Component {
 		DataValue inputAVal = getInputA().getValue();
 		boolean isValidBitLengthInputA = determineBitValidity(inputAVal, getBitLength());
 		if (!isValidBitLengthInputA) {
-			throw new Exception("ERROR: Invalid bit length for inputA in Adder");
+			throw new Exception("ERROR: Invalid bit length for inputA in ALU");
 		}
 		
 		DataValue inputBVal = getInputB().getValue();
 		boolean isValidBitLengthInputB = determineBitValidity(inputBVal, getBitLength());
 		if (!isValidBitLengthInputB) {
-			throw new Exception("ERROR: Invalid bit length for inputB in Adder");
+			throw new Exception("ERROR: Invalid bit length for inputB in ALU");
 		}
 		
 		DataValue result;
@@ -139,10 +139,23 @@ public class ALU extends Component {
 		default:
 			throw new Exception("ERROR: Invalid ALU OP code");		
 		}
-		return fitDataToBitLength(result); //FIXME
+		return fitDataToBitLength(result, getBitLength()); //FIXME
 	}
 	
-	private void changeOpOrder(Operation op, int index) { 
-		//TODO not sure how we want to implement this yet.
+	/**
+	 * @author Jonathan Watson
+	 * @version 0.1
+	 * @param op
+	 * @param index
+	 * @throws Exception
+	 */
+	public void changeOpOrder(Operation op, int index) throws Exception { 
+		if (opOrder.contains(op)) {
+			opOrder.remove(op);
+		}
+		if (index > opOrder.size()) {
+			throw new Exception("ERROR: insertion index greater than opOrder size");
+		}
+		opOrder.add(index, op);
 	}
 }

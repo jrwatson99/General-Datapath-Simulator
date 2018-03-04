@@ -59,7 +59,7 @@ public class BitShifter extends Component {
 		
 		DataValue newOutput = shiftData(inputVal);
 		
-		getOutput().setValue(fitDataToBitLength(newOutput));
+		getOutput().setValue(fitDataToBitLength(newOutput, getBitLength()));
 	}
 	
 	/**
@@ -82,35 +82,6 @@ public class BitShifter extends Component {
 			throw new Exception("ERROR: Invalid Signedness value in Bitshifter");
 		}
 		
-		return newOutput;
-	}
-	
-	/**
-	 * removes any part of input that can not exist within the given bitLength
-	 * @author Jonathan Watson
-	 * @version 0.1
-	 * @param dataToFit
-	 * @return newOutput
-	 * @throws Exception
-	 */
-	private DataValue fitDataToBitLength(DataValue dataToFit) throws Exception {
-		DataValue newOutput = dataToFit;
-		if (getSignedness() == Signedness.SIGNED) {
-			//if newOutput > 0
-			if (newOutput.compareTo(DataValue.ZERO) > 0) {
-				newOutput = (DataValue)newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, getBitLength() - 1) - 1)));
-			}
-			//if newOutput < 0
-			else if (newOutput.compareTo(DataValue.ZERO) < 0) {
-				newOutput = (DataValue)(newOutput.multiply(new DataValue("-1")).mod(new DataValue(Integer.toString((int)Math.pow(2, getBitLength() - 1))))).multiply(new DataValue("-1"));
-			}
-		}
-		else if (getSignedness() == Signedness.UNSIGNED) {
-			newOutput = (DataValue)newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, getBitLength()))));
-		}
-		else {
-			throw new Exception("ERROR: Invalid signedness value in Bitshifter");
-		}
 		return newOutput;
 	}
 }

@@ -9,6 +9,8 @@ package logic.components;
  */
 public class MUX extends Component{
 	
+	private Wire 
+	
 	public MUX() {
 		super();
 	}
