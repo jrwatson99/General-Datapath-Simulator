@@ -3,7 +3,7 @@ package logic.components;
 import logic.DataValue;
 import logic.Wire;
 
-/*
+/**
  * Adder class. Performs simple mathematical addition.
  * 2 inputs, 1 output
  * out = in1 + in2

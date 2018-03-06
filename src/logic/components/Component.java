@@ -125,7 +125,7 @@ public abstract class Component {
 			newOutput = (DataValue)newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength))));
 		}
 		else {
-			throw new Exception("ERROR: Invalid signedness value in Bitshifter");
+			throw new Exception("ERROR: Invalid signedness value in fitDataToBitLength");
 		}
 		return newOutput;
 	}
