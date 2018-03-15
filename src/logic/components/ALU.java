@@ -122,19 +122,19 @@ public class ALU extends Component {
 		DataValue result;
 		switch(operation) {
 		case ADD: // add
-			result=(DataValue)inputAVal.add(inputBVal);
+			result = new DataValue(inputAVal.add(inputBVal));
 			break;
 		case SUBTRACT: // sub
-			result=(DataValue)inputAVal.subtract(inputBVal);
+			result = new DataValue(inputAVal.subtract(inputBVal));
 			break;
 		case MULTIPLY: // mul
-			result=(DataValue)inputAVal.multiply(inputBVal);
+			result = new DataValue(inputAVal.multiply(inputBVal));
 			break;
 		case SRL: // srl
-			result=(DataValue)inputAVal.shiftRight(inputBVal.intValue());
+			result = new DataValue(inputAVal.shiftRight(inputBVal.intValue()));
 			break;
 		case SLL: // sll
-			result=(DataValue)inputAVal.shiftLeft(inputBVal.intValue());
+			result = new DataValue(inputAVal.shiftLeft(inputBVal.intValue()));
 			break;
 		default:
 			throw new Exception("ERROR: Invalid ALU OP code");		
@@ -158,4 +158,152 @@ public class ALU extends Component {
 		}
 		opOrder.add(index, op);
 	}
+	
+	
+	/**
+	 * Test class
+	 * @author Jonathan Watson
+	 * @version 0.1
+	 *
+	 */
+	public static class Tester32Bit {
+		
+		private static Wire inputAWire;
+		private static Wire inputBWire;
+		private static ALU testALU;
+		private static Wire outputWire;
+		private static Wire opCodeWire;
+		private static Wire zeroWire;
+		
+		public static void main(String args[]) throws Exception {
+			
+			setupALU();
+			
+			//run tests with all value from 0 to 2^31 - should test many valid values, NOT invalid values
+			int i = 0;
+			int j = 0;
+			final int maxValToTest = (int)Math.pow(2, 15);
+			final int incrementAmount = (int)Math.pow(2, 3);
+			System.out.println("Beginning tests for 32 bit Adder.");
+			for (i = 0; i < maxValToTest; i += incrementAmount) {
+				
+				if (i % (incrementAmount * 10) == 0) {
+					int numTenthsFinished = i / (maxValToTest / 100);
+					System.out.println((numTenthsFinished) + "% Completed");
+				}
+				for (j = 0; j < maxValToTest; j += incrementAmount) {
+					//System.out.println(i + " " + j);
+					runAllTests(new DataValue(Integer.toString(i)), new DataValue(Integer.toString(j)));
+				}
+			}
+			System.out.println("Finished tests for 32 bit ALU. Congratulations :D!");
+			
+			
+		}
+		
+		private static void setupALU() {
+			testALU = new ALU();
+			
+			inputAWire = new Wire();
+			testALU.setInputA(inputAWire);
+			
+			inputBWire = new Wire();
+			testALU.setInputB(inputBWire);
+			
+			outputWire = new Wire();
+			testALU.setOutput(outputWire);
+			
+			opCodeWire = new Wire();
+			testALU.setALUOP(opCodeWire);
+			
+			zeroWire = new Wire();
+			testALU.setZero(zeroWire);
+			
+		}
+		
+		private static void runAllTests(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			runAddTest(inputAVal, inputBVal);
+			runSubtractTest(inputAVal, inputBVal);
+			runMultiplyTest(inputAVal, inputBVal);
+			runShiftRightTest(inputAVal, inputBVal);
+			runShiftLeftTest(inputAVal, inputBVal);
+		}
+		
+		
+		private static void runAddTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			inputAWire.setValue(inputAVal);
+			inputBWire.setValue(inputBVal);
+			opCodeWire.setValue(new DataValue("0"));
+			testALU.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputAVal);
+			expectedOutputValue.add(inputBVal);
+			
+			assert(expectedOutputValue.equals(outputWire.getValue()));
+		}
+		
+		private static void runSubtractTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			inputAWire.setValue(inputAVal);
+			inputBWire.setValue(inputBVal);
+			opCodeWire.setValue(new DataValue("1"));
+			testALU.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputAVal);
+			expectedOutputValue.subtract(inputBVal);
+			
+			assert(expectedOutputValue.equals(outputWire.getValue()));
+		}
+		
+		private static void runMultiplyTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			inputAWire.setValue(inputAVal);
+			inputBWire.setValue(inputBVal);
+			opCodeWire.setValue(new DataValue("2"));
+			testALU.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputAVal);
+			expectedOutputValue.multiply(inputBVal);
+			
+			assert(expectedOutputValue.equals(outputWire.getValue()));
+		}
+		
+		private static void runShiftRightTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			inputAWire.setValue(inputAVal);
+			inputBWire.setValue(inputBVal);
+			opCodeWire.setValue(new DataValue("4"));
+			testALU.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputAVal);
+			if (inputBVal.compareTo(new DataValue(Integer.toString(Integer.MAX_VALUE))) <= 0) {
+				expectedOutputValue.shiftRight(inputBVal.intValue());
+				
+				assert(expectedOutputValue.equals(outputWire.getValue()));
+			}
+			else {
+				throw new Exception("ERROR: ALU - Cannot shift right by more than " + Integer.MAX_VALUE);
+			}
+		}
+		
+		private static void runShiftLeftTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
+			inputAWire.setValue(inputAVal);
+			inputBWire.setValue(inputBVal);
+			opCodeWire.setValue(new DataValue("3"));
+			testALU.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputAVal);
+			if (inputBVal.compareTo(new DataValue(Integer.toString(Integer.MAX_VALUE))) <= 0) {
+				expectedOutputValue.shiftLeft(inputBVal.intValue());
+				
+				assert(expectedOutputValue.equals(outputWire.getValue()));
+			}
+			else {
+				throw new Exception("ERROR: ALU - Cannot shift left by more than " + Integer.MAX_VALUE);
+			}
+		}
+	}
+	
 }

@@ -84,4 +84,71 @@ public class BitShifter extends Component {
 		
 		return newOutput;
 	}
+	
+	private static class Tester32Bit {
+		
+		private static BitShifter testBitShifter;
+		private static Wire inputWire;
+		private static Wire outputWire;
+		
+		
+		private static void main(String args[]) {
+			setupBitShifter();
+			
+			
+			/*
+			//run tests with all value from 0 to 2^31 - should test many valid values, NOT invalid values
+			int i = 0;
+			int j = 0;
+			final int maxValToTest = (int)Math.pow(2, 30);
+			final int incrementAmount = (int)Math.pow(2, 18);
+			System.out.println("Beginning tests for 32 bit Adder.");
+			for (i = 0; i < maxValToTest; i += incrementAmount) {
+				
+				if (i % (incrementAmount * 10) == 0) {
+					int numTenthsFinished = i / (maxValToTest / 100);
+					System.out.println((numTenthsFinished) + "% Completed");
+				}
+				for (j = 0; j < maxValToTest; j += incrementAmount) {
+					//System.out.println(i + " " + j);
+					runTest(new DataValue(Integer.toString(i)), new DataValue(Integer.toString(j)));
+				}
+			}
+			*/
+			System.out.println("Finished tests for 32 bit Adder. Congratulations :D!");
+		}
+		
+		private static void setupBitShifter() {
+			testBitShifter = new BitShifter();
+			
+			inputWire = new Wire();
+			testBitShifter.setInput(inputWire);
+			
+			outputWire = new Wire();
+			testBitShifter.setOutput(outputWire);
+		}
+		
+		private static void runTest(DataValue inputVal, int shiftAmount, Direction direction) throws Exception {
+			inputWire.setValue(inputVal);
+			testBitShifter.setShiftAmount(shiftAmount);
+			testBitShifter.setDirection(direction);
+			testBitShifter.Update();
+			
+			DataValue expectedOutputValue = new DataValue("0");
+			expectedOutputValue.add(inputVal);
+			if (direction == Direction.RIGHT) {
+				expectedOutputValue.shiftRight(shiftAmount);
+			}
+			else if (direction == Direction.LEFT) {
+				expectedOutputValue.shiftLeft(shiftAmount);
+			}
+			else {
+				throw new Exception("ERROR: invalid direction");
+			}
+			
+			assert (expectedOutputValue.equals(outputWire.getValue()));
+		}
+		
+	}
+	
 }

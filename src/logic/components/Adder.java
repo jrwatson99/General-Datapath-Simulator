@@ -85,22 +85,15 @@ public class Adder extends Component {
 		private static Adder testAdder;
 		
 		public static void main(String args[]) throws Exception {
-			testAdder = new Adder();
 			
-			inputAWire = new Wire();
-			testAdder.setInputA(inputAWire);
-			
-			inputBWire = new Wire();
-			testAdder.setInputB(inputBWire);
-			
-			outputWire = new Wire();
-			testAdder.setOutput(outputWire);
+			//initiate wires and adder, connect wires to adder
+			setupAdder();
 
 			//run tests with all value from 0 to 2^31 - should test many valid values, NOT invalid values
 			int i = 0;
 			int j = 0;
-			int maxValToTest = (int)Math.pow(2, 30);
-			int incrementAmount = (int)Math.pow(2, 18);
+			final int maxValToTest = (int)Math.pow(2, 30);
+			final int incrementAmount = (int)Math.pow(2, 18);
 			System.out.println("Beginning tests for 32 bit Adder.");
 			for (i = 0; i < maxValToTest; i += incrementAmount) {
 				
@@ -113,10 +106,23 @@ public class Adder extends Component {
 					runTest(new DataValue(Integer.toString(i)), new DataValue(Integer.toString(j)));
 				}
 			}
-			System.out.println("Finished tests for 32 bit Adder. Congratulations!");
+			System.out.println("Finished tests for 32 bit Adder. Congratulations :D!");
 			
 			
 			
+		}
+		
+		private static void setupAdder() {
+			testAdder = new Adder();
+			
+			inputAWire = new Wire();
+			testAdder.setInputA(inputAWire);
+			
+			inputBWire = new Wire();
+			testAdder.setInputB(inputBWire);
+			
+			outputWire = new Wire();
+			testAdder.setOutput(outputWire);
 		}
 		
 		private static void runTest(DataValue inputAVal, DataValue inputBVal) throws Exception {
