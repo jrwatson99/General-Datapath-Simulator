@@ -1,8 +1,30 @@
 package logic;
 
+
+
 public class Wire {
 	private DataValue value;
+	private WireListener listener;
 	
-	public void setValue(DataValue newValue) {value = newValue;}
+	public Wire(){
+		this(null);
+	}
+	
+	public Wire(WireListener listener){
+		this.listener=listener;
+		value=new DataValue();
+	}
+	
+	public void setValue(DataValue newValue) {
+		if(this.value!=newValue && listener != null) {
+			listener.onValueChange();
+		}
+		value = newValue;
+		}
+	
 	public DataValue getValue() {return value;}
+
+	public void addWireListener(WireListener wireListener) {
+		listener=wireListener;
+	}
 }
