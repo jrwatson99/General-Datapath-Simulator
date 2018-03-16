@@ -15,4 +15,7 @@ public class DataValue extends BigInteger {
 	public DataValue(BigInteger bigInt) {
 		super(bigInt.toByteArray());
 	}
+	public DataValue() {
+		this("0");
+	}
 }
