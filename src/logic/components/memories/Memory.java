@@ -63,7 +63,7 @@ public abstract class Memory extends Component{
 	}
 	
 	public abstract void onPosEdgeClk() throws Exception;
-	public abstract void onNegEdgeClk();
+	public abstract void onNegEdgeClk() throws Exception;
 	
 	/**
 	 * listens for clock edge and calls update
