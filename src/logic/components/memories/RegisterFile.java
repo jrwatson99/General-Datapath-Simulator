@@ -33,6 +33,9 @@ public class RegisterFile extends Memory{
 		setDataWidth(registerWidth);
 		registers = new ArrayList<DataValue>();
 		registers.ensureCapacity(numRegisters);
+		for(int i=0;i<numRegisters;i++) {
+			registers.add(DataValue.ZERO);
+		}
 	}
 	
 	@Override
@@ -70,6 +73,65 @@ public class RegisterFile extends Memory{
 	public void Update() throws Exception {
 		super.update();
 	}
-	//TODO write a tester class
+	private static class Tester {
+		private static Wire clk;
+		private static Wire readData1;
+		private static Wire readData2;
+		private static Wire writeData;
+		private static Wire writeEn;
+		private static Wire writeAddress;
+		private static Wire readAddress1;
+		private static Wire readAddress2;
+		private static RegisterFile regs;
+		
+		public static void main(String args[]) {
+			regs = new RegisterFile(32,32);
+			clk = new Wire();
+			clk.setValue(DataValue.ZERO);
+			regs.setCLK(clk);
+			readData1 = new Wire();
+			regs.setReadData(readData1);
+			readData2 = new Wire();
+			regs.setReadData2(readData2);
+			readAddress1 = new Wire();
+			regs.setReadAddress1(readAddress1);
+			readAddress2 = new Wire();
+			regs.setReadAddress2(readAddress2);
+			writeData = new Wire();
+			regs.setWriteData(writeData);
+			writeEn = new Wire();
+			regs.setWriteEnable(writeEn);
+			writeAddress = new Wire();
+			regs.setAddress(writeAddress);
+			
+			initMemTest();
+			printMem();
+			
+		}
+
+		private static void printMem() {
+			for(int i=0; i<regs.numRegisters;i+=2) {
+				readAddress1.setValue(new DataValue(i));
+				readAddress2.setValue(new DataValue(i+1));
+				clk.setValue(DataValue.ONE);
+				clk.setValue(DataValue.ZERO);
+				System.out.println("Reg "+ i + ": " + readData1.getValue().toString() + "\nReg " + (i+1) +  ": " + readData2.getValue().toString() );
+			}
+		}
+
+		private static void initMemTest() {
+			DataValue x;
+			writeEn.setValue(DataValue.ONE);
+			for(int i=0; i<regs.numRegisters;i++) {
+				x=new DataValue(i);
+				writeAddress.setValue(x);
+				writeData.setValue(x);
+				clk.setValue(DataValue.ONE);
+				clk.setValue(DataValue.ZERO);
+			}
+			writeEn.setValue(DataValue.ZERO);
+		}
+		
+	}
 	
 }

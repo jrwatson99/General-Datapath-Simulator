@@ -21,7 +21,7 @@ public class DataValue extends BigInteger {
 		super(byteData);
 	}
 	public DataValue() {
-		this("0");
+		this(0);
 	}
 	public DataValue(int num) {
 		this(BigInteger.valueOf(num));
