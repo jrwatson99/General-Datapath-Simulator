@@ -36,11 +36,12 @@ public abstract class Memory extends Component{
 
 	
 	public Memory(){
-		name="invalid";
+		this("invalid");
 	}
 	
 	public Memory(String name) {
 		this.name=name;
+		setSignedness(Signedness.UNSIGNED);
 	}
 	
 	/**

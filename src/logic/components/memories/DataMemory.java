@@ -53,13 +53,12 @@ public class DataMemory extends Memory{
 		if(getWriteEnable().getValue().intValue()==1) {
 			if(determineBitValidity(getWriteData().getValue(),getDataWidth())) {
 				byte[] data = getWriteData().getValue().toByteArray();
-				for(int i=0; i <= (bits/8);i++) {
+				for(int i=0; i <= (bits-1)/8;i++) {
 					index=address+i;
 					if(index < 0 || index >= size) {
-						throw new Exception("Error: Out of bounds memory write in "+ getName());
+						throw new Exception("Error: Out of bounds memory write in "+ getName()+address);
 					}
-					mem.set(index,data[bits/8-i]);
-					
+					mem.set(index,data[bits/8-i]); 					
 				}
 				for(int i=bits/8+1; i<getDataWidth()/8;i++) {
 					index=address+i;
@@ -110,7 +109,7 @@ public class DataMemory extends Memory{
 		private static DataMemory memory;
 		
 		public static void main(String args[]) {
-			memory = new DataMemory(2048,8);
+			memory = new DataMemory(1024,16);
 			
 			clk = new Wire();
 			clk.setValue(DataValue.ZERO);
@@ -137,7 +136,8 @@ public class DataMemory extends Memory{
 			address.setValue(DataValue.ZERO);
 			clk.setValue(DataValue.ONE);
 			clk.setValue(DataValue.ZERO);				
-			for(int i=memory.getDataWidth()/8;i<=memory.size-memory.getDataWidth()/8;i+=memory.getDataWidth()/8) {
+			int bytes=memory.getDataWidth()/8;
+			for(int i=bytes;i<=memory.size-bytes;i+=bytes) {
 				System.out.println(address.getValue().intValue()+" "+readData.getValue().toString());
 				address.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
@@ -149,7 +149,7 @@ public class DataMemory extends Memory{
 		private static void initMemTest() {
 			writeEn.setValue(DataValue.ONE);
 			for(int i=0;i<=memory.size-memory.getDataWidth()/8;i+=memory.getDataWidth()/8) {
-				writeData.setValue(new DataValue(i%256));
+				writeData.setValue(new DataValue(i%530));
 				address.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
 				clk.setValue(DataValue.ZERO);

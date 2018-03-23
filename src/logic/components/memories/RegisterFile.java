@@ -85,7 +85,7 @@ public class RegisterFile extends Memory{
 		private static RegisterFile regs;
 		
 		public static void main(String args[]) {
-			regs = new RegisterFile(32,32);
+			regs = new RegisterFile(256,8);
 			clk = new Wire();
 			clk.setValue(DataValue.ZERO);
 			regs.setCLK(clk);
@@ -125,7 +125,7 @@ public class RegisterFile extends Memory{
 			for(int i=0; i<regs.numRegisters;i++) {
 				x=new DataValue(i);
 				writeAddress.setValue(x);
-				writeData.setValue(x);
+				writeData.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
 				clk.setValue(DataValue.ZERO);
 			}

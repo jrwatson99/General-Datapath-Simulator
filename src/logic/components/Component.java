@@ -53,7 +53,7 @@ public abstract class Component {
 		assert (data.compareTo(DataValue.ZERO) >= 0) : "method \"isValidUnsignedBitLength\": Param data cannot be less than zero.";
 		
 		//is valid if data/pow(2, numBits) < 1
-		boolean isValid = ((data.divide(((new DataValue("2")).pow(numBits)).subtract(DataValue.ONE))).compareTo(DataValue.ONE) < 0);
+		boolean isValid = ((data.divide(((new DataValue("2")).pow(numBits)).subtract(DataValue.ONE))).compareTo(DataValue.ONE) <= 0);
 		return isValid;
 	}
 	
