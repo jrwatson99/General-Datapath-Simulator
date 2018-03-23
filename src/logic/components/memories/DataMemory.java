@@ -1,5 +1,6 @@
 package logic.components.memories;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import logic.DataValue;
@@ -8,7 +9,7 @@ import logic.Wire;
 public class DataMemory extends Memory{
 	
 	private Wire readEnable;
-	private ArrayList<Byte> mem;
+	private byte[] mem;
 	private int size; // in bytes, memories are limited to 2 GB for this simulator
 	
 	public Wire getReadEnable() {return readEnable;	}
@@ -28,10 +29,11 @@ public class DataMemory extends Memory{
  	public DataMemory(int size,int width,String name){
 		super(name);
 		setDataWidth(width);
-		mem=new ArrayList<Byte>();
-		for(int i=0;i<size;i++) {
-			mem.add(new Byte((byte)0));
-		}
+//		mem=new ArrayList<Byte>();
+//		for(int i=0;i<size;i++) {
+//			mem.add(new Byte((byte)0));
+//		}
+		mem=new byte[size];
 		this.size=size;
 	}
 	
@@ -58,11 +60,13 @@ public class DataMemory extends Memory{
 					if(index < 0 || index >= size) {
 						throw new Exception("Error: Out of bounds memory write in "+ getName()+address);
 					}
-					mem.set(index,data[bits/8-i]); 					
+					//mem.set(index,data[bits/8-i]); 
+					mem[index]=data[bits/8-i];
 				}
 				for(int i=bits/8+1; i<getDataWidth()/8;i++) {
 					index=address+i;
-					mem.set(index,new Byte((byte) 0));
+					//mem.set(index,new Byte((byte) 0));
+					mem[index]=0;
 				}
 			}
 			else {
@@ -73,7 +77,15 @@ public class DataMemory extends Memory{
 			throw new Exception("Error: Invalid value for write enable in "+ getName());
 		}
 	}
-
+	
+	
+	/**
+	 * updates output wire with <datawidth> bits from memory at <address>
+	 * @author Matthew Johnson
+	 * @version 0.1
+	 * @throws Exception
+	 * @return void
+	 */
 	@Override
 	public void onNegEdgeClk() throws Exception {
 		int address=getAddress().getValue().intValue();
@@ -82,7 +94,7 @@ public class DataMemory extends Memory{
 			byte[] data = new byte[getDataWidth()/8];
 			for(int i=0; i < (getDataWidth()/8); i++) {
 				index = address+i;
-				data[getDataWidth()/8-i-1]=mem.get(index);
+				data[getDataWidth()/8-i-1]=mem[index];//mem.get(index);
 				if(index >= size || index < 0) {
 					throw new Exception("Error: Out of Bounds memory read in "+ getName());
 				}
@@ -99,6 +111,14 @@ public class DataMemory extends Memory{
 		super.update();
 	}
 	
+	/**
+	 * used for testing memory read/write functionality. tested for 8-64 bitwidth and up to 2 GB of memory
+	 * @author Matthew Johnson
+	 * @version 0.1
+	 * @throws Exception
+	 * @return void
+	 */
+	@SuppressWarnings("unused")
 	private static class tester{
 		private static Wire clk;
 		private static Wire readData;
@@ -109,7 +129,7 @@ public class DataMemory extends Memory{
 		private static DataMemory memory;
 		
 		public static void main(String args[]) {
-			memory = new DataMemory(1024,16);
+			memory = new DataMemory(Integer.MAX_VALUE-2,32);
 			
 			clk = new Wire();
 			clk.setValue(DataValue.ZERO);
@@ -127,17 +147,29 @@ public class DataMemory extends Memory{
 			
 			initMemTest();
 			printMem();
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//System.out.println(memory.mem);
 			
 		}
-		
+		/**
+		 * prints contents of memory to console for inspection, used to test read/write functionality.
+		 * @author Matthew Johnson
+		 * @version 0.1
+		 * @throws Exception
+		 * @return void
+		 */
 		private static void printMem() {
 			readEn.setValue(DataValue.ONE);
 			address.setValue(DataValue.ZERO);
 			clk.setValue(DataValue.ONE);
 			clk.setValue(DataValue.ZERO);				
 			int bytes=memory.getDataWidth()/8;
-			for(int i=bytes;i<=memory.size-bytes;i+=bytes) {
+			for(int i=0;i<=memory.size-bytes;i+=bytes) {
 				System.out.println(address.getValue().intValue()+" "+readData.getValue().toString());
 				address.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
@@ -145,11 +177,17 @@ public class DataMemory extends Memory{
 			}
 			System.out.println(address.getValue().intValue()+" "+readData.getValue().toString());
 		}
-
+		
+		/**basic initialization of memory. sets each cell to its address, will crash if address is larger than suported datawidth.
+		 * @author Matthew Johnson
+		 * @version 0.1
+		 * @throws Exception
+		 * @return void
+		 */
 		private static void initMemTest() {
 			writeEn.setValue(DataValue.ONE);
 			for(int i=0;i<=memory.size-memory.getDataWidth()/8;i+=memory.getDataWidth()/8) {
-				writeData.setValue(new DataValue(i%530));
+				writeData.setValue(new DataValue(i));
 				address.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
 				clk.setValue(DataValue.ZERO);

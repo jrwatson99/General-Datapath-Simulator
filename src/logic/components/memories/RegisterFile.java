@@ -73,6 +73,7 @@ public class RegisterFile extends Memory{
 	public void Update() throws Exception {
 		super.update();
 	}
+	@SuppressWarnings("unused")
 	private static class Tester {
 		private static Wire clk;
 		private static Wire readData1;
