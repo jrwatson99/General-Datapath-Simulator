@@ -1,6 +1,9 @@
 package graphics.ComponentGraphics;
 
-public abstract class ComponentGraphic {
+import javafx.scene.Node;
+import javafx.scene.layout.Region;
+
+public abstract class ComponentGraphic extends Region {
 	private int xLoc;
 	private int yLoc;
 

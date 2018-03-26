@@ -20,29 +20,37 @@ public class ComponentListElement extends HBox {
     public ComponentListElement(String cName, DatapathWindow datapathWindow) {
         Label componentName = new Label(cName);
 
-        Pane pane;
-        if (datapathWindow.getContent() instanceof Pane) {
-            pane = (Pane)datapathWindow.getContent();
-            ObservableList<Node> paneChildren = pane.getChildren();
-        }
-
-
         Button addButton = new Button("Add");
         addButton.setOnAction(new EventHandler<ActionEvent>() {
-            //FIXME: ADD TO EXECUTION ENVIRONMENT
-            AdderGraphic newAdderGraphic = new AdderGraphic();
 
+            @Override public void handle (ActionEvent e){
 
+                //FIXME: ADD TO EXECUTION ENVIRONMENT
+                AdderGraphic newAdderGraphic = new AdderGraphic();
 
-            paneChildren.add(newAdderGraphic);
+                ObservableList<Node> rootChildren = ((HBox)((Button)e.getSource()).getParent().getParent().getParent().getParent().getParent().getParent()).getChildren();
 
-            @Override public void handle(ActionEvent e) {
-                datapathWindow.addEventHandler(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
+                int i;
+                for (i = 0; i < rootChildren.size(); i++) {
+                    if (rootChildren.get(i) instanceof DatapathWindow) {
+                        ((Pane)((DatapathWindow)rootChildren.get(i)).getContent()).getChildren().addAll(newAdderGraphic.getGraphics());
+                        newAdderGraphic.updateLoc(100, 100);
+                    }
+                }
+
+                datapathWindow.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+                    @Override
                     public void handle(MouseEvent e) {
-                        newAdderGraphic.updateLoc(e.getX(), e.getY());
-                    };
+                        if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
+                            newAdderGraphic.updateLoc(e.getX(), e.getY());
+                        }
+                        else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                            datapathWindow.removeEventHandler(MouseEvent.ANY, this);
+                        }
+                    }
                 });
             }
+
         });
 
         this.getChildren().addAll(componentName, addButton);
