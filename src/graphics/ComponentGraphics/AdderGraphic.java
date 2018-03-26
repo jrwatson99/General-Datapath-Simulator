@@ -68,7 +68,14 @@ public class AdderGraphic extends ComponentGraphic{
     }
 
     public Shape[] getGraphics() {
-        Shape[] graphics = {lineDiagonalTopRight, lineDiagonalBottomRight, lineDiagonalTopLeft, lineDiagonalBottomLeft, lineStraightTop, lineStraightBottom, lineStraightEnd};
+        Shape[] graphics = {
+                lineDiagonalTopRight,
+                lineDiagonalBottomRight,
+                lineDiagonalTopLeft,
+                lineDiagonalBottomLeft,
+                lineStraightTop,
+                lineStraightBottom,
+                lineStraightEnd};
 
         return graphics;
     }
