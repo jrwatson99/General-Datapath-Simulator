@@ -114,15 +114,15 @@ public abstract class Component {
 		if (getSignedness() == Signedness.SIGNED) {
 			//if newOutput > 0
 			if (newOutput.compareTo(DataValue.ZERO) > 0) {
-				newOutput = (DataValue)newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength - 1) - 1)));
+				newOutput = new DataValue(newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength - 1) - 1))));
 			}
 			//if newOutput < 0
 			else if (newOutput.compareTo(DataValue.ZERO) < 0) {
-				newOutput = (DataValue)(newOutput.multiply(new DataValue("-1")).mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength - 1))))).multiply(new DataValue("-1"));
+				newOutput = new DataValue((newOutput.multiply(new DataValue("-1")).mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength - 1))))).multiply(new DataValue("-1")));
 			}
 		}
 		else if (getSignedness() == Signedness.UNSIGNED) {
-			newOutput = (DataValue)newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength))));
+			newOutput = new DataValue(newOutput.mod(new DataValue(Integer.toString((int)Math.pow(2, bitLength)))));
 		}
 		else {
 			throw new Exception("ERROR: Invalid signedness value in fitDataToBitLength");
