@@ -77,6 +77,7 @@ public class Adder extends Component {
 	 * @version 0.1
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private static class Tester32Bit {
 		
 		private static Wire inputAWire;

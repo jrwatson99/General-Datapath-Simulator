@@ -17,10 +17,13 @@ public class Wire {
 	
 	public void setValue(DataValue newValue) {
 		if(this.value!=newValue && listener != null) {
+			value = newValue;
 			listener.onValueChange();
 		}
-		value = newValue;
+		else {
+			value = newValue;
 		}
+	}
 	
 	public DataValue getValue() {return value;}
 
