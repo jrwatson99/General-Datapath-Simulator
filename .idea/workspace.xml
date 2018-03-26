@@ -2,48 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11560b75-2d97-4ffe-b407-fc96e668aeaa" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/General Datapath Simulator.iml" afterPath="$PROJECT_DIR$/General Datapath Simulator.iml" />
-      <change beforePath="$PROJECT_DIR$/bin/.gitignore" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ALUGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ALUGraphic.class" />
+      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ALUGraphic.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/AdderGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/AdderGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/BitExtenderGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/BitExtenderGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/BitShifterGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/BitShifterGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ComparatorGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ComparatorGraphic.class" />
       <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ComponentGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ComponentGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ConstantValueGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/ConstantValueGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/MUXGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/MUXGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/MemoryGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/MemoryGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/RegisterGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/RegisterGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/WireGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/WireGraphic.class" />
-      <change beforePath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/WireJunctionGraphic.class" afterPath="$PROJECT_DIR$/bin/graphics/ComponentGraphics/WireJunctionGraphic.class" />
       <change beforePath="$PROJECT_DIR$/bin/graphics/GUI.class" afterPath="$PROJECT_DIR$/bin/graphics/GUI.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/ExecutionEnvironment.class" afterPath="$PROJECT_DIR$/bin/logic/ExecutionEnvironment.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/LogicInterface.class" afterPath="$PROJECT_DIR$/bin/logic/LogicInterface.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/Wire.class" afterPath="$PROJECT_DIR$/bin/logic/Wire.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/WireJunction.class" afterPath="$PROJECT_DIR$/bin/logic/WireJunction.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/ALU$Operation.class" afterPath="$PROJECT_DIR$/bin/logic/components/ALU$Operation.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/ALU.class" afterPath="$PROJECT_DIR$/bin/logic/components/ALU.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/Adder.class" afterPath="$PROJECT_DIR$/bin/logic/components/Adder.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/BitExtender.class" afterPath="$PROJECT_DIR$/bin/logic/components/BitExtender.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/BitShifter$Direction.class" afterPath="$PROJECT_DIR$/bin/logic/components/BitShifter$Direction.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/BitShifter.class" afterPath="$PROJECT_DIR$/bin/logic/components/BitShifter.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/Comparator.class" afterPath="$PROJECT_DIR$/bin/logic/components/Comparator.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/Component$Signedness.class" afterPath="$PROJECT_DIR$/bin/logic/components/Component$Signedness.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/Component.class" afterPath="$PROJECT_DIR$/bin/logic/components/Component.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/ConstantValue.class" afterPath="$PROJECT_DIR$/bin/logic/components/ConstantValue.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/MUX.class" afterPath="$PROJECT_DIR$/bin/logic/components/MUX.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/Register.class" afterPath="$PROJECT_DIR$/bin/logic/components/Register.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/memories/DataMemory.class" afterPath="$PROJECT_DIR$/bin/logic/components/memories/DataMemory.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/memories/Memory.class" afterPath="$PROJECT_DIR$/bin/logic/components/memories/Memory.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/components/memories/RegisterFile.class" afterPath="$PROJECT_DIR$/bin/logic/components/memories/RegisterFile.class" />
-      <change beforePath="$PROJECT_DIR$/bin/logic/dataValue.class" afterPath="$PROJECT_DIR$/bin/logic/dataValue.class" />
+      <change beforePath="$PROJECT_DIR$/bin/graphics/GUIElements/ComponentListElement.class" afterPath="$PROJECT_DIR$/bin/graphics/GUIElements/ComponentListElement.class" />
+      <change beforePath="$PROJECT_DIR$/bin/graphics/GUIElements/ComponentWindow.class" afterPath="$PROJECT_DIR$/bin/graphics/GUIElements/ComponentWindow.class" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/ComponentGraphics/AdderGraphic.java" afterPath="$PROJECT_DIR$/src/graphics/ComponentGraphics/AdderGraphic.java" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/ComponentGraphics/ComponentGraphic.java" afterPath="$PROJECT_DIR$/src/graphics/ComponentGraphics/ComponentGraphic.java" />
       <change beforePath="$PROJECT_DIR$/src/graphics/GUI.java" afterPath="$PROJECT_DIR$/src/graphics/GUI.java" />
-      <change beforePath="$PROJECT_DIR$/src/logic/components/Register.java" afterPath="$PROJECT_DIR$/src/logic/components/Register.java" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java" afterPath="$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,59 +27,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Component.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/logic/components/Component.java">
+      <file leaf-file-name="AdderGraphic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/AdderGraphic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="20" column="7" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+            <state relative-caret-position="216">
+              <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WireSplitter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/logic/WireSplitter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/graphics/GUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1855#1856#0" expanded="true" />
-                <element signature="e#1883#1884#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComponentWindow.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="13" column="76" lean-forward="true" selection-start-line="13" selection-start-column="76" selection-end-line="13" selection-end-column="76" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ComponentListElement.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ComponentListElement.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="212">
+              <caret line="31" column="49" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1359#1360#0" expanded="true" />
+                <element signature="e#1452#1453#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,8 +54,8 @@
       <file leaf-file-name="DatapathWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+            <state relative-caret-position="52">
+              <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -125,11 +63,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Register.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/logic/components/Register.java">
+      <file leaf-file-name="ALUGraphic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/ALUGraphic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphics/GUI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="42" column="76" lean-forward="false" selection-start-line="42" selection-start-column="76" selection-end-line="42" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1869#1870#0" expanded="true" />
+                <element signature="e#1897#1898#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComponentWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="78">
+              <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComponentGraphic.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/ComponentGraphic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -156,10 +130,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/logic/components/Register.java" />
-        <option value="$PROJECT_DIR$/src/graphics/GUI.java" />
-        <option value="$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java" />
-        <option value="$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java" />
+        <option value="$PROJECT_DIR$/src/graphics/ComponentGraphics/ComponentGraphic.java" />
+        <option value="$PROJECT_DIR$/src/graphics/ComponentGraphics/AdderGraphic.java" />
         <option value="$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java" />
+        <option value="$PROJECT_DIR$/src/graphics/GUI.java" />
+        <option value="$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java" />
+        <option value="$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java" />
       </list>
     </option>
   </component>
@@ -200,6 +176,13 @@
               <item name="General-Datapath-Simulator" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="graphics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="General-Datapath-Simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="General-Datapath-Simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="graphics" type="462c0819:PsiDirectoryNode" />
+              <item name="ComponentGraphics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="General-Datapath-Simulator" type="b2602c69:ProjectViewProjectNode" />
@@ -384,7 +367,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -436,7 +419,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java</url>
+          <line>23</line>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -462,8 +454,8 @@
           <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1883#1884#0" expanded="true" />
+            <element signature="e#1869#1870#0" expanded="true" />
+            <element signature="e#1897#1898#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -486,7 +478,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logic/WireSplitter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="17">
           <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
           <folding />
         </state>
@@ -500,10 +492,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java">
+    <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/ComponentGraphic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/ALUGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphics/ComponentGraphics/AdderGraphic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="59" selection-start-column="5" selection-end-line="59" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -512,32 +528,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/graphics/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
+        <state relative-caret-position="170">
+          <caret line="42" column="76" lean-forward="false" selection-start-line="42" selection-start-column="76" selection-end-line="42" selection-end-column="76" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1883#1884#0" expanded="true" />
+            <element signature="e#1869#1870#0" expanded="true" />
+            <element signature="e#1897#1898#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/DatapathWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+        <state relative-caret-position="52">
+          <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/graphics/GUIElements/ComponentListElement.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="13" column="76" lean-forward="true" selection-start-line="13" selection-start-column="76" selection-end-line="13" selection-end-column="76" />
+        <state relative-caret-position="212">
+          <caret line="31" column="49" lean-forward="false" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1359#1360#0" expanded="true" />
+            <element signature="e#1452#1453#0" expanded="true" />
           </folding>
         </state>
       </provider>

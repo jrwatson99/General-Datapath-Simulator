@@ -13,7 +13,7 @@ public class ComponentWindow extends ScrollPane {
 
     private static final String componentNames[] = {"Adder", "Multiplexer"};
 
-    public ComponentWindow() {
+    public ComponentWindow(DatapathWindow datapathWindow) {
         super();
 
         this.setFitToWidth(true);
@@ -24,7 +24,7 @@ public class ComponentWindow extends ScrollPane {
         VBox componentList = new VBox();
         int i = 0;
         for (i = 0; i < componentNames.length; i++) {
-            componentList.getChildren().add(new ComponentListElement(componentNames[i]));
+            componentList.getChildren().add(new ComponentListElement(componentNames[i], datapathWindow));
         }
 
         this.setContent(componentList);

@@ -39,8 +39,8 @@ public class GUI extends Application {
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, optionsMenu, helpMenu);
 
-        ComponentWindow componentWindow = new ComponentWindow();
         DatapathWindow datapathWindow = new DatapathWindow();
+        ComponentWindow componentWindow = new ComponentWindow(datapathWindow);
 
         HBox datapathAndComponentBox = new HBox();
         datapathAndComponentBox.getChildren().addAll(datapathWindow, componentWindow);

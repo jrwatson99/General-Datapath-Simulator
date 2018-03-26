@@ -1,7 +1,8 @@
 package graphics.ComponentGraphics;
 
-public class ComponentGraphic {
+public abstract class ComponentGraphic {
 	private int xLoc;
 	private int yLoc;
-	
+
+	public abstract void updateLoc(double x, double y);
 }
