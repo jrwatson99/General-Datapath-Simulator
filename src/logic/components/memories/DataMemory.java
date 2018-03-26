@@ -38,7 +38,9 @@ public class DataMemory extends Memory{
 	}
 	
 	
-	
+	public void resize(int newSize) {
+		mem=java.util.Arrays.copyOf(mem, newSize);
+	}
 	
 	@Override
 	/**
