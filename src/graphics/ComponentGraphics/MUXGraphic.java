@@ -2,6 +2,7 @@ package graphics.ComponentGraphics;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import logic.components.MUX;
 
 public class MUXGraphic extends ComponentGraphic {
 
@@ -9,6 +10,12 @@ public class MUXGraphic extends ComponentGraphic {
     private Line lineStraightRight;
     private Arc arcTop;
     private Arc arcBottom;
+
+    private MUX mux;
+
+    public MUX getComponent() {
+        return mux;
+    }
 
     private static final double STRAIGHT_LENGTH = 40;
     private static final double STRAIGHT_SEPARATION_DISTANCE = 16;
@@ -36,6 +43,8 @@ public class MUXGraphic extends ComponentGraphic {
         arcBottom.setType(ArcType.OPEN);
         arcBottom.setFill(Color.TRANSPARENT);
         arcBottom.setStroke(Color.BLACK);
+
+        mux = new MUX();
     }
 
     public void updateLoc(double x, double y) {
