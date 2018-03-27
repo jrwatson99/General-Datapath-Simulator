@@ -1,5 +1,6 @@
 package graphics.ComponentGraphics;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 public class MUXGraphic extends ComponentGraphic {
@@ -9,8 +10,8 @@ public class MUXGraphic extends ComponentGraphic {
     private Arc arcTop;
     private Arc arcBottom;
 
-    private static final double STRAIGHT_LENGTH = 30;
-    private static final double STRAIGHT_SEPARATION_DISTANCE = 8;
+    private static final double STRAIGHT_LENGTH = 40;
+    private static final double STRAIGHT_SEPARATION_DISTANCE = 16;
     private static final double ARC_RADIUS = STRAIGHT_SEPARATION_DISTANCE / 2;
 
     public MUXGraphic() {
@@ -23,10 +24,18 @@ public class MUXGraphic extends ComponentGraphic {
         arcTop.setRadiusY(ARC_RADIUS);
         arcTop.setLength(180);
         arcTop.setStartAngle(0);
-        arcTop.setType(ArcType.ROUND);
+        arcTop.setType(ArcType.OPEN);
+        arcTop.setFill(Color.TRANSPARENT);
+        arcTop.setStroke(Color.BLACK);
+
 
         arcBottom.setRadiusX(ARC_RADIUS);
         arcBottom.setRadiusY(ARC_RADIUS);
+        arcBottom.setLength(180);
+        arcBottom.setStartAngle(180);
+        arcBottom.setType(ArcType.OPEN);
+        arcBottom.setFill(Color.TRANSPARENT);
+        arcBottom.setStroke(Color.BLACK);
     }
 
     public void updateLoc(double x, double y) {
@@ -41,10 +50,10 @@ public class MUXGraphic extends ComponentGraphic {
         lineStraightRight.setEndY(y + STRAIGHT_LENGTH);
 
         arcTop.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
-        arcTop.setCenterY(y - (STRAIGHT_SEPARATION_DISTANCE / 2));
+        arcTop.setCenterY(y);
 
         arcBottom.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
-        arcBottom.setCenterY(y + STRAIGHT_SEPARATION_DISTANCE + (STRAIGHT_SEPARATION_DISTANCE / 2));
+        arcBottom.setCenterY(y + STRAIGHT_LENGTH);
     }
 
     public Shape[] getGraphics() {
