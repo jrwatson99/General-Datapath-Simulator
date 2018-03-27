@@ -9,7 +9,35 @@ package logic;
  */
 
 public class ExecutionEnvironment {
-	private static ExecutionEnvironment EESingleton;
+	private static ExecutionEnvironment EESingleton = new ExecutionEnvironment();
+
+	private boolean placingWire;
+
+	public void startPlacingWire() {
+		placingWire = true;
+	}
+	public void stopPlacingWire() {
+		placingWire = false;
+	}
+	public void togglePlacingWire() {
+		if (placingWire) {
+			stopPlacingWire();
+		}
+		else {
+			startPlacingWire();
+		}
+	}
+
+	public boolean getPlacingWireStatus() {
+		return placingWire;
+	}
+
+	//Do not instantiate any instance other than EESingleton
+	private ExecutionEnvironment() {
+		placingWire = false;
+	}
 	
 	public static ExecutionEnvironment getExecutionEnvironment() { return EESingleton;}
+
+
 }

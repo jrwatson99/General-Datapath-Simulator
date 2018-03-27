@@ -1,8 +1,6 @@
 package graphics.GUIElements;
 
-import graphics.ComponentGraphics.AdderGraphic;
-import graphics.ComponentGraphics.ComponentGraphic;
-import graphics.ComponentGraphics.MUXGraphic;
+import graphics.ComponentGraphics.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import logic.ExecutionEnvironment;
+import logic.Wire;
 import logic.components.Adder;
 
 import java.awt.*;
@@ -39,6 +39,12 @@ public class ComponentListElement extends HBox {
                         break;
                     case "Multiplexer":
                         newComponentGraphic = new MUXGraphic();
+                        break;
+                    case "ALU":
+                        newComponentGraphic = new ALUGraphic();
+                        break;
+                    case "Comparator":
+                        newComponentGraphic = new ComparatorGraphic();
                         break;
                     default:
                         newComponentGraphic = null;

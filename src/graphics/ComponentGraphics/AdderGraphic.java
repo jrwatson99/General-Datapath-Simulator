@@ -3,8 +3,9 @@ package graphics.ComponentGraphics;
 
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
+import logic.components.Adder;
 
-public class AdderGraphic extends ComponentGraphic{
+public class AdderGraphic extends ComponentGraphic {
     private Line lineDiagonalTopRight;
     private Line lineDiagonalBottomRight;
     private Line lineDiagonalTopLeft;
@@ -13,12 +14,21 @@ public class AdderGraphic extends ComponentGraphic{
     private Line lineStraightBottom;
     private Line lineStraightEnd;
 
+    private Adder adder;
+
+    private ComponentInputWireNode inputANode;
+    private ComponentInputWireNode inputBNode;
+    private ComponentOutputWireNode outputNode;
+
     private static final double BIG_DIAGONAL_LENGTH_X = 40;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
     private static final double LITTLE_DIAGONAL_LENGTH_X = 10;
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
     private static final double STRAIGHT_LENGTH = 30;
 
+    public Adder getComponent() {
+        return adder;
+    }
 
     public AdderGraphic() {
         lineDiagonalTopRight = new Line();
@@ -28,6 +38,12 @@ public class AdderGraphic extends ComponentGraphic{
         lineStraightTop = new Line();
         lineStraightBottom = new Line();
         lineStraightEnd = new Line();
+
+        inputANode = new ComponentInputWireNode();
+        inputBNode = new ComponentInputWireNode();
+        outputNode = new ComponentOutputWireNode();
+
+        adder = new Adder();
     }
 
     public void updateLoc(double x, double y) {
@@ -65,6 +81,21 @@ public class AdderGraphic extends ComponentGraphic{
         lineStraightEnd.setStartY(y + BIG_DIAGONAL_LENGTH_Y);
         lineStraightEnd.setEndX(x + BIG_DIAGONAL_LENGTH_X);
         lineStraightEnd.setEndY(y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH));
+
+        inputANode.setStartX(x - inputANode.getLength());
+        inputANode.setStartY(y + (STRAIGHT_LENGTH / 2));
+        inputANode.setEndX(x);
+        inputANode.setEndY(y + (STRAIGHT_LENGTH / 2));
+
+        inputBNode.setStartX(x - inputANode.getLength());
+        inputBNode.setStartY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
+        inputBNode.setEndX(x);
+        inputBNode.setEndY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
+
+        outputNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
+        outputNode.setStartY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
+        outputNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
+        outputNode.setEndY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
     }
 
     public Shape[] getGraphics() {
@@ -75,7 +106,10 @@ public class AdderGraphic extends ComponentGraphic{
                 lineDiagonalBottomLeft,
                 lineStraightTop,
                 lineStraightBottom,
-                lineStraightEnd};
+                lineStraightEnd,
+                inputANode,
+                inputBNode,
+                outputNode};
 
         return graphics;
     }
