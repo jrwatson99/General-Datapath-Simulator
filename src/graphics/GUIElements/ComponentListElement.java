@@ -29,11 +29,11 @@ public class ComponentListElement extends HBox {
 
                 //FIXME: ADD TO EXECUTION ENVIRONMENT
 
-                ComponentListElement thisComponentListElement = ((ComponentListElement)((Button)e.getSource()).getParent());
-                String componentName = ((Label)thisComponentListElement.getChildren().get(0)).getText();
+//                ComponentListElement thisComponentListElement = ((ComponentListElement)((Button)e.getSource()).getParent());
+//                String componentName = ((Label)thisComponentListElement.getChildren().get(0)).getText();
 
                 ComponentGraphic newComponentGraphic;
-                switch (componentName) {
+                switch (componentName.getText()) { //much simpler
                     case "Adder":
                         newComponentGraphic = new AdderGraphic();
                         break;
@@ -51,15 +51,8 @@ public class ComponentListElement extends HBox {
                         break;
                 }
                 if (newComponentGraphic != null) {
-
-                    ObservableList<Node> rootChildren = ((HBox) ((Button) e.getSource()).getParent().getParent().getParent().getParent().getParent().getParent()).getChildren();
-
-                    int i;
-                    for (i = 0; i < rootChildren.size(); i++) {
-                        if (rootChildren.get(i) instanceof DatapathWindow) {
-                            ((Pane) ((DatapathWindow) rootChildren.get(i)).getContent()).getChildren().addAll(newComponentGraphic.getGraphics());
-                        }
-                    }
+//NOTE THIS
+                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    // no loop                
 
                     final ComponentGraphic finalNewComponentGraphic = newComponentGraphic;
 

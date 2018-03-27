@@ -24,30 +24,32 @@ public class GUI extends Application {
         double sceneHeight = primaryScreenBounds.getHeight() / 2;
         double sceneWidth = primaryScreenBounds.getWidth() / 2;
 
-        VBox root = getDefaultRootAsVBox();
+        BorderPane root = getDefaultRootAsBorderPane();
         primaryStage.setTitle(sceneTitle);
         primaryStage.setScene(new Scene(root, sceneWidth, sceneHeight));
         primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
-    private VBox getDefaultRootAsVBox() {
+    private BorderPane getDefaultRootAsBorderPane() {
         final Menu fileMenu = new Menu("File");
         final Menu optionsMenu = new Menu("Options");
         final Menu helpMenu = new Menu("Help");
 
+        BorderPane root = new BorderPane();
+        
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(fileMenu, optionsMenu, helpMenu);
 
         DatapathWindow datapathWindow = new DatapathWindow();
         ComponentWindow componentWindow = new ComponentWindow(datapathWindow);
 
-        HBox datapathAndComponentBox = new HBox();
-        datapathAndComponentBox.getChildren().addAll(datapathWindow, componentWindow);
 
-        VBox root = new VBox();
-        root.getChildren().addAll(menuBar, datapathAndComponentBox);
-        root.setVgrow(datapathAndComponentBox, Priority.ALWAYS);
+
+        //root.getChildren().addAll(menuBar,datapathWindow,componentWindow);
+        root.setCenter(datapathWindow);
+        root.setTop(menuBar);
+        root.setRight(componentWindow);
 
         return root;
     }
