@@ -63,6 +63,7 @@ public class ComponentListElement extends HBox {
                                 finalNewComponentGraphic.updateLoc(e.getX(), e.getY());
                             } else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
                                 datapathWindow.removeEventHandler(MouseEvent.ANY, this);
+                                finalNewComponentGraphic.config();
                             }
                         }
                     });

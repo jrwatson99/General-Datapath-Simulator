@@ -50,7 +50,7 @@ public class ALU extends Component {
 		initOpOrder();
 	}
 
-	private enum Operation{
+	public enum Operation{
 		ADD,
 		SUBTRACT,
 		MULTIPLY,

@@ -1,5 +1,7 @@
 package graphics;
 
+import graphics.ComponentGraphics.ALUGraphic;
+import graphics.GUIElements.ALUConfigWindow;
 import graphics.GUIElements.ComponentWindow;
 import graphics.GUIElements.DatapathWindow;
 import javafx.geometry.Rectangle2D;

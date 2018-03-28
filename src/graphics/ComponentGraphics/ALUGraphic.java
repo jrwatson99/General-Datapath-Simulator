@@ -1,5 +1,6 @@
 package graphics.ComponentGraphics;
 
+import graphics.GUIElements.ALUConfigWindow;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import logic.components.ALU;
@@ -86,4 +87,11 @@ public class ALUGraphic extends ComponentGraphic {
 
         return graphics;
     }
+
+	@Override
+	public void config() {
+		ALUConfigWindow cfg = new ALUConfigWindow("ALU Configuration", this);
+		cfg.showAndWait();
+		
+	}
 }
