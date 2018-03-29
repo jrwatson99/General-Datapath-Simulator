@@ -44,6 +44,8 @@ public abstract class Memory extends Component{
 		setSignedness(Signedness.UNSIGNED);
 	}
 	
+	public abstract void resize(int newSize);
+	
 	/**
 	 * determines which clock edge has occurred and calls the appropriate function
 	 * @author Matthew Johnson

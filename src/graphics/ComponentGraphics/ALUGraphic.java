@@ -16,7 +16,7 @@ public class ALUGraphic extends ComponentGraphic {
 
     private ALU alu;
 
-    private static final double BIG_DIAGONAL_LENGTH_X = 40;
+    private static final double BIG_DIAGONAL_LENGTH_X = 50;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
     private static final double LITTLE_DIAGONAL_LENGTH_X = 10;
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
@@ -39,6 +39,9 @@ public class ALUGraphic extends ComponentGraphic {
     }
 
     public void updateLoc(double x, double y) {
+    	
+    	updateTextLoc(x+LITTLE_DIAGONAL_LENGTH_X, y+STRAIGHT_LENGTH+LITTLE_DIAGONAL_LENGTH_Y );
+    	
         lineDiagonalTopRight.setStartX(x);
         lineDiagonalTopRight.setStartY(y);
         lineDiagonalTopRight.setEndX(x + BIG_DIAGONAL_LENGTH_X);

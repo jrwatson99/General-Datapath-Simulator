@@ -19,7 +19,10 @@ public class ComponentWindow extends ScrollPane {
             "Adder",
             "Multiplexer",
             "ALU",
-            "Comparator"};
+            "Comparator",
+            "Data Memory",
+            "Register File"
+            };
 
     public ComponentWindow(DatapathWindow datapathWindow) {
         super();

@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 
+import graphics.GUIElements.DefaultConfigWindow;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 import logic.components.Adder;
@@ -20,7 +21,7 @@ public class AdderGraphic extends ComponentGraphic {
     private ComponentInputWireNode inputBNode;
     private ComponentOutputWireNode outputNode;
 
-    private static final double BIG_DIAGONAL_LENGTH_X = 40;
+    private static final double BIG_DIAGONAL_LENGTH_X = 50;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
     private static final double LITTLE_DIAGONAL_LENGTH_X = 10;
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
@@ -47,6 +48,8 @@ public class AdderGraphic extends ComponentGraphic {
     }
 
     public void updateLoc(double x, double y) {
+    	updateTextLoc(x+2,y+STRAIGHT_LENGTH);
+    	
         lineDiagonalTopRight.setStartX(x);
         lineDiagonalTopRight.setStartY(y);
         lineDiagonalTopRight.setEndX(x + BIG_DIAGONAL_LENGTH_X);
@@ -113,4 +116,10 @@ public class AdderGraphic extends ComponentGraphic {
 
         return graphics;
     }
+
+	@Override
+	public void config() {
+		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
+		cfg.showAndWait();		
+	}
 }

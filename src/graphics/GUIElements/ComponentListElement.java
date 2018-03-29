@@ -33,7 +33,7 @@ public class ComponentListElement extends HBox {
 //                String componentName = ((Label)thisComponentListElement.getChildren().get(0)).getText();
 
                 ComponentGraphic newComponentGraphic;
-                switch (componentName.getText()) { //much simpler
+                switch (cName) { //much simpler
                     case "Adder":
                         newComponentGraphic = new AdderGraphic();
                         break;
@@ -46,13 +46,20 @@ public class ComponentListElement extends HBox {
                     case "Comparator":
                         newComponentGraphic = new ComparatorGraphic();
                         break;
+                    case "Data Memory":
+                    	newComponentGraphic = new DataMemoryGraphic();
+                    	break;
+                    case "Register File":
+                    	newComponentGraphic = new RegisterFileGraphic();
+                    	break;
                     default:
                         newComponentGraphic = null;
                         break;
                 }
                 if (newComponentGraphic != null) {
 //NOTE THIS
-                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    // no loop                
+                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    // no loop  
+                	((Pane)datapathWindow.getContent()).getChildren().add(newComponentGraphic.getText());
 
                     final ComponentGraphic finalNewComponentGraphic = newComponentGraphic;
 

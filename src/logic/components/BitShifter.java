@@ -18,7 +18,6 @@ public class BitShifter extends Component {
 	
 	private Wire input;
 	private Wire output;
-	private int bitLength;
 	private int shiftAmount;
 	private Direction direction;
 	
@@ -28,9 +27,6 @@ public class BitShifter extends Component {
 	
 	public void setOutput(Wire newOutput) {output = newOutput;}
 	public Wire getOutput() {return output;}
-	
-	public void setBitLength(int newBitLength) {bitLength = newBitLength;}
-	public int getBitLength() {return bitLength;}
 	
 	public void setShiftAmount(int newShiftAmount) {shiftAmount = newShiftAmount;}
 	public int getShiftAmount() {return shiftAmount;}

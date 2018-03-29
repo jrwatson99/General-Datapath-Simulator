@@ -12,7 +12,6 @@ public class ALU extends Component {
 	private Wire aluOP;
 	private Wire output;
 	private Wire zero;
-	private int bitLength;
 	private int opBitLength;
 	private ArrayList<Operation> opOrder;
 	
@@ -30,9 +29,6 @@ public class ALU extends Component {
 
 	public void setZero(Wire newZero) {zero = newZero;}
 	public Wire getZero() {return zero;}
-		
-	public void setBitLength(int newBitLength) {bitLength = newBitLength;}
-	public int getBitLength() {return bitLength;}
 	
 	public void setOPBitLength(int newBitLength) { opBitLength = newBitLength;}
 	public int getOPBitLength() { return opBitLength;}

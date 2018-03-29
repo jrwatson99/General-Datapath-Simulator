@@ -2,25 +2,37 @@ package graphics.ComponentGraphics;
 
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.Component;
 
 public abstract class ComponentGraphic extends Region {
 	private int xLoc;
 	private int yLoc;
-	private String name;
+	private Text name;
 	
 	public abstract void updateLoc(double x, double y);
+	
+	public void updateTextLoc(double x, double y) {
+		name.setX(x);
+		name.setY(y);
+	}
+	
+	public ComponentGraphic() {
+		this.name=new Text();
+	}
 
 	public abstract Shape[] getGraphics();
 
 	public abstract Component getComponent();
 
 	public String getName() {
-		return name;
+		return name.getText();
 	}
-
+	
+	public Text getText() {return name;}
+	
 	public void setName(String name) {
-		this.name = name;
+		this.name.setText(name);
 	}
 
 	public abstract void config() ;

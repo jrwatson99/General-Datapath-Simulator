@@ -17,7 +17,6 @@ public class Adder extends Component {
 	private Wire inputA;
 	private Wire inputB;
 	private Wire output;
-	private int bitLength;
 	
 	public void setInputA(Wire newInput) {inputA = newInput;}
 	public Wire getInputA() {return inputA;}
@@ -28,8 +27,6 @@ public class Adder extends Component {
 	public void setOutput(Wire newOutput) {output = newOutput;}
 	public Wire getOutput() {return output;}
 	
-	public void setBitLength(int newBitLength) {bitLength = newBitLength;}
-	public int getBitLength() {return bitLength;}
 
 	/**Adder Constructor
 	 * @author Jonathan Watson

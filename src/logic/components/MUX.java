@@ -16,7 +16,6 @@ public class MUX extends Component{
 	private Wire inputB;
 	private Wire select;
 	private Wire output;
-	private int bitLength;
 	
 	public void setInputA(Wire newInput) {inputA = newInput;}
 	public Wire getInputA() {return inputA;}
@@ -27,13 +26,11 @@ public class MUX extends Component{
 	public void setoutput(Wire newInput) {output= newInput;}
 	public Wire getOutput() {return output;}
 	
-	public void setBitLength(int newBitLength) {bitLength = newBitLength;}
-	public int getBitLength() {return bitLength;}
 
 	
 	public MUX() {
 		super();
-		bitLength=32;
+		setBitLength(32);
 	}
 
 	/**
@@ -46,13 +43,13 @@ public class MUX extends Component{
 	@Override
 	public void Update() throws Exception {
 		if(select.getValue().intValue()==0) {
-			if(inputA.getValue().bitLength()!=this.bitLength) {
+			if(inputA.getValue().bitLength()!=this.getBitLength()) {
 				throw new Exception("Invalid bit length in Mux inputA");
 			}
 			output.setValue(inputA.getValue());
 		}
 		else if(select.getValue().intValue()==1) {
-			if(inputB.getValue().bitLength()!=this.bitLength) {
+			if(inputB.getValue().bitLength()!=this.getBitLength()) {
 				throw new Exception("Invalid bit length in Mux inputB");
 			}
 			output.setValue(inputB.getValue());

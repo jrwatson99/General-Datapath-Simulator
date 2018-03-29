@@ -10,6 +10,10 @@ public abstract class Component {
 	
 	
 	protected Signedness signedness;
+	private int bitLength;
+	
+	public int getBitLength() {return bitLength;}
+	public void setBitLength(int newLength) {bitLength=newLength;}
 	
 	public void setSignedness(Signedness newSignedness) {signedness = newSignedness;}
 	public Signedness getSignedness() {return signedness;}

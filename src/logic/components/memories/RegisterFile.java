@@ -37,6 +37,15 @@ public class RegisterFile extends Memory{
 			registers.add(DataValue.ZERO);
 		}
 	}
+
+	@Override
+	public void resize(int newSize) {
+		registers.ensureCapacity(newSize);
+		this.numRegisters = newSize;
+		for(int i=0;i<newSize;i++) {
+			registers.add(DataValue.ZERO);
+		}
+	}
 	
 	@Override
 	public void onPosEdgeClk() throws Exception {

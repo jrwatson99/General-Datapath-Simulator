@@ -1,5 +1,6 @@
 package graphics.ComponentGraphics;
 
+import graphics.GUIElements.DefaultConfigWindow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import logic.components.MUX;
@@ -75,4 +76,11 @@ public class MUXGraphic extends ComponentGraphic {
 
         return graphics;
     }
+
+	@Override
+	public void config() {
+		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
+		cfg.showAndWait();
+		
+	}
 }
