@@ -188,7 +188,10 @@ public class DataMemory extends Memory{
 		 */
 		private static void initMemTest() {
 			writeEn.setValue(DataValue.ONE);
-			for(int i=0;i<=memory.size-memory.getDataWidth()/8;i+=memory.getDataWidth()/8) {
+			DataValue i;
+			final DataValue UPPER_BOUNDS = new DataValue(memory.size-memory.getDataWidth()/8);
+			final DataValue INCREMENT = new DataValue(memory.getDataWidth()/8);
+			for(i = DataValue.ZERO; i.compareTo(UPPER_BOUNDS) < 0; i.add(INCREMENT)) {
 				writeData.setValue(new DataValue(i));
 				address.setValue(new DataValue(i));
 				clk.setValue(DataValue.ONE);
