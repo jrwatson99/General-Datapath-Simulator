@@ -1,0 +1,92 @@
+package graphics.GUIElements;
+
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public abstract class ConfigWindow extends Stage {
+	private GridPane layout;
+	private Button confirm;
+	
+	public ConfigWindow(String title) {
+		this.setTitle(title);
+		
+		this.initModality(Modality.APPLICATION_MODAL);
+		
+		confirm = new Button("Apply");
+		confirm.setOnAction(e -> closeWindow());
+		
+		layout = new GridPane();
+		layout.setVgap(10);
+		layout.setHgap(10);
+		layout.setPadding(new Insets(10,10,10,10));
+		
+		VBox layout1 = new VBox();
+		layout1.getChildren().addAll(layout,confirm);
+		layout1.setAlignment(Pos.BOTTOM_CENTER);
+		this.setScene(new Scene(layout1));
+		
+		this.setOnCloseRequest(e -> {
+			e.consume();
+			closeWindow();
+			
+		});
+	}
+	
+	private void closeWindow() {
+		try {
+			updateComponent();
+			close();
+		} catch (Exception e1) {
+			//do nothing, let user change values and try again
+			e1.getMessage();// TODO put this in a alert window
+		}
+	}
+	
+	public abstract void updateComponent() throws Exception;
+	
+	public void addInputLine(InputLine input) {
+		layout.addRow(layout.getChildren().size()/2,input.getName(), input.getText());
+	}
+	
+	public GridPane getLayout() {
+		return layout;
+	}
+	
+	protected class InputLine{
+		private Label name;
+		private TextField text;
+		
+		public InputLine(String name){
+			this.name =new Label(name+": ");
+			text = new TextField();
+			text.setPromptText("Enter value for "+name);
+		}
+
+		public Label getName() {
+			return name;
+		}
+
+		public void setName(Label name) {
+			this.name = name;
+		}
+
+		public TextField getText() {
+			return text;
+		}
+
+		public void setText(TextField text) {
+			this.text = text;
+		}
+		
+	}
+	
+}
