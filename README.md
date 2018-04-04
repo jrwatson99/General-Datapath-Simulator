@@ -1,6 +1,6 @@
 # General Datapath Simulator
 
-An interactive datapath to easily and intuitively test original design logic
+An interactive datapath simulator to easily and intuitively test original design logic
 
 ## Getting Started
 
