@@ -8,4 +8,8 @@ public class ComponentInputWireNode extends Line {
     public double getLength() {
         return LENGTH;
     }
+
+    public ComponentInputWireNode() {
+        setStrokeWidth(3);
+    }
 }
