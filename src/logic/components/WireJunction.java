@@ -1,6 +1,9 @@
-package logic;
+package logic.components;
 
-public class WireJunction {
+import logic.Wire;
+import logic.WireListener;
+
+public class WireJunction extends Component{
 	private Wire input;
 	private Wire out1;
 	private Wire out2;
@@ -35,6 +38,10 @@ public class WireJunction {
 			out1.setValue(input.getValue());
 			out2.setValue(input.getValue());
 		}
+		
+	}
+	@Override
+	public void Update() throws Exception {
 		
 	}
 }

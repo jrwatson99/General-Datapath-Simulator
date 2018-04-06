@@ -1,8 +1,12 @@
-package logic;
+package logic.components;
 
 import java.math.BigInteger;
 
-public class WireSplitter {
+import logic.DataValue;
+import logic.Wire;
+import logic.WireListener;
+
+public class WireSplitter extends Component{
 	private Wire input;
 	private Wire output;
 	private int inWidth;
@@ -16,6 +20,13 @@ public class WireSplitter {
 		this.startBit=startBit;
 		this.stopBit=stopBit;
 		
+	}
+
+	public WireSplitter() {
+		this.inWidth=0;
+		this.outWidth=0;
+		this.startBit=0;
+		this.stopBit=0;
 	}
 
 	public Wire getInput() {
@@ -81,6 +92,11 @@ public class WireSplitter {
 //	private class tester{
 //		
 //	}
+
+	@Override
+	public void Update() throws Exception {
+		
+	}
 	
 	
 	

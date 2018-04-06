@@ -21,7 +21,11 @@ public class ComponentWindow extends ScrollPane {
             "ALU",
             "Comparator",
             "Data Memory",
-            "Register File"
+            "Register File",
+            "Bit Shifter",
+            "Bit Extender",
+            "Wire Junction",
+            "Wire Splitter"
             };
 
     public ComponentWindow(DatapathWindow datapathWindow) {

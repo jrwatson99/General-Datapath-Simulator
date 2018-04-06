@@ -1,20 +1,22 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.ALUConfigWindow;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import logic.components.ALU;
 
 public class ALUGraphic extends ComponentGraphic {
-    private Line lineDiagonalTopRight;
-    private Line lineDiagonalBottomRight;
-    private Line lineDiagonalTopLeft;
-    private Line lineDiagonalBottomLeft;
-    private Line lineStraightTop;
-    private Line lineStraightBottom;
-    private Line lineStraightEnd;
 
+	private Polygon shape;
     private ALU alu;
+    
+
+    private ComponentInputWireNode inputANode;
+    private ComponentInputWireNode aluOpNode;
+    private ComponentInputWireNode inputBNode;
+    private ComponentOutputWireNode outputNode;
 
     private static final double BIG_DIAGONAL_LENGTH_X = 50;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
@@ -27,14 +29,15 @@ public class ALUGraphic extends ComponentGraphic {
     }
 
     public ALUGraphic() {
-        lineDiagonalTopRight = new Line();
-        lineDiagonalBottomRight = new Line();
-        lineDiagonalTopLeft = new Line();
-        lineDiagonalBottomLeft = new Line();
-        lineStraightTop = new Line();
-        lineStraightBottom = new Line();
-        lineStraightEnd = new Line();
 
+    	shape = new Polygon();
+    	shape.setFill(Color.WHITE);
+    	shape.setStroke(Color.BLACK);
+        aluOpNode = new ComponentInputWireNode();
+        inputANode = new ComponentInputWireNode();
+        inputBNode = new ComponentInputWireNode();
+        outputNode = new ComponentOutputWireNode();
+        
         alu = new ALU();
     }
 
@@ -42,51 +45,45 @@ public class ALUGraphic extends ComponentGraphic {
     	
     	updateTextLoc(x+LITTLE_DIAGONAL_LENGTH_X, y+STRAIGHT_LENGTH+LITTLE_DIAGONAL_LENGTH_Y );
     	
-        lineDiagonalTopRight.setStartX(x);
-        lineDiagonalTopRight.setStartY(y);
-        lineDiagonalTopRight.setEndX(x + BIG_DIAGONAL_LENGTH_X);
-        lineDiagonalTopRight.setEndY(y + BIG_DIAGONAL_LENGTH_Y);
+    	shape.getPoints().clear();
+    	shape.getPoints().addAll(new Double[] {
+    	         x,y,
+    	         x + BIG_DIAGONAL_LENGTH_X, y + BIG_DIAGONAL_LENGTH_Y,
+    	         x + BIG_DIAGONAL_LENGTH_X, y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH),
+    	         x, y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH,
+    	         x, y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)),
+    	         x + LITTLE_DIAGONAL_LENGTH_X, y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y),
+    	         x, y + STRAIGHT_LENGTH
+    	});
 
-        lineDiagonalBottomRight.setStartX(x);
-        lineDiagonalBottomRight.setStartY(y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH);
-        lineDiagonalBottomRight.setEndX(x + BIG_DIAGONAL_LENGTH_X);
-        lineDiagonalBottomRight.setEndY(y + BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH);
+    	aluOpNode.setStartX(x+STRAIGHT_LENGTH);
+    	aluOpNode.setStartY(y + 5);
+        aluOpNode.setEndX(x+STRAIGHT_LENGTH);
+        aluOpNode.setEndY(y + (STRAIGHT_LENGTH / 2)-5);
+        
+        inputANode.setStartX(x - inputANode.getLength());
+        inputANode.setStartY(y + (STRAIGHT_LENGTH / 2));
+        inputANode.setEndX(x);
+        inputANode.setEndY(y + (STRAIGHT_LENGTH / 2));
 
-        lineDiagonalTopLeft.setStartX(x);
-        lineDiagonalTopLeft.setStartY(y + STRAIGHT_LENGTH);
-        lineDiagonalTopLeft.setEndX(x + LITTLE_DIAGONAL_LENGTH_X);
-        lineDiagonalTopLeft.setEndY(y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y));
+        inputBNode.setStartX(x - inputANode.getLength());
+        inputBNode.setStartY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
+        inputBNode.setEndX(x);
+        inputBNode.setEndY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
 
-        lineDiagonalBottomLeft.setStartX(x);
-        lineDiagonalBottomLeft.setStartY(y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)));
-        lineDiagonalBottomLeft.setEndX(x + LITTLE_DIAGONAL_LENGTH_X);
-        lineDiagonalBottomLeft.setEndY(y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y));
-
-        lineStraightTop.setStartX(x);
-        lineStraightTop.setStartY(y);
-        lineStraightTop.setEndX(x);
-        lineStraightTop.setEndY(y + STRAIGHT_LENGTH);
-
-        lineStraightBottom.setStartX(x);
-        lineStraightBottom.setStartY(y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)));
-        lineStraightBottom.setEndX(x);
-        lineStraightBottom.setEndY(y + (2 * (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y)));
-
-        lineStraightEnd.setStartX(x + BIG_DIAGONAL_LENGTH_X);
-        lineStraightEnd.setStartY(y + BIG_DIAGONAL_LENGTH_Y);
-        lineStraightEnd.setEndX(x + BIG_DIAGONAL_LENGTH_X);
-        lineStraightEnd.setEndY(y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH));
+        outputNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
+        outputNode.setStartY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
+        outputNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
+        outputNode.setEndY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
     }
 
     public Shape[] getGraphics() {
         Shape[] graphics = {
-                lineDiagonalTopRight,
-                lineDiagonalBottomRight,
-                lineDiagonalTopLeft,
-                lineDiagonalBottomLeft,
-                lineStraightTop,
-                lineStraightBottom,
-                lineStraightEnd};
+        		shape,
+        		aluOpNode,
+                inputANode,
+                inputBNode,
+                outputNode};
 
         return graphics;
     }

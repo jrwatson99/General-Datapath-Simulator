@@ -45,9 +45,11 @@ public abstract class ConfigWindow extends Stage {
 		try {
 			updateComponent();
 			close();
-		} catch (Exception e1) {
-			//do nothing, let user change values and try again
-			e1.getMessage();// TODO put this in a alert window
+		} catch (NumberFormatException e1) {
+			new AlertWindow("Non Integer Number Detected");
+		}
+		catch( Exception e2) {
+			new AlertWindow("Invalid Bit Data");
 		}
 	}
 	
