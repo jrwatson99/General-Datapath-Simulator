@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.ALUConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
@@ -37,12 +38,11 @@ public class ALUGraphic extends ComponentGraphic {
         inputANode = new ComponentInputWireNode();
         inputBNode = new ComponentInputWireNode();
         outputNode = new ComponentOutputWireNode();
-        
         alu = new ALU();
+        addMouseHandler();
     }
 
     public void updateLoc(double x, double y) {
-    	
     	updateTextLoc(x+LITTLE_DIAGONAL_LENGTH_X, y+STRAIGHT_LENGTH+LITTLE_DIAGONAL_LENGTH_Y );
     	
     	shape.getPoints().clear();
@@ -92,6 +92,18 @@ public class ALUGraphic extends ComponentGraphic {
 	public void config() {
 		ALUConfigWindow cfg = new ALUConfigWindow("ALU Configuration", this);
 		cfg.showAndWait();
+		
+	}
+
+	@Override
+	public void addMouseHandler() {shape.setOnMouseClicked(e-> { 
+		if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
+			this.config();
+		}
+		else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
+			//TODO add click and drag;
+		}
+	} );
 		
 	}
 }

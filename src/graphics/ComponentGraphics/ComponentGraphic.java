@@ -1,11 +1,14 @@
 package graphics.ComponentGraphics;
 
+import java.awt.event.MouseEvent;
+
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.Component;
 
-public abstract class ComponentGraphic extends Region {
+public abstract class ComponentGraphic {
 	private int xLoc;
 	private int yLoc;
 	private Text name;
@@ -36,4 +39,6 @@ public abstract class ComponentGraphic extends Region {
 	}
 
 	public abstract void config() ;
+	
+	public abstract void addMouseHandler();
 }
