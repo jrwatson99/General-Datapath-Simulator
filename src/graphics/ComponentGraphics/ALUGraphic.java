@@ -97,13 +97,13 @@ public class ALUGraphic extends ComponentGraphic {
 
 	@Override
 	public void addMouseHandler() {shape.setOnMouseClicked(e-> { 
-		if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
-			this.config();
-		}
-		else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
-			//TODO add click and drag;
-		}
-	} );
+			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
+				this.config();
+			}
+			else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
+				//TODO add click and drag;
+			}
+		} );
 		
 	}
 }
