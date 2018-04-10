@@ -2,6 +2,7 @@ package graphics.ComponentGraphics;
 
 
 import graphics.GUIElements.DefaultConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -34,10 +35,12 @@ public class AdderGraphic extends ComponentGraphic {
         outputNode = new ComponentOutputWireNode();
 
         adder = new Adder();
+
+        addMouseHandler();
     }
 
     public void updateLoc(double x, double y) {
-    	updateTextLoc(x+2,y+STRAIGHT_LENGTH);
+    	updateTextLoc(x + 2,y + STRAIGHT_LENGTH);
     	
     	shape.getPoints().clear();
     	shape.getPoints().addAll(new Double[] {
@@ -81,4 +84,16 @@ public class AdderGraphic extends ComponentGraphic {
 		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
 		cfg.showAndWait();		
 	}
+
+    @Override
+    public void addMouseHandler() {
+        shape.setOnMouseClicked(e -> {
+            if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
+                this.config();
+            }
+            else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
+                //TODO add click and drag;
+            }
+        });
+    }
 }

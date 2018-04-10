@@ -10,6 +10,7 @@ public class DataMemoryGraphic extends MemoryGraphic {
 	private ComponentInputWireNode writeEn;
 	private ComponentInputWireNode readEn;
 	private ComponentOutputWireNode readData;
+
 	public DataMemoryGraphic() {
 		super();
 		setComponent(new DataMemory());

@@ -38,7 +38,7 @@ public abstract class ComponentGraphic {
 		this.name.setText(name);
 	}
 
-	public abstract void config() ;
-	
+	public abstract void config();
+
 	public abstract void addMouseHandler();
 }

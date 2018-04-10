@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.DefaultConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -9,7 +10,7 @@ import logic.components.Component;
 import logic.components.ConstantValue;
 
 public class ConstantValueGraphic extends ComponentGraphic{
-	private Rectangle rect;
+	private Rectangle rectangle;
 	
 	private ComponentOutputWireNode outputNode;
 
@@ -19,22 +20,24 @@ public class ConstantValueGraphic extends ComponentGraphic{
     private ConstantValue val;
     
 	public ConstantValueGraphic() {
-		rect = new Rectangle();
-		rect.setWidth(WIDTH);
-		rect.setHeight(HEIGHT);
-		rect.setFill(Color.WHITE);
-		rect.setStroke(Color.BLACK);
+		rectangle = new Rectangle();
+		rectangle.setWidth(WIDTH);
+		rectangle.setHeight(HEIGHT);
+		rectangle.setFill(Color.WHITE);
+		rectangle.setStroke(Color.BLACK);
 		outputNode = new ComponentOutputWireNode();
 		
 		val = new ConstantValue();
+
+		addMouseHandler();
 	}
 	
 	@Override
 	public void updateLoc(double x, double y) {
 		this.updateTextLoc(x+5, y+15);
 		
-		rect.setX(x);
-		rect.setY(y);
+		rectangle.setX(x);
+		rectangle.setY(y);
 		
 
         outputNode.setStartX(x + WIDTH);
@@ -48,7 +51,7 @@ public class ConstantValueGraphic extends ComponentGraphic{
 	@Override
 	public Shape[] getGraphics() {
 		Shape[] graphics = new Shape[]  {
-				rect,
+				rectangle,
 				outputNode
 		};
 		return graphics;
@@ -66,4 +69,15 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		val.setValue(new DataValue(cfg.getName()));
 	}
 
+	@Override
+	public void addMouseHandler() {
+		rectangle.setOnMouseClicked(e -> {
+			if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
+				this.config();
+			}
+			else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
+				//TODO add click and drag;
+			}
+		});
+	}
 }

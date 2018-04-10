@@ -4,7 +4,7 @@ import javafx.scene.shape.Shape;
 import logic.components.Component;
 import logic.components.WireJunction;
 
-public class WireJunctionGraphic extends ComponentGraphic{
+public class WireJunctionGraphic {
 
 	private ComponentOutputWireNode outputANode;
 	private ComponentOutputWireNode outputBNode;
@@ -19,8 +19,7 @@ public class WireJunctionGraphic extends ComponentGraphic{
 		junct = new WireJunction();
 		
 	}
-	
-	@Override
+
 	public void updateLoc(double x, double y) {		
 
         outputANode.setStartX(x);
@@ -41,7 +40,6 @@ public class WireJunctionGraphic extends ComponentGraphic{
 		
 	}
 
-	@Override
 	public Shape[] getGraphics() {
 		Shape[] graphics = new Shape[]  {
 				outputANode,
@@ -51,13 +49,10 @@ public class WireJunctionGraphic extends ComponentGraphic{
 		return graphics;
 	}
 
-	@Override
 	public Component getComponent() {
 		return junct;
 	}
 
-
-	@Override
 	public void config() {
 	}
 

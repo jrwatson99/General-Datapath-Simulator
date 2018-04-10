@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.MemoryConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -25,6 +26,8 @@ public abstract class MemoryGraphic extends ComponentGraphic{
         rectangle.setWidth(WIDTH);
         rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
+
+        addMouseHandler();
     }
 
     public void updateLoc(double x, double y) {
@@ -48,5 +51,15 @@ public abstract class MemoryGraphic extends ComponentGraphic{
 		
 	}
 
-
+    @Override
+    public void addMouseHandler() {
+        rectangle.setOnMouseClicked(e -> {
+            if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
+                this.config();
+            }
+            else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
+                //TODO add click and drag;
+            }
+        });
+    }
 }

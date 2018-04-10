@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.DefaultConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import logic.components.MUX;
@@ -46,6 +47,8 @@ public class MUXGraphic extends ComponentGraphic {
         arcBottom.setStroke(Color.BLACK);
 
         mux = new MUX();
+
+        addMouseHandler();
     }
 
     public void updateLoc(double x, double y) {
@@ -83,4 +86,16 @@ public class MUXGraphic extends ComponentGraphic {
 		cfg.showAndWait();
 		
 	}
+
+    @Override
+    public void addMouseHandler() {
+        lineStraightLeft.setOnMouseClicked(e -> {
+            if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
+                this.config();
+            }
+            else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
+                //TODO add click and drag;
+            }
+        });
+    }
 }

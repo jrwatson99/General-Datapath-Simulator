@@ -5,7 +5,7 @@ import javafx.scene.shape.Shape;
 import logic.components.Component;
 import logic.components.WireSplitter;
 
-public class WireSplitterGraphic extends ComponentGraphic {
+public class WireSplitterGraphic {
 
 	private ComponentOutputWireNode outputANode;
 	private ComponentInputWireNode inputNode;
@@ -18,8 +18,7 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		junct = new WireSplitter();
 		
 	}
-	
-	@Override
+
 	public void updateLoc(double x, double y) {		
 
         outputANode.setStartX(x);
@@ -36,7 +35,6 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		
 	}
 
-	@Override
 	public Shape[] getGraphics() {
 		Shape[] graphics = new Shape[]  {
 				outputANode,
@@ -45,13 +43,11 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		return graphics;
 	}
 
-	@Override
 	public WireSplitter getComponent() {
 		return junct;
 	}
 
 
-	@Override
 	public void config() {
 		WireSplitterConfigWindow cfg = new WireSplitterConfigWindow("config",this);
 		cfg.showAndWait();

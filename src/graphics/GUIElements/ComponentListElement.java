@@ -58,12 +58,6 @@ public class ComponentListElement extends HBox {
                     case "Bit Extender":
                     	newComponentGraphic = new BitExtenderGraphic();
                     	break;
-                    case "Wire Junction":
-                    	newComponentGraphic = new WireJunctionGraphic();
-                    	break;
-                    case "Wire Splitter":
-                    	newComponentGraphic = new WireSplitterGraphic();
-                    	break;
                     default:
                         newComponentGraphic = null;
                         break;
