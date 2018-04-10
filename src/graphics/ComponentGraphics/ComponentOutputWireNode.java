@@ -13,7 +13,7 @@ public class ComponentOutputWireNode extends Line {
     private static final double LENGTH = 5;
     private ArrayList<Line> wireGraphicLines;
 
-    private static final double MAX_CONNECTION_DISTANCE = 5.0;
+    private static final double MAX_CONNECTION_DISTANCE = 10.0;
 
     public double getLength() {
         return LENGTH;
@@ -41,9 +41,13 @@ public class ComponentOutputWireNode extends Line {
                     }
 
                     //Add first line in wire
-                    Line firstLine = new Line(getEndX(), getEndY(), getEndX(), getEndY());
-                    wireGraphicLines.add(firstLine);
-                    parentPane.getChildren().add(firstLine);
+                    Line firstLineHorizontal = new Line(getEndX(), getEndY(), getEndX(), getEndY());
+                    wireGraphicLines.add(firstLineHorizontal);
+                    parentPane.getChildren().add(firstLineHorizontal);
+
+                    Line firstLineVertical = new Line(getEndX(), getEndY(), getEndX(), getEndY());
+                    wireGraphicLines.add(firstLineVertical);
+                    parentPane.getChildren().add(firstLineVertical);
 
                     addParentPaneWirePlacingListener(parentPane);
                 }
@@ -57,14 +61,14 @@ public class ComponentOutputWireNode extends Line {
             public void handle(MouseEvent e) {
                 if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
 
-                    Line lastLine = wireGraphicLines.get(wireGraphicLines.size() - 1);
+                    Line lastLineVertical = wireGraphicLines.get(wireGraphicLines.size() - 1);
+                    Line lastLineHorizontal = wireGraphicLines.get(wireGraphicLines.size() - 2);
 
-                    if (wireGraphicLines.size() % 2 == 0) {
-                        lastLine.setEndY(e.getY());
-                    }
-                    else {
-                        lastLine.setEndX(e.getX());
-                    }
+                    lastLineHorizontal.setEndX(e.getX());
+
+                    lastLineVertical.setStartX(e.getX());
+                    lastLineVertical.setEndX(e.getX());
+                    lastLineVertical.setEndY(e.getY());
 
                     ExecutionEnvironment.getExecutionEnvironment().startPlacingWire();
                 }
@@ -89,16 +93,32 @@ public class ComponentOutputWireNode extends Line {
                         }
                     }
 
-                    Line lastLine = wireGraphicLines.get(wireGraphicLines.size() - 1);
+                    Line lastLineVertical = wireGraphicLines.get(wireGraphicLines.size() - 1);
+                    Line lastLineHorizontal = wireGraphicLines.get(wireGraphicLines.size() - 2);
                     if (connectingInputNode != null) {
-                        lastLine.setEndX(connectingInputNode.getStartX());
-                        lastLine.setEndY(connectingInputNode.getStartY());
-                        getParent().removeEventHandler(MouseEvent.ANY, this);
+                        if (connectingInputNode.getStartY() != lastLineVertical.getStartY()) {
+                            lastLineHorizontal.setEndX(connectingInputNode.getStartX());
+
+                            lastLineVertical.setStartX(connectingInputNode.getStartX());
+                            lastLineVertical.setEndX(connectingInputNode.getStartX());
+                            lastLineVertical.setEndY(connectingInputNode.getStartY());
+
+                            getParent().removeEventHandler(MouseEvent.ANY, this);
+                        }
+                        else {
+                            parentPane.getChildren().remove(wireGraphicLines.remove(wireGraphicLines.size() - 1));
+                            lastLineHorizontal.setEndX(connectingInputNode.getStartX());
+                        }
+
                     }
                     else {
-                        Line newLine = new Line(lastLine.getEndX(), lastLine.getEndY(), lastLine.getEndX(), lastLine.getEndY());
-                        wireGraphicLines.add(newLine);
-                        parentPane.getChildren().add(newLine);
+                        Line newLineVertical = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
+                        wireGraphicLines.add(newLineVertical);
+                        parentPane.getChildren().add(newLineVertical);
+
+                        Line newLineHorizontal = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
+                        wireGraphicLines.add(newLineHorizontal);
+                        parentPane.getChildren().add(newLineHorizontal);
                     }
                 }
             }
