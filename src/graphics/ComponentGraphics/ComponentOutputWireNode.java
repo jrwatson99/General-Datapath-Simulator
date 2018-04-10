@@ -6,12 +6,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import logic.ExecutionEnvironment;
+import logic.Wire;
+import logic.components.Component;
 
 import java.util.ArrayList;
 
 public class ComponentOutputWireNode extends Line {
     private static final double LENGTH = 5;
     private ArrayList<Line> wireGraphicLines;
+    private ComponentGraphic componentGraphic;
+    private String name;
 
     private static final double MAX_CONNECTION_DISTANCE = 10.0;
 
@@ -19,9 +23,15 @@ public class ComponentOutputWireNode extends Line {
         return LENGTH;
     }
 
-    public ComponentOutputWireNode() {
+    public ComponentGraphic getComponentGraphic() { return componentGraphic; }
+
+    public String getName() { return name; }
+
+    public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName) throws Exception {
         setStrokeWidth(3);
         wireGraphicLines = new ArrayList<Line>();
+        componentGraphic = parentComponentGraphic;
+        name = outputName;
         addOutputNodeClickListener();
     }
 
@@ -85,8 +95,6 @@ public class ComponentOutputWireNode extends Line {
                                     + Math.pow(wireGraphicLines.get(wireGraphicLines.size() - 1).getEndY() - ((ComponentInputWireNode)nodeInPane).getStartY(), 2)
                                     );
 
-                            System.out.println(distanceBetweenWireAndNode);
-
                             if (distanceBetweenWireAndNode < MAX_CONNECTION_DISTANCE) {
                                 connectingInputNode = (ComponentInputWireNode)nodeInPane;
                             }
@@ -110,6 +118,12 @@ public class ComponentOutputWireNode extends Line {
                             lastLineHorizontal.setEndX(connectingInputNode.getStartX());
                         }
 
+                        Component outputComponent = getComponentGraphic().getComponent();
+                        Component inputComponent = connectingInputNode.getComponentGraphic().getComponent();
+
+                        Wire logicalWire = new Wire();
+                        inputComponent.connectOutputWire(logicalWire, getName());
+                        outputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
                     }
                     else {
                         Line newLineVertical = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
@@ -124,6 +138,20 @@ public class ComponentOutputWireNode extends Line {
             }
         });
     }
-
-
 }
+
+/*  Input and Output names
+ ---------------------------------------------------------------
+| Adder         | inputA        | inputB          | output      |
+| ALU           |               |
+| BitExtender   |               |
+| BitShifter    |               |
+| Comparator    |               |
+| ConstantValue |               |
+| DataMemory    |               |
+| MUX           |               |
+| RegisterFile  |               |
+| WireJunction  |               |
+| WireSplitter  |               |
+ -------------------------------------------
+ */

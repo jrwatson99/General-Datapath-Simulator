@@ -30,9 +30,9 @@ public class AdderGraphic extends ComponentGraphic {
     	shape = new Polygon();
     	shape.setFill(Color.WHITE);
     	shape.setStroke(Color.BLACK);
-        inputANode = new ComponentInputWireNode();
-        inputBNode = new ComponentInputWireNode();
-        outputNode = new ComponentOutputWireNode();
+        inputANode = new ComponentInputWireNode(this, "inputA");
+        inputBNode = new ComponentInputWireNode(this, "inputB");
+        outputNode = new ComponentOutputWireNode(this, "output");
 
         adder = new Adder();
 

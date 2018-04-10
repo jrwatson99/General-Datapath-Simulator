@@ -4,7 +4,7 @@ import javafx.scene.shape.Shape;
 import logic.components.Component;
 import logic.components.WireJunction;
 
-public class WireJunctionGraphic {
+public class WireJunctionGraphic extends ComponentGraphic {
 
 	private ComponentOutputWireNode outputANode;
 	private ComponentOutputWireNode outputBNode;
@@ -13,9 +13,9 @@ public class WireJunctionGraphic {
 	private WireJunction junct;
 	
 	public WireJunctionGraphic() {
-		outputANode = new ComponentOutputWireNode();
-		outputBNode = new ComponentOutputWireNode();
-		inputNode = new ComponentInputWireNode();
+		outputANode = new ComponentOutputWireNode(this);
+		outputBNode = new ComponentOutputWireNode(this);
+		inputNode = new ComponentInputWireNode(this);
 		junct = new WireJunction();
 		
 	}
@@ -56,5 +56,9 @@ public class WireJunctionGraphic {
 	public void config() {
 	}
 
+	@Override
+	public void addMouseHandler() {
+
+	}
 
 }

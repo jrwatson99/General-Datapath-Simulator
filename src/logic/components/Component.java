@@ -1,6 +1,7 @@
 package logic.components;
 
 import logic.DataValue;
+import logic.Wire;
 
 /*
  * The super class for all the logical components. 
@@ -133,4 +134,7 @@ public abstract class Component {
 		}
 		return newOutput;
 	}
+
+	public abstract void connectInputWire(Wire connectingWire, String inputName);
+	public abstract void connectOutputWire(Wire connectingWire, String outputName);
 }

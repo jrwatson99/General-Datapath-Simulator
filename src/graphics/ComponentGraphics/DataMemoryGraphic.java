@@ -14,11 +14,11 @@ public class DataMemoryGraphic extends MemoryGraphic {
 	public DataMemoryGraphic() {
 		super();
 		setComponent(new DataMemory());
-		address = new ComponentInputWireNode();
-		writeData = new ComponentInputWireNode();
-		writeEn = new ComponentInputWireNode();
-		readEn = new ComponentInputWireNode();
-		readData = new ComponentOutputWireNode();
+		address = new ComponentInputWireNode(this);
+		writeData = new ComponentInputWireNode(this);
+		writeEn = new ComponentInputWireNode(this);
+		readEn = new ComponentInputWireNode(this);
+		readData = new ComponentOutputWireNode(this);
 	}
 	
 	@Override 

@@ -29,8 +29,8 @@ public class BitShifterGraphic extends ComponentGraphic{
         rectangle.setFill(Color.TRANSPARENT);
         rectangle.setStroke(Color.BLACK);
 
-        inputNode = new ComponentInputWireNode();
-        outputNode = new ComponentOutputWireNode();
+        inputNode = new ComponentInputWireNode(this);
+        outputNode = new ComponentOutputWireNode(this);
 
         addMouseHandler();
     }

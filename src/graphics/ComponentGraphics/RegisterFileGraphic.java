@@ -16,13 +16,13 @@ public class RegisterFileGraphic extends MemoryGraphic {
 	public RegisterFileGraphic() {
 		super();
 		setComponent(new RegisterFile());
-		readAddress1 = new ComponentInputWireNode();
-		readAddress2 = new ComponentInputWireNode();
-		writeAddress = new ComponentInputWireNode();
-		writeData = new ComponentInputWireNode();
-		writeEn = new ComponentInputWireNode();
-		readData1 = new ComponentOutputWireNode();
-		readData2 = new ComponentOutputWireNode();
+		readAddress1 = new ComponentInputWireNode(this);
+		readAddress2 = new ComponentInputWireNode(this);
+		writeAddress = new ComponentInputWireNode(this);
+		writeData = new ComponentInputWireNode(this);
+		writeEn = new ComponentInputWireNode(this);
+		readData1 = new ComponentOutputWireNode(this);
+		readData2 = new ComponentOutputWireNode(this);
 	}
 	
 	@Override 
