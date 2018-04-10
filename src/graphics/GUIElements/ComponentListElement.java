@@ -74,7 +74,8 @@ public class ComponentListElement extends HBox {
                         public void handle(MouseEvent e) {
                             if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
                                 finalNewComponentGraphic.updateLoc(e.getX(), e.getY());
-                            } else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                            }
+                            else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
                                 datapathWindow.removeEventHandler(MouseEvent.ANY, this);
                                 finalNewComponentGraphic.config();
                             }
