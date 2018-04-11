@@ -33,7 +33,14 @@ public abstract class Memory extends Component{
 	public void setAddressWidth(int addressWidth) {this.addressWidth = addressWidth;}
 	public int getDataWidth() {return dataWidth;}
 	public void setDataWidth(int dataWidth) {this.dataWidth = dataWidth;}
-
+	public int getSize() {
+		if(this.getClass()==RegisterFile.class) {
+			return ((RegisterFile)this).getNumRegisters();
+		}
+		else {
+			return ((DataMemory)this).getSize();
+		}
+	}
 	
 	public Memory(){
 		this("invalid");
@@ -67,7 +74,6 @@ public abstract class Memory extends Component{
 	
 	public abstract void onPosEdgeClk() throws Exception;
 	public abstract void onNegEdgeClk() throws Exception;
-	
 	/**
 	 * listens for clock edge and calls update
 	 * @author Matthew Johnson

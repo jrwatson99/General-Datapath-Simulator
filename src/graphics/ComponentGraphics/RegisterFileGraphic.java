@@ -1,5 +1,7 @@
 package graphics.ComponentGraphics;
 
+import graphics.GUIElements.RegisterFileConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
 import logic.components.memories.RegisterFile;
 
@@ -16,13 +18,13 @@ public class RegisterFileGraphic extends MemoryGraphic {
 	public RegisterFileGraphic() {
 		super();
 		setComponent(new RegisterFile());
-		readAddress1 = new ComponentInputWireNode(this);
-		readAddress2 = new ComponentInputWireNode(this);
-		writeAddress = new ComponentInputWireNode(this);
-		writeData = new ComponentInputWireNode(this);
-		writeEn = new ComponentInputWireNode(this);
-		readData1 = new ComponentOutputWireNode(this);
-		readData2 = new ComponentOutputWireNode(this);
+		readAddress1 = new ComponentInputWireNode(this,"ReadAddress1");
+		readAddress2 = new ComponentInputWireNode(this,"ReadAddress2");
+		writeAddress = new ComponentInputWireNode(this,"WriteAddress");
+		writeData = new ComponentInputWireNode(this,"WriteData");
+		writeEn = new ComponentInputWireNode(this,"WriteEn");
+		readData1 = new ComponentOutputWireNode(this,"ReadData1");
+		readData2 = new ComponentOutputWireNode(this,"ReadData2");
 	}
 	
 	@Override 
@@ -79,5 +81,21 @@ public class RegisterFileGraphic extends MemoryGraphic {
 				readData2,
 		};
 		return graphics;
+	}
+	@Override
+	public void changeMouseHandler() {getRect().setOnMouseClicked(e-> {
+			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
+				this.config2();
+			}
+			else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
+				//TODO add click and drag;
+				
+			}
+		});
+	}
+	
+	public void config2() {
+		RegisterFileConfigWindow cfg = new RegisterFileConfigWindow("config", this);
+		cfg.showAndWait();
 	}
 }

@@ -1,11 +1,15 @@
 package graphics.GUIElements;
 
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -28,9 +32,8 @@ public abstract class ConfigWindow extends Stage {
 		layout.setVgap(10);
 		layout.setHgap(10);
 		layout.setPadding(new Insets(10,10,10,10));
-		
 		VBox layout1 = new VBox();
-		layout1.getChildren().addAll(layout,confirm);
+		layout1.getChildren().addAll(new ScrollPane(layout),confirm);
 		layout1.setAlignment(Pos.BOTTOM_CENTER);
 		this.setScene(new Scene(layout1));
 		
@@ -39,6 +42,8 @@ public abstract class ConfigWindow extends Stage {
 			closeWindow();
 			
 		});
+		this.setMaxHeight(800);
+		
 	}
 	
 	private void closeWindow() {
@@ -49,7 +54,7 @@ public abstract class ConfigWindow extends Stage {
 			new AlertWindow("Non Integer Number Detected");
 		}
 		catch( Exception e2) {
-			new AlertWindow("Invalid Bit Data");
+			new AlertWindow("Invalid Bit Data  " + e2.getMessage());
 		}
 	}
 	
@@ -71,6 +76,11 @@ public abstract class ConfigWindow extends Stage {
 			this.name =new Label(name+": ");
 			text = new TextField();
 			text.setPromptText("Enter value for "+name);
+		}
+		
+		public InputLine(String name,String defualtText) {
+			this.name =new Label(name+": ");
+			text = new TextField(defualtText);
 		}
 
 		public Label getName() {

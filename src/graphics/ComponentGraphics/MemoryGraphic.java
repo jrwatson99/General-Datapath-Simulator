@@ -10,7 +10,7 @@ import logic.components.memories.Memory;
 public abstract class MemoryGraphic extends ComponentGraphic{
 	private Memory mem;
 	private Rectangle rectangle;
-
+	
 
     protected static final double HEIGHT = 200;
     protected static final double WIDTH = 100;
@@ -48,10 +48,12 @@ public abstract class MemoryGraphic extends ComponentGraphic{
 	public void config() {
 		MemoryConfigWindow cfg = new MemoryConfigWindow("Mem Config",this);
 		cfg.showAndWait();
-		
+		changeMouseHandler();
 	}
 
-    @Override
+    public abstract void changeMouseHandler();
+    
+	@Override
     public void addMouseHandler() {
         rectangle.setOnMouseClicked(e -> {
             if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {

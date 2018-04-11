@@ -7,10 +7,18 @@ public class MemoryConfigWindow extends ConfigWindow{
 	MemoryGraphic memg;
 	public MemoryConfigWindow(String title, MemoryGraphic memg) {
 		super(title);
-		this.addInputLine(new InputLine("Name"));
-		this.addInputLine(new InputLine("Address Bit Width"));
-		this.addInputLine(new InputLine("Data Bit Width"));
-		this.addInputLine(new InputLine("Memory Size/ Number of registers"));
+		if(memg.getName()=="") {
+			this.addInputLine(new InputLine("Name"));
+			this.addInputLine(new InputLine("Address Bit Width"));
+			this.addInputLine(new InputLine("Data Bit Width"));
+			this.addInputLine(new InputLine("Memory Size/ Number of registers"));
+		}
+		else {
+			this.addInputLine(new InputLine("Name",memg.getName()));
+			this.addInputLine(new InputLine("Address Bit Width",Integer.toString(memg.getComponent().getAddressWidth())));
+			this.addInputLine(new InputLine("Data Bit Width",Integer.toString(memg.getComponent().getDataWidth())));
+			this.addInputLine(new InputLine("Memory Size/ Number of registers",Integer.toString(memg.getComponent().getSize())));
+		}
 		this.memg=memg;
 	}
 	
@@ -31,6 +39,9 @@ public class MemoryConfigWindow extends ConfigWindow{
 	@Override
 	public void updateComponent() throws Exception {
 		memg.setName(getName());
+		if(Math.pow(2, getAddressWidth()) < getSize()) {
+			throw new Exception(" Address too small");
+		}
 		memg.getComponent().setAddressWidth(getAddressWidth());
 		memg.getComponent().setDataWidth(getDataWidth());
 		memg.getComponent().resize(getSize());

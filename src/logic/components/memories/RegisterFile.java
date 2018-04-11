@@ -82,6 +82,52 @@ public class RegisterFile extends Memory{
 	public void Update() throws Exception {
 		super.update();
 	}
+	
+	public void setReg(int regNum, DataValue val) {
+		registers.set(regNum, val);
+	}
+	
+
+
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch(inputName) {
+		case "ReadAddress1":
+			setReadAddress1(connectingWire);
+			break;
+		case "ReadAddress2":
+			setReadAddress2(connectingWire);
+			break;
+		case "WriteAddress":
+			setAddress(connectingWire);
+			break;
+		case "WriteEn":
+			setWriteEnable(connectingWire);
+			break;
+		case "WriteData":
+			setWriteData(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: Invalid input name");
+		
+		}
+		
+	}
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch(outputName) {
+		case "ReadData1":
+			setReadData(connectingWire);
+			break;
+		case "ReadData2":
+			setReadData2(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: Invalid input name");
+		}
+	}
+	
+	
 	@SuppressWarnings("unused")
 	private static class Tester {
 		private static Wire clk;
@@ -143,5 +189,11 @@ public class RegisterFile extends Memory{
 		}
 		
 	}
-	
+
+
+	public DataValue getReg(int i) {
+		return registers.get(i);
+	}
+
+
 }

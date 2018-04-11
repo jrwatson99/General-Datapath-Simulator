@@ -27,7 +27,7 @@ public class ComponentOutputWireNode extends Line {
 
     public String getName() { return name; }
 
-    public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName) throws Exception {
+    public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName){
         setStrokeWidth(3);
         wireGraphicLines = new ArrayList<Line>();
         componentGraphic = parentComponentGraphic;
