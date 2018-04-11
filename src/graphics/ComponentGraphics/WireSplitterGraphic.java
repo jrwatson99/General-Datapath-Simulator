@@ -7,24 +7,24 @@ import logic.components.WireSplitter;
 
 public class WireSplitterGraphic extends ComponentGraphic {
 
-	private ComponentOutputWireNode outputANode;
+	private ComponentOutputWireNode outputNode;
 	private ComponentInputWireNode inputNode;
     
 	private WireSplitter junct;
 	
 	public WireSplitterGraphic() {
-		outputANode = new ComponentOutputWireNode(this);
-		inputNode = new ComponentInputWireNode(this);
+		outputNode = new ComponentOutputWireNode(this, "output");
+		inputNode = new ComponentInputWireNode(this, "input");
 		junct = new WireSplitter();
 		
 	}
 
 	public void updateLoc(double x, double y) {		
 
-        outputANode.setStartX(x);
-        outputANode.setStartY(y);
-        outputANode.setEndX(x + outputANode.getLength());
-        outputANode.setEndY(y);
+        outputNode.setStartX(x);
+        outputNode.setStartY(y);
+        outputNode.setEndX(x + outputNode.getLength());
+        outputNode.setEndY(y);
         
         
         inputNode.setStartX(x);
@@ -37,7 +37,7 @@ public class WireSplitterGraphic extends ComponentGraphic {
 
 	public Shape[] getGraphics() {
 		Shape[] graphics = new Shape[]  {
-				outputANode,
+				outputNode,
 				inputNode
 		};
 		return graphics;

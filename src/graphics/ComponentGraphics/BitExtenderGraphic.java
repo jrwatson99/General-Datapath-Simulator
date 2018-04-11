@@ -28,8 +28,8 @@ public class BitExtenderGraphic extends ComponentGraphic{
         rectangle.setFill(Color.TRANSPARENT);
         rectangle.setStroke(Color.BLACK);
 
-        inputNode = new ComponentInputWireNode(this);
-        outputNode = new ComponentOutputWireNode(this);
+        inputNode = new ComponentInputWireNode(this, "input");
+        outputNode = new ComponentOutputWireNode(this, "output");
 
         addMouseHandler();
     }
