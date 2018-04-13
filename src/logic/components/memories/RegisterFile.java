@@ -108,7 +108,7 @@ public class RegisterFile extends Memory{
 			setWriteData(connectingWire);
 			break;
 		default:
-			System.out.println("ERROR: Invalid input name");
+			System.out.println("ERROR: Invalid input name" + inputName);
 		
 		}
 		
@@ -123,7 +123,7 @@ public class RegisterFile extends Memory{
 			setReadData2(connectingWire);
 			break;
 		default:
-			System.out.println("ERROR: Invalid input name");
+			System.out.println("ERROR: Invalid Output name" + outputName);
 		}
 	}
 	

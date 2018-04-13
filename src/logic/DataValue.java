@@ -26,4 +26,7 @@ public class DataValue extends BigInteger {
 	public DataValue(int num) {
 		this(BigInteger.valueOf(num));
 	}
+	public DataValue(String line, int radix) {
+		super(line,radix);
+	}
 }

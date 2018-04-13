@@ -122,8 +122,8 @@ public class ComponentOutputWireNode extends Line {
                         Component inputComponent = connectingInputNode.getComponentGraphic().getComponent();
 
                         Wire logicalWire = new Wire();
-                        inputComponent.connectOutputWire(logicalWire, getName());
-                        outputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
+                        outputComponent.connectOutputWire(logicalWire, getName());
+                        inputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
                     }
                     else {
                         Line newLineVertical = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());

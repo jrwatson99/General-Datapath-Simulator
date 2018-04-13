@@ -25,13 +25,14 @@ public abstract class ConfigWindow extends Stage {
 		
 		this.initModality(Modality.APPLICATION_MODAL);
 		
-		confirm = new Button("Apply");
-		confirm.setOnAction(e -> closeWindow());
-		
 		layout = new GridPane();
 		layout.setVgap(10);
 		layout.setHgap(10);
 		layout.setPadding(new Insets(10,10,10,10));
+		
+		confirm = new Button("Apply");
+		confirm.setOnAction(e -> closeWindow());
+		
 		VBox layout1 = new VBox();
 		layout1.getChildren().addAll(new ScrollPane(layout),confirm);
 		layout1.setAlignment(Pos.BOTTOM_CENTER);
@@ -46,7 +47,7 @@ public abstract class ConfigWindow extends Stage {
 		
 	}
 	
-	private void closeWindow() {
+	protected void closeWindow() {
 		try {
 			updateComponent();
 			close();
@@ -54,7 +55,8 @@ public abstract class ConfigWindow extends Stage {
 			new AlertWindow("Non Integer Number Detected");
 		}
 		catch( Exception e2) {
-			new AlertWindow("Invalid Bit Data  " + e2.getMessage());
+			new AlertWindow("Invalid Bit Data:  " + e2.getMessage());
+			e2.printStackTrace();
 		}
 	}
 	
