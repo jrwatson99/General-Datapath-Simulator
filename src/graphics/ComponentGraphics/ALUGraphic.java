@@ -34,10 +34,10 @@ public class ALUGraphic extends ComponentGraphic {
     	shape = new Polygon();
     	shape.setFill(Color.WHITE);
     	shape.setStroke(Color.BLACK);
-        aluOpNode = new ComponentInputWireNode(this);
-        inputANode = new ComponentInputWireNode(this);
-        inputBNode = new ComponentInputWireNode(this);
-        outputNode = new ComponentOutputWireNode(this);
+        aluOpNode = new ComponentInputWireNode(this, "opCode");
+        inputANode = new ComponentInputWireNode(this, "inputA");
+        inputBNode = new ComponentInputWireNode(this, "inputB");
+        outputNode = new ComponentOutputWireNode(this, "output");
         alu = new ALU();
         addMouseHandler();
     }

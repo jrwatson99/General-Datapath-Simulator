@@ -33,11 +33,11 @@ public class ComparatorGraphic extends ComponentGraphic {
         rectangle.setStroke(Color.BLACK);
         
 
-        inputANode = new ComponentInputWireNode(this);
-        inputBNode = new ComponentInputWireNode(this);
-        outputLTNode = new ComponentOutputWireNode(this);
-        outputEQNode = new ComponentOutputWireNode(this);
-        outputGTNode = new ComponentOutputWireNode(this);
+        inputANode = new ComponentInputWireNode(this, "inputA");
+        inputBNode = new ComponentInputWireNode(this, "inputB");
+        outputLTNode = new ComponentOutputWireNode(this, "outputLT");
+        outputEQNode = new ComponentOutputWireNode(this, "outputEQ");
+        outputGTNode = new ComponentOutputWireNode(this, "outputGT");
 
         comparator = new Comparator();
 

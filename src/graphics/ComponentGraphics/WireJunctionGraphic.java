@@ -13,9 +13,9 @@ public class WireJunctionGraphic extends ComponentGraphic {
 	private WireJunction junct;
 	
 	public WireJunctionGraphic() {
-		outputANode = new ComponentOutputWireNode(this);
-		outputBNode = new ComponentOutputWireNode(this);
-		inputNode = new ComponentInputWireNode(this);
+		outputANode = new ComponentOutputWireNode(this, "outputA");
+		outputBNode = new ComponentOutputWireNode(this, "outputB");
+		inputNode = new ComponentInputWireNode(this, "input");
 		junct = new WireJunction();
 		
 	}

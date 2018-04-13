@@ -25,7 +25,7 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		rectangle.setHeight(HEIGHT);
 		rectangle.setFill(Color.WHITE);
 		rectangle.setStroke(Color.BLACK);
-		outputNode = new ComponentOutputWireNode(this);
+		outputNode = new ComponentOutputWireNode(this, "output");
 		
 		val = new ConstantValue();
 
