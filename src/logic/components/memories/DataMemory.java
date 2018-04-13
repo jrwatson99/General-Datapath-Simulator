@@ -1,5 +1,10 @@
 package logic.components.memories;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -14,7 +19,7 @@ public class DataMemory extends Memory{
 	
 	public Wire getReadEnable() {return readEnable;	}
 	public void setReadEnable(Wire readEnable) {this.readEnable = readEnable;}
-
+	public int getSize() { return size;}
 
 
 	public DataMemory(){
@@ -40,6 +45,7 @@ public class DataMemory extends Memory{
 	
 	public void resize(int newSize) {
 		mem=java.util.Arrays.copyOf(mem, newSize);
+		this.size=newSize;
 	}
 	
 	@Override
@@ -131,7 +137,7 @@ public class DataMemory extends Memory{
 		private static DataMemory memory;
 		
 		public static void main(String args[]) {
-			memory = new DataMemory(Integer.MAX_VALUE-2,32);
+			memory = new DataMemory(32,32);
 			
 			clk = new Wire();
 			clk.setValue(DataValue.ZERO);
@@ -199,6 +205,86 @@ public class DataMemory extends Memory{
 			}
 			writeEn.setValue(DataValue.ZERO);
 		}
+	}
+
+	public void setWord(int wordNum, DataValue wordValue) throws Exception {
+		int bits = wordValue.bitLength();
+		byte[] data = wordValue.toByteArray();
+		for(int i=0; i <= (bits-1)/8;i++) {
+			mem[wordNum*getDataWidth()/8 + i]=data[bits/8-i];
+		}
+		for(int i=bits/8+1; i<getDataWidth()/8;i++) {
+			mem[wordNum*getDataWidth()/8+i]=0;
+		}
+		
+	}
+	public DataValue getWord(int wordNum) throws Exception {
+		byte[] data = new byte[getDataWidth()/8];
+		for(int i=0; i < (getDataWidth()/8); i++) {
+			
+			data[getDataWidth()/8-i-1]=mem[(getDataWidth()/8)*wordNum+i];//mem.get(index);
+		}
+		return new DataValue(data);
+	}
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch(inputName) {
+//		case "Clock":   /// are we doing this?
+//			this.setCLK(connectingWire);
+//			break;
+		case "Address":
+			setAddress(connectingWire);
+			break;
+		case "ReadEn":
+			setReadEnable(connectingWire);
+			break;
+		case "WriteEn":
+			setWriteEnable(connectingWire);
+			break;
+		case "WriteData":
+			setWriteData(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: Invalid Input name" + inputName);
+		
+		}
+		
+	}
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch(outputName) {
+		case "ReadData":
+			setReadData(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: Invalid Output name" + outputName);
+		
+		}
+		
+	}
+	
+	public void initFromFile(String fileName, int radix) throws Exception {
+		File file = new File(fileName);
+		//file.createNewFile();
+		if(file.canRead()) {
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			String line;
+			int i=0;
+			while((line = in.readLine()) != null) {
+				try {
+					this.setWord(i, new DataValue(line,radix));
+					i++;
+				}
+				catch (Exception e) {
+					throw new Exception("File to Long?");
+				}
+			}
+			in.close();
+		}
+		else {
+			throw new Exception("Invalid File");
+		}
+		
 	}
 	
 }

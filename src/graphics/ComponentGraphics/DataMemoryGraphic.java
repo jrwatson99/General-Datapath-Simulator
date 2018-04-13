@@ -1,5 +1,7 @@
 package graphics.ComponentGraphics;
 
+import graphics.GUIElements.DataMemoryConfigWindow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
 import logic.components.memories.*;
 
@@ -14,11 +16,11 @@ public class DataMemoryGraphic extends MemoryGraphic {
 	public DataMemoryGraphic() {
 		super();
 		setComponent(new DataMemory());
-		address = new ComponentInputWireNode(this);
-		writeData = new ComponentInputWireNode(this);
-		writeEn = new ComponentInputWireNode(this);
-		readEn = new ComponentInputWireNode(this);
-		readData = new ComponentOutputWireNode(this);
+		address = new ComponentInputWireNode(this,"Address");
+		writeData = new ComponentInputWireNode(this,"WriteData");
+		writeEn = new ComponentInputWireNode(this,"WriteEn");
+		readEn = new ComponentInputWireNode(this,"ReadEn");
+		readData = new ComponentOutputWireNode(this,"ReadData");
 	}
 	
 	@Override 
@@ -62,5 +64,22 @@ public class DataMemoryGraphic extends MemoryGraphic {
 				readData,
 		};
 		return graphics;
+	}
+
+	@Override
+	public void changeMouseHandler() {getRect().setOnMouseClicked(e-> {
+			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
+				this.config2();
+			}
+			else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
+				//TODO add click and drag;
+				
+			}
+		});
+	}
+	
+	public void config2() {
+		DataMemoryConfigWindow cfg = new DataMemoryConfigWindow("config", this);
+		cfg.showAndWait();
 	}
 }

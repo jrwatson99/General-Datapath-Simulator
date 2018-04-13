@@ -1,10 +1,15 @@
 package graphics.GUIElements;
 
 import graphics.ComponentGraphics.MemoryGraphic;
+import graphics.GUIElements.ConfigWindow.InputLine;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import logic.components.memories.DataMemory;
 
 public class MemoryConfigWindow extends ConfigWindow{
 	MemoryGraphic memg;
+	CheckBox cb;
 	public MemoryConfigWindow(String title, MemoryGraphic memg) {
 		super(title);
 		if(memg.getName()=="") {
@@ -19,6 +24,13 @@ public class MemoryConfigWindow extends ConfigWindow{
 			this.addInputLine(new InputLine("Data Bit Width",Integer.toString(memg.getComponent().getDataWidth())));
 			this.addInputLine(new InputLine("Memory Size/ Number of registers",Integer.toString(memg.getComponent().getSize())));
 		}
+		if(memg.getComponent().getClass()==DataMemory.class) {
+
+			cb = new CheckBox();
+			getLayout().addRow(4,new Label("Do you want to initialize Data Memory from file?") ,cb);
+			this.addInputLine(new InputLine("Filename"));
+		}
+		
 		this.memg=memg;
 	}
 	
@@ -45,7 +57,9 @@ public class MemoryConfigWindow extends ConfigWindow{
 		memg.getComponent().setAddressWidth(getAddressWidth());
 		memg.getComponent().setDataWidth(getDataWidth());
 		memg.getComponent().resize(getSize());
-		
+		if(memg.getComponent().getClass()==DataMemory.class && cb.isSelected()) {
+			((DataMemory)memg.getComponent()).initFromFile(((TextField)getLayout().getChildren().get(11)).getText(), 10);
+		}
 	}
 	
 }
