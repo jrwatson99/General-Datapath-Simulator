@@ -4,6 +4,7 @@ import graphics.ComponentGraphics.MemoryGraphic;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -16,7 +17,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 	GridPane layout;
 	public DataMemoryConfigWindow(String title, MemoryGraphic memg) {
 		super(title, memg);
-		 layout = this.getLayout();
+		layout = this.getLayout();
 		try {
 			addData(memg);
 		} catch (Exception e) {
@@ -26,7 +27,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 		
 		Button confirm = new Button("Apply");
 		confirm.setOnAction(e -> this.closeWindow());
-		
+				
 		VBox layout1 = new VBox();
 		layout1.getChildren().addAll(new ScrollPane(layout),confirm);
 		layout1.setAlignment(Pos.BOTTOM_CENTER);
@@ -40,7 +41,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 		for(int i=0;i< (d.getSize()*8)/d.getDataWidth();i++) {
 			for(int j = 0; j<n;j++ ) {
 				if(i*n +j < (8*d.getSize())/d.getDataWidth()) {
-					layout.addRow(i+4,new Label("Word "+ (i*n+j)),new TextField(d.getWord(i*n +j).toString()));
+					layout.addRow(i+6,new Label("Word "+ (i*n+j)),new TextField(d.getWord(i*n +j).toString()));
 				}
 			}
 		}
@@ -57,7 +58,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 	}
 
 	private DataValue getWordValue(int i) {
-		return new DataValue(((TextField)getLayout().getChildren().get(i*2 + 1 +8)).getText());
+		return new DataValue(((TextField)getLayout().getChildren().get(i*2 + 1 +12)).getText());
 	}
 
 }

@@ -40,12 +40,6 @@ public class DataMemory extends Memory{
 //		}
 		mem=new byte[size];
 		this.size=size;
-		try {
-			this.initFromFile("initMem.txt", 10);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -143,7 +137,7 @@ public class DataMemory extends Memory{
 		private static DataMemory memory;
 		
 		public static void main(String args[]) {
-			memory = new DataMemory(Integer.MAX_VALUE-2,32);
+			memory = new DataMemory(32,32);
 			
 			clk = new Wire();
 			clk.setValue(DataValue.ZERO);
@@ -217,10 +211,10 @@ public class DataMemory extends Memory{
 		int bits = wordValue.bitLength();
 		byte[] data = wordValue.toByteArray();
 		for(int i=0; i <= (bits-1)/8;i++) {
-			mem[wordNum*bits/8 + i]=data[bits/8-i];
+			mem[wordNum*getDataWidth()/8 + i]=data[bits/8-i];
 		}
 		for(int i=bits/8+1; i<getDataWidth()/8;i++) {
-			mem[wordNum*bits/8]=0;
+			mem[wordNum*getDataWidth()/8+i]=0;
 		}
 		
 	}
@@ -271,13 +265,19 @@ public class DataMemory extends Memory{
 	
 	public void initFromFile(String fileName, int radix) throws Exception {
 		File file = new File(fileName);
+		//file.createNewFile();
 		if(file.canRead()) {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String line;
 			int i=0;
 			while((line = in.readLine()) != null) {
-				this.setWord(i, new DataValue(line,radix));
-				i++;
+				try {
+					this.setWord(i, new DataValue(line,radix));
+					i++;
+				}
+				catch (Exception e) {
+					throw new Exception("File to Long?");
+				}
 			}
 			in.close();
 		}
