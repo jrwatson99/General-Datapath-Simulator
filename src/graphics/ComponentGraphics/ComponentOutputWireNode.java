@@ -105,13 +105,26 @@ public class ComponentOutputWireNode extends Line {
                     Line lastLineHorizontal = wireGraphicLines.get(wireGraphicLines.size() - 2);
                     if (connectingInputNode != null) {
                         if (connectingInputNode.getStartY() != lastLineVertical.getStartY()) {
-                            lastLineHorizontal.setEndX(connectingInputNode.getStartX());
+                            if (connectingInputNode.getStartX() > lastLineHorizontal.getStartX()) {
+                                double intermediateX = lastLineHorizontal.getStartX() + ((connectingInputNode.getStartX() - lastLineHorizontal.getStartX()) * (4.0 / 5.0));
 
-                            lastLineVertical.setStartX(connectingInputNode.getStartX());
-                            lastLineVertical.setEndX(connectingInputNode.getStartX());
-                            lastLineVertical.setEndY(connectingInputNode.getStartY());
+                                lastLineHorizontal.setEndX(intermediateX);
 
-                            getParent().removeEventHandler(MouseEvent.ANY, this);
+                                lastLineVertical.setStartX(intermediateX);
+                                lastLineVertical.setEndX(intermediateX);
+                                lastLineVertical.setEndY(connectingInputNode.getStartY());
+
+                                Line finalLine = new Line(intermediateX, connectingInputNode.getStartY(), connectingInputNode.getStartX(), connectingInputNode.getStartY());
+                                wireGraphicLines.add(finalLine);
+                                parentPane.getChildren().add(finalLine);
+                            }
+                            else {
+                                lastLineHorizontal.setEndX(connectingInputNode.getStartX());
+
+                                lastLineVertical.setStartX(connectingInputNode.getStartX());
+                                lastLineVertical.setEndX(connectingInputNode.getStartX());
+                                lastLineVertical.setEndY(connectingInputNode.getStartY());
+                            }
                         }
                         else {
                             parentPane.getChildren().remove(wireGraphicLines.remove(wireGraphicLines.size() - 1));
@@ -124,6 +137,8 @@ public class ComponentOutputWireNode extends Line {
                         Wire logicalWire = new Wire();
                         outputComponent.connectOutputWire(logicalWire, getName());
                         inputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
+
+                        getParent().removeEventHandler(MouseEvent.ANY, this);
                     }
                     else {
                         Line newLineVertical = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
@@ -156,7 +171,7 @@ public class ComponentOutputWireNode extends Line {
  --------------------------------------------------------------------------------------------------
 | ConstantValue | output        |                 |               |                |               |
  --------------------------------------------------------------------------------------------------
-| DataMemory    | ?             |                 |               |                |               |
+| DataMemory    | address       | writeData       | writeEn       |                |               |
  --------------------------------------------------------------------------------------------------
 | MUX           | ?             |                 |               |                |               |
  --------------------------------------------------------------------------------------------------

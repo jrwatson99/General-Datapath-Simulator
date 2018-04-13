@@ -6,7 +6,7 @@ import javafx.scene.shape.Shape;
 import logic.components.memories.*;
 
 
-public class DataMemoryGraphic extends MemoryGraphic {
+public class  DataMemoryGraphic extends MemoryGraphic {
 	private ComponentInputWireNode address;
 	private ComponentInputWireNode writeData;
 	private ComponentInputWireNode writeEn;
@@ -16,11 +16,11 @@ public class DataMemoryGraphic extends MemoryGraphic {
 	public DataMemoryGraphic() {
 		super();
 		setComponent(new DataMemory());
-		address = new ComponentInputWireNode(this,"Address");
-		writeData = new ComponentInputWireNode(this,"WriteData");
-		writeEn = new ComponentInputWireNode(this,"WriteEn");
-		readEn = new ComponentInputWireNode(this,"ReadEn");
-		readData = new ComponentOutputWireNode(this,"ReadData");
+		address = new ComponentInputWireNode(this,"address");
+		writeData = new ComponentInputWireNode(this,"writeData");
+		writeEn = new ComponentInputWireNode(this,"writeEn");
+		readEn = new ComponentInputWireNode(this,"readEn");
+		readData = new ComponentOutputWireNode(this,"readData");
 	}
 	
 	@Override 

@@ -232,16 +232,16 @@ public class DataMemory extends Memory{
 //		case "Clock":   /// are we doing this?
 //			this.setCLK(connectingWire);
 //			break;
-		case "Address":
+		case "address":
 			setAddress(connectingWire);
 			break;
-		case "ReadEn":
+		case "readEn":
 			setReadEnable(connectingWire);
 			break;
-		case "WriteEn":
+		case "writeEn":
 			setWriteEnable(connectingWire);
 			break;
-		case "WriteData":
+		case "writeData":
 			setWriteData(connectingWire);
 			break;
 		default:
@@ -253,7 +253,7 @@ public class DataMemory extends Memory{
 	@Override
 	public void connectOutputWire(Wire connectingWire, String outputName) {
 		switch(outputName) {
-		case "ReadData":
+		case "readData":
 			setReadData(connectingWire);
 			break;
 		default:

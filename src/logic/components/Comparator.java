@@ -55,5 +55,35 @@ public class Comparator extends Component {
 			getOutputLessThan().setValue((DataValue)DataValue.ZERO);
 		}
 	}
-	
+
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch (inputName) {
+			case "inputA":
+				setInputA(connectingWire);
+				break;
+			case "inputB":
+				setInputB(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: Invalid input name");
+		}
+	}
+
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch (outputName) {
+			case "outputLT":
+				setOutputLessThan(connectingWire);
+				break;
+			case "outputEQ":
+				setOutputEqualTo(connectingWire);
+				break;
+			case "outputGT":
+				setOutputGreaterThan(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: invalid output name");
+		}
+	}
 }

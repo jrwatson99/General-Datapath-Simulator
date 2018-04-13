@@ -2,7 +2,10 @@ package graphics.ComponentGraphics;
 
 
 import graphics.GUIElements.DefaultConfigWindow;
+import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -92,7 +95,17 @@ public class AdderGraphic extends ComponentGraphic {
                 this.config();
             }
             else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
-                //TODO add click and drag;
+                shape.getParent().addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent e) {
+                        if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
+                            updateLoc(e.getX(), e.getY());
+                        }
+                        else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                            shape.getParent().removeEventHandler(MouseEvent.ANY, this);
+                        }
+                    }
+                });
             }
         });
     }

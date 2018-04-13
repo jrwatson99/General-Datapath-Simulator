@@ -1,14 +1,18 @@
 package logic.components;
 
 import logic.DataValue;
+import logic.Wire;
 
 public class ConstantValue extends Component {
 
 	private DataValue value;
+	private Wire output;
 	
 	public void setValue(DataValue newValue) {value = newValue;}
 	public DataValue getValue() {return value;}
-	
+
+	public void setOutput(Wire wire) { output = wire;}
+    public Wire getOutput() { return output;}
 	/**
 	 * Default constructor sets the value to 0
 	 * @author Jonathan Watson
@@ -30,5 +34,24 @@ public class ConstantValue extends Component {
 	
 	public void Update() {
 		
+	}
+
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch (inputName) {
+			default:
+				System.out.println("ERROR: Invalid input name");
+		}
+	}
+
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch (outputName) {
+			case "output":
+				setOutput(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: invalid output name");
+		}
 	}
 }

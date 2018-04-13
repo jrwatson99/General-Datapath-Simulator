@@ -97,10 +97,26 @@ public class WireSplitter extends Component{
 	public void Update() throws Exception {
 		
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch (inputName) {
+			case "input":
+				setInput(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: Invalid input name");
+		}
+	}
+
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch (outputName) {
+			case "output":
+				setOutput(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: invalid output name");
+		}
+	}
 }

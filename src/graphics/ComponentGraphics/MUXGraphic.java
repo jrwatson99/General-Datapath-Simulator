@@ -34,7 +34,7 @@ public class MUXGraphic extends ComponentGraphic {
         arcTop.setLength(180);
         arcTop.setStartAngle(0);
         arcTop.setType(ArcType.OPEN);
-        arcTop.setFill(Color.TRANSPARENT);
+        arcTop.setFill(Color.WHITE);
         arcTop.setStroke(Color.BLACK);
 
 

@@ -32,7 +32,7 @@ public class ALUGraphic extends ComponentGraphic {
     public ALUGraphic() {
 
     	shape = new Polygon();
-    	shape.setFill(Color.WHITE);
+        shape.setFill(Color.WHITE);
     	shape.setStroke(Color.BLACK);
         aluOpNode = new ComponentInputWireNode(this, "opCode");
         inputANode = new ComponentInputWireNode(this, "inputA");

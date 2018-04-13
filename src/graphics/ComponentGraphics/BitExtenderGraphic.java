@@ -25,7 +25,7 @@ public class BitExtenderGraphic extends ComponentGraphic{
         rectangle = new Rectangle();
         rectangle.setHeight(HEIGHT);
         rectangle.setWidth(WIDTH);
-        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setFill(Color.WHITE);
         rectangle.setStroke(Color.BLACK);
 
         inputNode = new ComponentInputWireNode(this, "input");

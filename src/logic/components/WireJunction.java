@@ -15,16 +15,16 @@ public class WireJunction extends Component{
 		this.input = input;
 		this.input.addWireListener(new Updater());
 	}
-	public Wire getOut1() {
+	public Wire getOutputA() {
 		return out1;
 	}
-	public void setOut1(Wire out1) {
+	public void setOutputA(Wire out1) {
 		this.out1 = out1;
 	}
-	public Wire getOut2() {
+	public Wire getOutputB() {
 		return out2;
 	}
-	public void setOut2(Wire out2) {
+	public void setOutputB(Wire out2) {
 		this.out2 = out2;
 	}
 	
@@ -43,5 +43,30 @@ public class WireJunction extends Component{
 	@Override
 	public void Update() throws Exception {
 		
+	}
+
+	@Override
+	public void connectInputWire(Wire connectingWire, String inputName) {
+		switch (inputName) {
+			case "input":
+				setInput(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: Invalid input name");
+		}
+	}
+
+	@Override
+	public void connectOutputWire(Wire connectingWire, String outputName) {
+		switch (outputName) {
+			case "outputA":
+				setOutputA(connectingWire);
+				break;
+			case "outputB":
+				setOutputB(connectingWire);
+				break;
+			default:
+				System.out.println("ERROR: invalid output name");
+		}
 	}
 }

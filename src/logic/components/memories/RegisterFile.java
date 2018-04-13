@@ -92,19 +92,19 @@ public class RegisterFile extends Memory{
 	@Override
 	public void connectInputWire(Wire connectingWire, String inputName) {
 		switch(inputName) {
-		case "ReadAddress1":
+		case "readAddress1":
 			setReadAddress1(connectingWire);
 			break;
-		case "ReadAddress2":
+		case "readAddress2":
 			setReadAddress2(connectingWire);
 			break;
-		case "WriteAddress":
+		case "writeAddress":
 			setAddress(connectingWire);
 			break;
-		case "WriteEn":
+		case "writeEn":
 			setWriteEnable(connectingWire);
 			break;
-		case "WriteData":
+		case "writeData":
 			setWriteData(connectingWire);
 			break;
 		default:
@@ -116,10 +116,10 @@ public class RegisterFile extends Memory{
 	@Override
 	public void connectOutputWire(Wire connectingWire, String outputName) {
 		switch(outputName) {
-		case "ReadData1":
+		case "readData1":
 			setReadData(connectingWire);
 			break;
-		case "ReadData2":
+		case "readData2":
 			setReadData2(connectingWire);
 			break;
 		default:
