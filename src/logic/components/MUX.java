@@ -62,16 +62,28 @@ public class MUX extends Component{
 	@Override
 	public void connectInputWire(Wire connectingWire, String inputName) {
 		switch (inputName) {
-			default:
-				System.out.println("ERROR: Invalid input name");
+		case "inputA":
+			setInputA(connectingWire);
+			break;
+		case "inputB":
+			setInputB(connectingWire);
+			break;
+		case "select":
+			setSelect(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: Invalid input name");
 		}
 	}
 
 	@Override
 	public void connectOutputWire(Wire connectingWire, String outputName) {
 		switch (outputName) {
-			default:
-				System.out.println("ERROR: invalid output name");
+		case "output":
+			setoutput(connectingWire);
+			break;
+		default:
+			System.out.println("ERROR: invalid output name");
 		}
 	}
 }

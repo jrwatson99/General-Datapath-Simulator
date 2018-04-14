@@ -33,7 +33,7 @@ public class ConstantValue extends Component {
 	}
 	
 	public void Update() {
-		
+		output.setValue(value);
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class ConstantValue extends Component {
 		switch (outputName) {
 			case "output":
 				setOutput(connectingWire);
+				connectingWire.setValue(getValue());
 				break;
 			default:
 				System.out.println("ERROR: invalid output name");

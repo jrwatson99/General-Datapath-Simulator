@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.ALU;
 
 public class ALUGraphic extends ComponentGraphic {
@@ -104,5 +105,12 @@ public class ALUGraphic extends ComponentGraphic {
 				//TODO add click and drag;
 			}
 		});
+	}
+	@Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputNode.getValue()
+		};
+		return t;
 	}
 }

@@ -3,6 +3,7 @@ package graphics.ComponentGraphics;
 import graphics.GUIElements.RegisterFileConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.memories.RegisterFile;
 
 public class RegisterFileGraphic extends MemoryGraphic {
@@ -81,6 +82,14 @@ public class RegisterFileGraphic extends MemoryGraphic {
 				readData2,
 		};
 		return graphics;
+	}
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				readData1.getValue(),
+				readData1.getValue()
+		};
+		return t;
 	}
 	@Override
 	public void changeMouseHandler() {getRect().setOnMouseClicked(e-> {

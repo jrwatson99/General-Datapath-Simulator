@@ -2,6 +2,7 @@ package graphics.ComponentGraphics;
 
 import graphics.GUIElements.WireSplitterConfigWindow;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.Component;
 import logic.components.WireSplitter;
 
@@ -42,7 +43,13 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		};
 		return graphics;
 	}
-
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputNode.getValue()
+		};
+		return t;
+	}
 	public WireSplitter getComponent() {
 		return junct;
 	}

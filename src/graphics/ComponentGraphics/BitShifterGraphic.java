@@ -5,6 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.BitShifter;
 import logic.components.Component;
 
@@ -63,7 +64,13 @@ public class BitShifterGraphic extends ComponentGraphic{
         		inputNode};
 		return graphics;
 	}
-
+	@Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputNode.getValue()
+		};
+		return t;
+	}
 	@Override
 	public Component getComponent() {
 		return bitShifter;

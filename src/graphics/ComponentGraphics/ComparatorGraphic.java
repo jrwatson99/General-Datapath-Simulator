@@ -5,6 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.Comparator;
 
 public class ComparatorGraphic extends ComponentGraphic {
@@ -87,7 +88,15 @@ public class ComparatorGraphic extends ComponentGraphic {
 
         return graphics;
     }
-
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputLTNode.getValue(),
+				outputEQNode.getValue(),
+				outputGTNode.getValue()
+		};
+		return t;
+	}
 	@Override
 	public void config() {
 		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);

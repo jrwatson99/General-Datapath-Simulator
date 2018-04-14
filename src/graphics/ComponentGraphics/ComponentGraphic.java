@@ -25,6 +25,8 @@ public abstract class ComponentGraphic {
 	}
 
 	public abstract Shape[] getGraphics();
+	
+	public abstract Text[] getValueText();
 
 	public abstract Component getComponent();
 

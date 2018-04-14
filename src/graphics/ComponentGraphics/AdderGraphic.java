@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.Adder;
 
 public class AdderGraphic extends ComponentGraphic {
@@ -109,4 +110,12 @@ public class AdderGraphic extends ComponentGraphic {
             }
         });
     }
+
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputNode.getValue()
+		};
+		return t;
+	}
 }

@@ -4,9 +4,15 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import logic.ExecutionEnvironment;
 import logic.Wire;
+import logic.WireListener;
 import logic.components.Component;
 
 import java.util.ArrayList;
@@ -16,13 +22,15 @@ public class ComponentOutputWireNode extends Line {
     private ArrayList<Line> wireGraphicLines;
     private ComponentGraphic componentGraphic;
     private String name;
-
+    private Wire logicalWire;
+    private Text value;
+    
     private static final double MAX_CONNECTION_DISTANCE = 10.0;
 
     public double getLength() {
         return LENGTH;
     }
-
+    public Text getValue() {return value;}
     public ComponentGraphic getComponentGraphic() { return componentGraphic; }
 
     public String getName() { return name; }
@@ -33,8 +41,14 @@ public class ComponentOutputWireNode extends Line {
         componentGraphic = parentComponentGraphic;
         name = outputName;
         addOutputNodeClickListener();
+        value = new Text();
+        value.setFill(Color.RED);
+        value.setFont(Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 20));
     }
 
+    
+    
+    
     private void addOutputNodeClickListener() {
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
@@ -64,7 +78,16 @@ public class ComponentOutputWireNode extends Line {
             }
         });
     }
+    private class TextUpdater implements WireListener{
 
+        
+		@Override
+		public void onValueChange() {
+			value.setText(logicalWire.getValue().toString());
+//			System.out.println(logicalWire.getValue().toString());
+		}
+    	
+    }
     public void addParentPaneWirePlacingListener(Pane parentPane) {
         parentPane.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
             @Override
@@ -130,11 +153,15 @@ public class ComponentOutputWireNode extends Line {
                             parentPane.getChildren().remove(wireGraphicLines.remove(wireGraphicLines.size() - 1));
                             lastLineHorizontal.setEndX(connectingInputNode.getStartX());
                         }
-
+                        
+                        value.setX(lastLineVertical.getStartX());
+                        value.setY(lastLineVertical.getStartY());
+//                        System.out.println("x: "+value.getX()+"    y: "+value.getY());
                         Component outputComponent = getComponentGraphic().getComponent();
                         Component inputComponent = connectingInputNode.getComponentGraphic().getComponent();
 
-                        Wire logicalWire = new Wire();
+                        logicalWire = new Wire();
+                        logicalWire.addWireListener(new TextUpdater());
                         outputComponent.connectOutputWire(logicalWire, getName());
                         inputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
 
@@ -171,11 +198,11 @@ public class ComponentOutputWireNode extends Line {
  --------------------------------------------------------------------------------------------------
 | ConstantValue | output        |                 |               |                |               |
  --------------------------------------------------------------------------------------------------
-| DataMemory    | address       | writeData       | writeEn       |                |               |
+| DataMemory    | address       | readEn          | writeData     | writeEn        | readData      |               
  --------------------------------------------------------------------------------------------------
-| MUX           | ?             |                 |               |                |               |
+| MUX           | inputA        | inputB          | select        | output         |               |
  --------------------------------------------------------------------------------------------------
-| RegisterFile  | ?             |                 |               |                |               |
+| RegisterFile  |               |                 |               |                |               |
  --------------------------------------------------------------------------------------------------
 | WireJunction  | input         | outputA         | outputB       |                |               |
  --------------------------------------------------------------------------------------------------

@@ -4,6 +4,7 @@ import graphics.GUIElements.DefaultConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import javafx.scene.text.Text;
 import logic.components.MUX;
 
 public class MUXGraphic extends ComponentGraphic {
@@ -23,6 +24,11 @@ public class MUXGraphic extends ComponentGraphic {
     private static final double STRAIGHT_SEPARATION_DISTANCE = 16;
     private static final double ARC_RADIUS = STRAIGHT_SEPARATION_DISTANCE / 2;
 
+    private ComponentInputWireNode inputA;
+    private ComponentInputWireNode inputB;
+    private ComponentInputWireNode sel;
+    private ComponentOutputWireNode out;
+    
     public MUXGraphic() {
         lineStraightLeft = new Line();
         lineStraightRight = new Line();
@@ -34,7 +40,7 @@ public class MUXGraphic extends ComponentGraphic {
         arcTop.setLength(180);
         arcTop.setStartAngle(0);
         arcTop.setType(ArcType.OPEN);
-        arcTop.setFill(Color.WHITE);
+        arcTop.setFill(Color.TRANSPARENT);
         arcTop.setStroke(Color.BLACK);
 
 
@@ -48,6 +54,11 @@ public class MUXGraphic extends ComponentGraphic {
 
         mux = new MUX();
 
+        inputA = new ComponentInputWireNode(this, "inputA");
+        inputB = new ComponentInputWireNode(this, "inputB");
+        sel = new ComponentInputWireNode(this, "select");
+        out = new ComponentOutputWireNode(this, "output");
+        
         addMouseHandler();
     }
 
@@ -67,6 +78,27 @@ public class MUXGraphic extends ComponentGraphic {
 
         arcBottom.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
         arcBottom.setCenterY(y + STRAIGHT_LENGTH);
+        
+        inputA.setStartX(x);
+        inputA.setStartY(y+8);
+        inputA.setEndX(x-inputA.getLength());
+        inputA.setEndY(y+8);
+        
+        inputB.setStartX(x);
+        inputB.setStartY(y+32);
+        inputB.setEndX(x-inputB.getLength());
+        inputB.setEndY(y+32);
+        
+        sel.setStartX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
+        sel.setStartY(y+STRAIGHT_LENGTH+ARC_RADIUS);
+        sel.setEndX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
+        sel.setEndY(y+STRAIGHT_LENGTH+ARC_RADIUS+sel.getLength());
+        
+        out.setStartX(x+STRAIGHT_SEPARATION_DISTANCE);
+        out.setStartY(y+20);
+        out.setEndX(x+STRAIGHT_SEPARATION_DISTANCE+out.getLength());
+        out.setEndY(y+20);
+        
     }
 
     public Shape[] getGraphics() {
@@ -74,12 +106,23 @@ public class MUXGraphic extends ComponentGraphic {
                 lineStraightLeft,
                 lineStraightRight,
                 arcTop,
-                arcBottom
+                arcBottom,
+                inputA,
+                inputB,
+                sel,
+                out
         };
 
         return graphics;
     }
 
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				out.getValue()
+		};
+		return t;
+	}
 	@Override
 	public void config() {
 		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);

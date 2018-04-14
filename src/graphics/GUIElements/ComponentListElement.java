@@ -58,15 +58,27 @@ public class ComponentListElement extends HBox {
                     case "Bit Extender":
                     	newComponentGraphic = new BitExtenderGraphic();
                     	break;
+                    case "Wire Junction":
+                    	newComponentGraphic = new WireJunctionGraphic();
+                    	break;
+                    case "Wire Splitter":
+                    	newComponentGraphic = new WireSplitterGraphic();
+                    	break;
+                    case "Constant Value":
+                    	newComponentGraphic = new ConstantValueGraphic();
+                    	break;
+                    case "Register":
+                    	newComponentGraphic = new RegisterGraphic();
+                    	break;
                     default:
                         newComponentGraphic = null;
                         break;
                 }
                 if (newComponentGraphic != null) {
-//NOTE THIS
-                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    // no loop  
-                	((Pane)datapathWindow.getContent()).getChildren().add(newComponentGraphic.getText());
 
+                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    
+                	((Pane)datapathWindow.getContent()).getChildren().add(newComponentGraphic.getText());
+                	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getValueText());
                     final ComponentGraphic finalNewComponentGraphic = newComponentGraphic;
 
                     datapathWindow.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {

@@ -5,6 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.DataValue;
 import logic.components.Component;
 import logic.components.ConstantValue;
@@ -67,6 +68,7 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
 		cfg.showAndWait();	
 		val.setValue(new DataValue(cfg.getName()));
+		val.Update();
 	}
 
 	@Override
@@ -79,5 +81,13 @@ public class ConstantValueGraphic extends ComponentGraphic{
 				//TODO add click and drag;
 			}
 		});
+	}
+
+	@Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputNode.getValue()
+		};
+		return t;
 	}
 }

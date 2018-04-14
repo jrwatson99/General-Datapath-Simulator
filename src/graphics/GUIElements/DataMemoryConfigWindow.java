@@ -15,9 +15,11 @@ import logic.components.memories.DataMemory;
 
 public class DataMemoryConfigWindow extends MemoryConfigWindow {
 	GridPane layout;
+	int offset;
 	public DataMemoryConfigWindow(String title, MemoryGraphic memg) {
 		super(title, memg);
 		layout = this.getLayout();
+		offset = layout.getChildren().size();
 		try {
 			addData(memg);
 		} catch (Exception e) {
@@ -41,7 +43,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 		for(int i=0;i< (d.getSize()*8)/d.getDataWidth();i++) {
 			for(int j = 0; j<n;j++ ) {
 				if(i*n +j < (8*d.getSize())/d.getDataWidth()) {
-					layout.addRow(i+6,new Label("Word "+ (i*n+j)),new TextField(d.getWord(i*n +j).toString()));
+					layout.addRow(i+offset/2,new Label("Word "+ (i*n+j)),new TextField(d.getWord(i*n +j).toString()));
 				}
 			}
 		}
@@ -58,7 +60,7 @@ public class DataMemoryConfigWindow extends MemoryConfigWindow {
 	}
 
 	private DataValue getWordValue(int i) {
-		return new DataValue(((TextField)getLayout().getChildren().get(i*2 + 1 +12)).getText());
+		return new DataValue(((TextField)getLayout().getChildren().get(i*2 + 1 + offset)).getText());
 	}
 
 }

@@ -25,7 +25,9 @@ public class ComponentWindow extends ScrollPane {
             "Bit Shifter",
             "Bit Extender",
             "Wire Junction",
-            "Wire Splitter"
+            "Wire Splitter",
+            "Constant Value",
+            "Pipeline Register"
             };
 
     public ComponentWindow(DatapathWindow datapathWindow) {

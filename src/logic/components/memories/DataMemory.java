@@ -229,9 +229,9 @@ public class DataMemory extends Memory{
 	@Override
 	public void connectInputWire(Wire connectingWire, String inputName) {
 		switch(inputName) {
-//		case "Clock":   /// are we doing this?
-//			this.setCLK(connectingWire);
-//			break;
+		case "CLK":   /// are we doing this?
+			this.setCLK(connectingWire);
+			break;
 		case "address":
 			setAddress(connectingWire);
 			break;

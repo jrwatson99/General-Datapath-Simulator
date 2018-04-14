@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.Component;
 import logic.components.WireJunction;
 
@@ -48,7 +49,14 @@ public class WireJunctionGraphic extends ComponentGraphic {
 		};
 		return graphics;
 	}
-
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				outputANode.getValue(),
+				outputBNode.getValue()
+		};
+		return t;
+	}
 	public Component getComponent() {
 		return junct;
 	}

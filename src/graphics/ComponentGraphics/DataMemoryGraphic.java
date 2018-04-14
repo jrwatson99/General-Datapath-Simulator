@@ -3,6 +3,7 @@ package graphics.ComponentGraphics;
 import graphics.GUIElements.DataMemoryConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
+import javafx.scene.text.Text;
 import logic.components.memories.*;
 
 
@@ -11,6 +12,7 @@ public class  DataMemoryGraphic extends MemoryGraphic {
 	private ComponentInputWireNode writeData;
 	private ComponentInputWireNode writeEn;
 	private ComponentInputWireNode readEn;
+	private ComponentInputWireNode clk;
 	private ComponentOutputWireNode readData;
 
 	public DataMemoryGraphic() {
@@ -20,6 +22,7 @@ public class  DataMemoryGraphic extends MemoryGraphic {
 		writeData = new ComponentInputWireNode(this,"writeData");
 		writeEn = new ComponentInputWireNode(this,"writeEn");
 		readEn = new ComponentInputWireNode(this,"readEn");
+		clk = new ComponentInputWireNode(this,"CLK");
 		readData = new ComponentOutputWireNode(this,"readData");
 	}
 	
@@ -31,11 +34,16 @@ public class  DataMemoryGraphic extends MemoryGraphic {
         address.setStartY(y + 15);
         address.setEndX(x);
         address.setEndY(y + 15);
-                
+
         writeData.setStartX(x - writeData.getLength());
         writeData.setStartY(y + 30);
         writeData.setEndX(x);
         writeData.setEndY(y + 30);
+        
+        clk.setStartX(x - clk.getLength());
+        clk.setStartY(y + 80);
+        clk.setEndX(x);
+        clk.setEndY(y + 80);
 
         readData.setStartX(x + WIDTH);
         readData.setStartY(y + 30);
@@ -62,10 +70,18 @@ public class  DataMemoryGraphic extends MemoryGraphic {
 				writeEn,
 				readEn,
 				readData,
+				clk
 		};
 		return graphics;
 	}
 
+    @Override
+	public Text[] getValueText() {
+		Text[] t = new Text[] {
+				readData.getValue()
+		};
+		return t;
+	}
 	@Override
 	public void changeMouseHandler() {getRect().setOnMouseClicked(e-> {
 			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
