@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import logic.DataValue;
 import logic.Wire;
+import logic.components.Component.basicListener;
 
 public class ALU extends Component {
 	
@@ -15,13 +16,22 @@ public class ALU extends Component {
 	private int opBitLength;
 	private ArrayList<Operation> opOrder;
 	
-	public void setInputA(Wire newInput) {inputA = newInput;}
+	public void setInputA(Wire newInput) {
+		inputA = newInput;
+		inputA.addWireListener(new basicListener());
+	}
 	public Wire getInputA() {return inputA;}
 	
-	public void setInputB(Wire newInput) {inputB = newInput;}
+	public void setInputB(Wire newInput) {
+		inputB = newInput;
+		inputB.addWireListener(new basicListener());
+	}
 	public Wire getInputB() {return inputB;}
 	
-	public void setALUOP(Wire newInput) {aluOP = newInput;}
+	public void setALUOP(Wire newInput) {
+		aluOP = newInput;
+		aluOP.addWireListener(new basicListener());
+	}
 	public Wire getALUOP() {return aluOP;}
 	
 	public void setOutput(Wire newOutput) {output = newOutput;}
@@ -78,33 +88,35 @@ public class ALU extends Component {
 	 * @return void
 	 */	
 	public void Update() throws Exception {
-		DataValue inputAVal = getInputA().getValue();
-		boolean isValidBitLengthInputA = determineBitValidity(inputAVal, getBitLength());
-		if (!isValidBitLengthInputA) {
-			throw new Exception("ERROR: Invalid bit length for inputA in ALU");
+		if(inputA !=null && inputB !=null && output!=null && aluOP != null) {
+			DataValue inputAVal = getInputA().getValue();
+			boolean isValidBitLengthInputA = determineBitValidity(inputAVal, getBitLength());
+			if (!isValidBitLengthInputA) {
+				throw new Exception("ERROR: Invalid bit length for inputA in ALU");
+			}
+			
+			DataValue inputBVal = getInputB().getValue();
+			boolean isValidBitLengthInputB = determineBitValidity(inputBVal, getBitLength());
+			if (!isValidBitLengthInputB) {
+				throw new Exception("ERROR: Invalid bit length for inputB in ALU");
+			}
+			
+			DataValue result;
+			Operation op=opOrder.get(aluOP.getValue().intValue());
+			
+			result=performOperation(inputAVal,inputBVal, op);
+	
+	
+			if(result.intValue()==0) {
+				zero.setValue(new DataValue("1"));
+			}
+			else {
+				zero.setValue(new DataValue("0"));
+			}
+			
+			 
+			getOutput().setValue(result);
 		}
-		
-		DataValue inputBVal = getInputB().getValue();
-		boolean isValidBitLengthInputB = determineBitValidity(inputBVal, getBitLength());
-		if (!isValidBitLengthInputB) {
-			throw new Exception("ERROR: Invalid bit length for inputB in ALU");
-		}
-		
-		DataValue result;
-		Operation op=opOrder.get(aluOP.getValue().intValue());
-		
-		result=performOperation(inputAVal,inputBVal, op);
-
-
-		if(result.intValue()==0) {
-			zero.setValue(new DataValue("1"));
-		}
-		else {
-			zero.setValue(new DataValue("0"));
-		}
-		
-		 
-		getOutput().setValue(result);
 	}
 	
 	/**

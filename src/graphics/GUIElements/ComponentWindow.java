@@ -27,7 +27,8 @@ public class ComponentWindow extends ScrollPane {
             "Wire Junction",
             "Wire Splitter",
             "Constant Value",
-            "Pipeline Register"
+            "Controller",
+//            "Pipeline Register"
             };
 
     public ComponentWindow(DatapathWindow datapathWindow) {
@@ -36,7 +37,7 @@ public class ComponentWindow extends ScrollPane {
         this.setFitToWidth(true);
         this.setHbarPolicy(ScrollBarPolicy.NEVER);
         this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-        this.setPrefViewportWidth(Screen.getPrimary().getVisualBounds().getWidth() / 5);
+        this.setPrefViewportWidth(Screen.getPrimary().getVisualBounds().getWidth() / 7);
 
         Button placingWireButton = new Button("Place Wire");
         placingWireButton.setOnAction(new EventHandler<ActionEvent>() {

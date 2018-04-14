@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import logic.DataValue;
 import logic.Wire;
 import logic.WireListener;
+import logic.components.Component.basicListener;
 
 public class WireSplitter extends Component{
 	private Wire input;
@@ -35,7 +36,7 @@ public class WireSplitter extends Component{
 
 	public void setInput(Wire input) {
 		this.input = input;
-		this.input.addWireListener(new Updater());
+		this.input.addWireListener(new basicListener());
 	}
 
 	public Wire getOutput() {
@@ -78,24 +79,15 @@ public class WireSplitter extends Component{
 		this.stopBit = stopBit;
 	}
 
-	private class Updater implements WireListener{
 
-		@Override
-		public void onValueChange() {
+	@Override
+	public void Update() throws Exception {
+		if(output != null) {
 			BigInteger x;
 			String y =input.getValue().toString(2);
 			x = new BigInteger(y.substring(startBit, stopBit+1),2);
 			output.setValue(new DataValue(x));
 		}
-		
-	}
-//	private class tester{
-//		
-//	}
-
-	@Override
-	public void Update() throws Exception {
-		
 	}
 
 	@Override

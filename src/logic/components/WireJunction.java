@@ -2,6 +2,7 @@ package logic.components;
 
 import logic.Wire;
 import logic.WireListener;
+import logic.components.Component.basicListener;
 
 public class WireJunction extends Component{
 	private Wire input;
@@ -13,7 +14,7 @@ public class WireJunction extends Component{
 	}
 	public void setInput(Wire input) {
 		this.input = input;
-		this.input.addWireListener(new Updater());
+		this.input.addWireListener(new basicListener());
 	}
 	public Wire getOutputA() {
 		return out1;
@@ -31,18 +32,15 @@ public class WireJunction extends Component{
 	public WireJunction() {
 		
 	}
-	private class Updater implements WireListener{
 
-		@Override
-		public void onValueChange() {
-			out1.setValue(input.getValue());
-			out2.setValue(input.getValue());
-		}
-		
-	}
 	@Override
 	public void Update() throws Exception {
-		
+		if(out1!= null) {
+			out1.setValue(input.getValue());
+		}
+		if(out2 != null) {
+			out2.setValue(input.getValue());
+		}
 	}
 
 	@Override

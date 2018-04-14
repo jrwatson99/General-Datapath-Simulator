@@ -98,4 +98,8 @@ public class  DataMemoryGraphic extends MemoryGraphic {
 		DataMemoryConfigWindow cfg = new DataMemoryConfigWindow("config", this);
 		cfg.showAndWait();
 	}
+    @Override
+	public void updateWireText() {
+    	readData.updateText();
+	}
 }

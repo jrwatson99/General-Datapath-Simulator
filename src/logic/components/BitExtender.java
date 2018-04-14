@@ -2,6 +2,7 @@ package logic.components;
 
 import logic.DataValue;
 import logic.Wire;
+import logic.components.Component.basicListener;
 
 public class BitExtender extends Component {
 	
@@ -10,7 +11,10 @@ public class BitExtender extends Component {
 	private int inputBitLength;
 	private int outputBitLength;
 	
-	public void setInput(Wire newInput) {input = newInput;}
+	public void setInput(Wire newInput) {
+		input = newInput;
+		input.addWireListener(new basicListener());
+	}
 	public Wire getInput() {return input;}
 	
 	public void setOutput(Wire newOutput) {output = newOutput;}
@@ -40,14 +44,16 @@ public class BitExtender extends Component {
 	 * @return void
 	 */
 	public void Update() throws Exception {
-		DataValue inputVal = input.getValue();
-		if (determineBitValidity(inputVal, getInputBitLength()) == false) {
-			throw new Exception("ERROR: Invalid bit length for input in BitExtender");
+		if(output!= null) {
+			DataValue inputVal = input.getValue();
+			if (determineBitValidity(inputVal, getInputBitLength()) == false) {
+				throw new Exception("ERROR: Invalid bit length for input in BitExtender");
+			}
+			if (determineBitValidity(inputVal, getOutputBitLength()) == false) {
+				throw new Exception("ERROR: Invalid bit length for output in BitExtender");
+			}
+			getOutput().setValue(inputVal);
 		}
-		if (determineBitValidity(inputVal, getOutputBitLength()) == false) {
-			throw new Exception("ERROR: Invalid bit length for output in BitExtender");
-		}
-		getOutput().setValue(inputVal);
 	}
 
 	@Override

@@ -93,4 +93,8 @@ public class BitExtenderGraphic extends ComponentGraphic{
             }
         });
     }
+    @Override
+	public void updateWireText() {
+		outputNode.updateText();		
+	}
 }

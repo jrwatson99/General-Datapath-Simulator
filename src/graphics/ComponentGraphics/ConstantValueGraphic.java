@@ -90,4 +90,8 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		};
 		return t;
 	}
+	@Override
+	public void updateWireText() {
+		outputNode.updateText();		
+	}
 }

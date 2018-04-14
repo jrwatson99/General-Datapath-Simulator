@@ -64,4 +64,8 @@ public class WireSplitterGraphic extends ComponentGraphic {
 	public void addMouseHandler() {
 
 	}
+	@Override
+	public void updateWireText() {
+		outputNode.updateText();		
+	}
 }

@@ -33,7 +33,9 @@ public class ConstantValue extends Component {
 	}
 	
 	public void Update() {
-		output.setValue(value);
+		if(output !=null) {
+			output.setValue(value);
+		}
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package logic.components;
 
 import logic.DataValue;
 import logic.Wire;
+import logic.WireListener;
 
 /*
  * The super class for all the logical components. 
@@ -137,4 +138,19 @@ public abstract class Component {
 
 	public abstract void connectInputWire(Wire connectingWire, String inputName);
 	public abstract void connectOutputWire(Wire connectingWire, String outputName);
+	
+	protected class basicListener implements WireListener {
+
+		@Override
+		public void onValueChange(){
+			
+			try {
+				Update();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(1);
+			}			
+		}
+		
+	}
 }

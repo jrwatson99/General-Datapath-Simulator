@@ -1,6 +1,7 @@
 package logic.components;
 
 import logic.Wire;
+import logic.components.Component.basicListener;
 
 /**
  * Mux Class
@@ -17,11 +18,20 @@ public class MUX extends Component{
 	private Wire select;
 	private Wire output;
 	
-	public void setInputA(Wire newInput) {inputA = newInput;}
+	public void setInputA(Wire newInput) {
+		inputA = newInput;
+		inputA.addWireListener(new basicListener());
+	}
 	public Wire getInputA() {return inputA;}
-	public void setInputB(Wire newInput) {inputB = newInput;}
+	public void setInputB(Wire newInput) {
+		inputB = newInput;
+		inputB.addWireListener(new basicListener());
+	}
 	public Wire getInputB() {return inputB;}
-	public void setSelect(Wire newInput) {select = newInput;}
+	public void setSelect(Wire newInput) {
+		select = newInput;
+		select.addWireListener(new basicListener());
+	}
 	public Wire getSelect() {return select;}
 	public void setoutput(Wire newInput) {output= newInput;}
 	public Wire getOutput() {return output;}
@@ -42,20 +52,22 @@ public class MUX extends Component{
 	 */
 	@Override
 	public void Update() throws Exception {
-		if(select.getValue().intValue()==0) {
-			if(inputA.getValue().bitLength()!=this.getBitLength()) {
-				throw new Exception("Invalid bit length in Mux inputA");
+		if(inputA != null && inputB != null && select != null && output !=null) {
+			if(select.getValue().intValue()==0) {
+				if(inputA.getValue().bitLength()!=this.getBitLength()) {
+					throw new Exception("Invalid bit length in Mux inputA");
+				}
+				output.setValue(inputA.getValue());
 			}
-			output.setValue(inputA.getValue());
-		}
-		else if(select.getValue().intValue()==1) {
-			if(inputB.getValue().bitLength()!=this.getBitLength()) {
-				throw new Exception("Invalid bit length in Mux inputB");
+			else if(select.getValue().intValue()==1) {
+				if(inputB.getValue().bitLength()!=this.getBitLength()) {
+					throw new Exception("Invalid bit length in Mux inputB");
+				}
+				output.setValue(inputB.getValue());
 			}
-			output.setValue(inputB.getValue());
-		}
-		else {
-			throw new Exception("Invalid select input to Mux");
+			else {
+				throw new Exception("Invalid select input to Mux");
+			}
 		}
 	}
 

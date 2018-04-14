@@ -4,6 +4,7 @@ package logic.components;
 
 import logic.DataValue;
 import logic.Wire;
+import logic.components.Component.basicListener;
 
 /**
  * Adder class. Performs simple mathematical addition.
@@ -18,10 +19,16 @@ public class Adder extends Component {
 	private Wire inputB;
 	private Wire output;
 	
-	public void setInputA(Wire newInput) {inputA = newInput;}
+	public void setInputA(Wire newInput) {
+		inputA = newInput;
+		inputA.addWireListener(new basicListener());
+	}
 	public Wire getInputA() {return inputA;}
 	
-	public void setInputB(Wire newInput) {inputB = newInput;}
+	public void setInputB(Wire newInput) {
+		inputB = newInput;
+		inputB.addWireListener(new basicListener());
+	}
 	public Wire getInputB() {return inputB;}
 	
 	public void setOutput(Wire newOutput) {output = newOutput;}
@@ -45,22 +52,22 @@ public class Adder extends Component {
 	 * @return void
 	 */
 	public void Update() throws Exception {
-		
-		DataValue inputAVal = getInputA().getValue();
-		boolean isValidBitLengthInputA = determineBitValidity(inputAVal, getBitLength());
-		if (!isValidBitLengthInputA) {
-			throw new Exception("ERROR: Invalid bit length for inputA in Adder");
+		if(inputA !=null && inputB !=null && output!=null) {
+			DataValue inputAVal = getInputA().getValue();
+			boolean isValidBitLengthInputA = determineBitValidity(inputAVal, getBitLength());
+			if (!isValidBitLengthInputA) {
+				throw new Exception("ERROR: Invalid bit length for inputA in Adder");
+			}
+			
+			DataValue inputBVal = getInputB().getValue();
+			boolean isValidBitLengthInputB = determineBitValidity(inputBVal, getBitLength());
+			if (!isValidBitLengthInputB) {
+				throw new Exception("ERROR: Invalid bit length for inputB in Adder");
+			}
+			
+			//System.out.println(inputAVal.toString() + " " + inputBVal.toString() + " " + (inputAVal.add(inputBVal)).toString());
+			output.setValue(new DataValue(inputAVal.add(inputBVal)));
 		}
-		
-		DataValue inputBVal = getInputB().getValue();
-		boolean isValidBitLengthInputB = determineBitValidity(inputBVal, getBitLength());
-		if (!isValidBitLengthInputB) {
-			throw new Exception("ERROR: Invalid bit length for inputB in Adder");
-		}
-		
-		//System.out.println(inputAVal.toString() + " " + inputBVal.toString() + " " + (inputAVal.add(inputBVal)).toString());
-		output.setValue(new DataValue(inputAVal.add(inputBVal)));
-		
 	}
 
 	@Override

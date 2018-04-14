@@ -12,9 +12,15 @@ public class Comparator extends Component {
 	private Wire outputEqualTo;
 	private Wire outputGreaterThan;
 	
-	public void setInputA(Wire newInput) {inputA = newInput;}
+	public void setInputA(Wire newInput) {
+		inputA = newInput;
+		inputA.addWireListener(new basicListener());
+	}
 	public Wire getInputA() {return inputA;}
-	public void setInputB(Wire newInput) {inputB = newInput;}
+	public void setInputB(Wire newInput) {
+		inputB = newInput;
+		inputB.addWireListener(new basicListener());
+	}
 	public Wire getInputB() {return inputB;}
 	
 	public void setOutputLessThan(Wire newOutput) {outputLessThan = newOutput;}
@@ -34,25 +40,49 @@ public class Comparator extends Component {
 	 * @version 0.1
 	 */
 	public void Update() {
-		DataValue inputAVal = inputA.getValue();
-		DataValue inputBVal = inputB.getValue();
-		
-		if (inputAVal.compareTo(inputBVal) > 0) {
-			getOutputGreaterThan().setValue((DataValue)DataValue.ONE);
-			getOutputEqualTo().setValue((DataValue)DataValue.ZERO);
-			getOutputLessThan().setValue((DataValue)DataValue.ZERO);
-			
-		}
-		else if (inputAVal.compareTo(inputBVal) < 0) {
-			getOutputGreaterThan().setValue((DataValue)DataValue.ZERO);
-			getOutputEqualTo().setValue((DataValue)DataValue.ZERO);
-			getOutputLessThan().setValue((DataValue)DataValue.ONE);
-			
-		}
-		else {
-			getOutputGreaterThan().setValue((DataValue)DataValue.ZERO);
-			getOutputEqualTo().setValue((DataValue)DataValue.ONE);
-			getOutputLessThan().setValue((DataValue)DataValue.ZERO);
+
+		if(inputA !=null && inputB !=null) {
+			DataValue inputAVal = inputA.getValue();
+			DataValue inputBVal = inputB.getValue();
+			if(outputLessThan != null) {
+				if (inputAVal.compareTo(inputBVal) > 0) {
+					getOutputLessThan().setValue((DataValue)DataValue.ZERO);
+					
+				}
+				else if (inputAVal.compareTo(inputBVal) < 0) {
+					getOutputLessThan().setValue((DataValue)DataValue.ONE);
+					
+				}
+				else {
+					getOutputLessThan().setValue((DataValue)DataValue.ZERO);
+				}
+			}
+			if(outputGreaterThan != null) {
+				if (inputAVal.compareTo(inputBVal) > 0) {
+					getOutputGreaterThan().setValue((DataValue)DataValue.ONE);
+					
+				}
+				else if (inputAVal.compareTo(inputBVal) < 0) {
+					getOutputGreaterThan().setValue((DataValue)DataValue.ZERO);
+					
+				}
+				else {
+					getOutputGreaterThan().setValue((DataValue)DataValue.ZERO);
+				}
+			}
+			if(outputEqualTo != null) {
+				if (inputAVal.compareTo(inputBVal) > 0) {
+					getOutputEqualTo().setValue((DataValue)DataValue.ZERO);
+					
+				}
+				else if (inputAVal.compareTo(inputBVal) < 0) {
+					getOutputEqualTo().setValue((DataValue)DataValue.ZERO);
+					
+				}
+				else {
+					getOutputEqualTo().setValue((DataValue)DataValue.ONE);
+				}
+			}
 		}
 	}
 
@@ -86,4 +116,5 @@ public class Comparator extends Component {
 				System.out.println("ERROR: invalid output name");
 		}
 	}
+	
 }

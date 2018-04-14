@@ -194,6 +194,10 @@ public class RegisterFile extends Memory{
 	public DataValue getReg(int i) {
 		return registers.get(i);
 	}
+	@Override
+	public Boolean allConnected() {
+		return readAddress1 != null && readAddress2 != null && getReadData() !=null && readData2 != null && getAddress() != null && getWriteData() != null && getClk() != null && getWriteEnable() !=null;
+	}
 
 
 }

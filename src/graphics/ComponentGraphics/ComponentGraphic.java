@@ -19,7 +19,7 @@ public abstract class ComponentGraphic {
 		name.setX(x);
 		name.setY(y);
 	}
-	
+	public abstract void updateWireText();
 	public ComponentGraphic() {
 		this.name=new Text();
 	}

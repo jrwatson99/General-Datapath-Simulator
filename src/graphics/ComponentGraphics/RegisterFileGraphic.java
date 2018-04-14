@@ -92,7 +92,8 @@ public class RegisterFileGraphic extends MemoryGraphic {
 		return t;
 	}
 	@Override
-	public void changeMouseHandler() {getRect().setOnMouseClicked(e-> {
+	public void changeMouseHandler() {
+		getRect().setOnMouseClicked(e-> {
 			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
 				this.config2();
 			}
@@ -106,5 +107,10 @@ public class RegisterFileGraphic extends MemoryGraphic {
 	public void config2() {
 		RegisterFileConfigWindow cfg = new RegisterFileConfigWindow("config", this);
 		cfg.showAndWait();
+	}
+    @Override
+	public void updateWireText() {
+	  	readData1.updateText();
+		readData2.updateText();
 	}
 }

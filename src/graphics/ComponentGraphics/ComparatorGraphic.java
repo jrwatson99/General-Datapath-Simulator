@@ -114,4 +114,10 @@ public class ComparatorGraphic extends ComponentGraphic {
             }
         });
     }
+    @Override
+	public void updateWireText() {
+    	outputLTNode.updateText();
+    	outputGTNode.updateText();
+    	outputEQNode.updateText();
+	}
 }

@@ -17,10 +17,10 @@ public abstract class Memory extends Component{
 	public void setName(String newName) { name=newName;}
 	public String getName() {return name;}
 	public void setCLK(Wire newCLK) {
-		clk=newCLK;
-		clk.addWireListener(new ClkListener());
+		setClk(newCLK);
+		getClk().addWireListener(new ClkListener());
 		}
-	public Wire getCLK() { return clk;}
+	public Wire getCLK() { return getClk();}
 	public void setWriteEnable(Wire newEnable) {writeEnable=newEnable;}
 	public Wire getWriteEnable() {return writeEnable;}
 	public void setWriteData(Wire newData) {writeData=newData;}
@@ -61,19 +61,27 @@ public abstract class Memory extends Component{
 	 * @return void
 	 */
 	public void update() throws Exception{
-		if(clk.getValue().intValue()==1) {
-			this.onPosEdgeClk();
-		}
-		else if(clk.getValue().intValue()==0) {
-			this.onNegEdgeClk();
-		}
-		else {
-			throw new Exception("Invalid clock value in memory "+this.name);
+		if(allConnected()) {
+			if(getClk().getValue().intValue()==1) {
+				this.onPosEdgeClk();
+			}
+			else if(getClk().getValue().intValue()==0) {
+				this.onNegEdgeClk();
+			}
+			else {
+				throw new Exception("Invalid clock value in memory "+this.name);
+			}
 		}
 	}
-	
+	public abstract Boolean allConnected();
 	public abstract void onPosEdgeClk() throws Exception;
 	public abstract void onNegEdgeClk() throws Exception;
+	public Wire getClk() {
+		return clk;
+	}
+	public void setClk(Wire clk) {
+		this.clk = clk;
+	}
 	/**
 	 * listens for clock edge and calls update
 	 * @author Matthew Johnson

@@ -141,4 +141,8 @@ public class MUXGraphic extends ComponentGraphic {
             }
         });
     }
+    @Override
+	public void updateWireText() {
+		out.updateText();		
+	}
 }

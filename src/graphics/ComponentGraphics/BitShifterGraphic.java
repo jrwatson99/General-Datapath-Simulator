@@ -94,4 +94,8 @@ public class BitShifterGraphic extends ComponentGraphic{
             }
         });
     }
+    @Override
+	public void updateWireText() {
+		outputNode.updateText();		
+	}
 }

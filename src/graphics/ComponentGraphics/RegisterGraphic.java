@@ -38,10 +38,16 @@ public class RegisterGraphic extends ComponentGraphic{
 	@Override
 	public Text[] getValueText() {
 		Text[] t = new Text[] {
-				readData1.getValue(),
-				readData1.getValue()
+//				readData1.getValue(),
+//				readData1.getValue()
 		};
 		return t;
+	}
+
+	@Override
+	public void updateWireText() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

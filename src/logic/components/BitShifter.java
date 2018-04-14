@@ -22,7 +22,10 @@ public class BitShifter extends Component {
 	private Direction direction;
 	
 	
-	public void setInput(Wire newInput) {input = newInput;}
+	public void setInput(Wire newInput) {
+		input = newInput;
+		input.addWireListener(new basicListener());
+	}
 	public Wire getInput() {return input;}
 	
 	public void setOutput(Wire newOutput) {output = newOutput;}
@@ -48,14 +51,16 @@ public class BitShifter extends Component {
 	 * @return void
 	 */
 	public void Update() throws Exception {
-		DataValue inputVal = getInput().getValue();
-		if (determineBitValidity(inputVal, getBitLength()) == false) {
-			throw new Exception("ERROR: Invalid bit length in BitShifter");
+		if(output != null) {
+			DataValue inputVal = getInput().getValue();
+			if (determineBitValidity(inputVal, getBitLength()) == false) {
+				throw new Exception("ERROR: Invalid bit length in BitShifter");
+			}
+			
+			DataValue newOutput = shiftData(inputVal);
+			
+			getOutput().setValue(fitDataToBitLength(newOutput, getBitLength()));
 		}
-		
-		DataValue newOutput = shiftData(inputVal);
-		
-		getOutput().setValue(fitDataToBitLength(newOutput, getBitLength()));
 	}
 	
 	/**

@@ -78,12 +78,18 @@ public class ComponentOutputWireNode extends Line {
             }
         });
     }
+    
+    public void updateText() {
+    	if(value != null && logicalWire !=null) {
+    		value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
+    	}
+    }
     private class TextUpdater implements WireListener{
 
         
 		@Override
 		public void onValueChange() {
-			value.setText(logicalWire.getValue().toString());
+			value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
 //			System.out.println(logicalWire.getValue().toString());
 		}
     	

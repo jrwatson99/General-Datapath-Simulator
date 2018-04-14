@@ -10,9 +10,10 @@ package logic;
 
 public class ExecutionEnvironment {
 	private static ExecutionEnvironment EESingleton = new ExecutionEnvironment();
-
+	private int radix;
 	private boolean placingWire;
-
+	public void setRadix(int rad) {radix=rad;}
+	public int getRadix() {return radix;}
 	public void startPlacingWire() {
 		placingWire = true;
 	}
@@ -38,6 +39,6 @@ public class ExecutionEnvironment {
 	}
 	
 	public static ExecutionEnvironment getExecutionEnvironment() { return EESingleton;}
-
+	
 
 }

@@ -69,4 +69,9 @@ public class WireJunctionGraphic extends ComponentGraphic {
 
 	}
 
+    @Override
+	public void updateWireText() {
+    	outputANode.updateText();
+    	outputBNode.updateText();
+	}
 }

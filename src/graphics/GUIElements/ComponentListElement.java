@@ -67,6 +67,9 @@ public class ComponentListElement extends HBox {
                     case "Constant Value":
                     	newComponentGraphic = new ConstantValueGraphic();
                     	break;
+                    case "Controller":
+                    	newComponentGraphic = new ControllerGraphic();
+                    	break;
                     case "Register":
                     	newComponentGraphic = new RegisterGraphic();
                     	break;

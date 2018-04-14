@@ -286,5 +286,9 @@ public class DataMemory extends Memory{
 		}
 		
 	}
+	@Override
+	public Boolean allConnected() {
+		return getClk() != null && getReadData() != null && readEnable != null && getWriteData() != null && getWriteEnable() != null && getAddress() != null;
+	}
 	
 }
