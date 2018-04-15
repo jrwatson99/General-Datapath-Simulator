@@ -32,9 +32,9 @@ public class ComponentOutputWireNode extends Line {
     }
     public Text getValue() {return value;}
     public ComponentGraphic getComponentGraphic() { return componentGraphic; }
-
+    public Wire getWire() {return logicalWire;}
     public String getName() { return name; }
-
+    public ArrayList<Line> getLines() {return wireGraphicLines;}
     public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName){
         setStrokeWidth(3);
         wireGraphicLines = new ArrayList<Line>();

@@ -6,7 +6,6 @@ import graphics.GUIElements.ControllerConfigWindow1;
 import graphics.GUIElements.ControllerConfigWindow2;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;

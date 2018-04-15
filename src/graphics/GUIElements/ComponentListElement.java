@@ -70,6 +70,9 @@ public class ComponentListElement extends HBox {
                     case "Controller":
                     	newComponentGraphic = new ControllerGraphic();
                     	break;
+                    case "Clock":
+                    	newComponentGraphic = new ClockGraphic();
+                    	break;
                     case "Register":
                     	newComponentGraphic = new RegisterGraphic();
                     	break;

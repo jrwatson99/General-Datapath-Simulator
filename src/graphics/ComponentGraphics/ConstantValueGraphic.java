@@ -20,6 +20,9 @@ public class ConstantValueGraphic extends ComponentGraphic{
     
     private ConstantValue val;
     
+    public Rectangle getRect() {return rectangle;}
+    public ComponentOutputWireNode getOutput() {return outputNode;}
+    
 	public ConstantValueGraphic() {
 		rectangle = new Rectangle();
 		rectangle.setWidth(WIDTH);
@@ -69,6 +72,7 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		cfg.showAndWait();	
 		val.setValue(new DataValue(cfg.getName()));
 		val.Update();
+		updateWireText();
 	}
 
 	@Override

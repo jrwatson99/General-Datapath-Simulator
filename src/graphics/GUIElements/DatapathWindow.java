@@ -1,14 +1,11 @@
 package graphics.GUIElements;
 
-import graphics.ComponentGraphics.AdderGraphic;
-import graphics.ComponentGraphics.ComponentGraphic;
 import graphics.ComponentGraphics.ComponentOutputWireNode;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import javafx.stage.Screen;
+import logic.ExecutionEnvironment;
 
 public class DatapathWindow extends ScrollPane {
 	  Pane datapathPane;
@@ -24,7 +21,10 @@ public class DatapathWindow extends ScrollPane {
         this.setContent(datapathPane);
         this.setFitToHeight(true);
         this.setFitToWidth(true);
+        ExecutionEnvironment.getExecutionEnvironment().setDataPathWindow(this);
     }
+    
+    public Pane getPane() {return datapathPane;}
     public void updateText() {
     	for(Node cp : datapathPane.getChildren()) {
     		if(cp.getClass()==ComponentOutputWireNode.class) {

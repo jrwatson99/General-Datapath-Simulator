@@ -1,5 +1,7 @@
 package logic;
 
+import graphics.GUIElements.DatapathWindow;
+
 /*
  * ExecutionEnvironment is the class which contains references to all components within the datapath. There can
  * only be one ExecutionEnvironment, and thus it is represented by a singleton. This class simulates the clock
@@ -11,6 +13,7 @@ package logic;
 public class ExecutionEnvironment {
 	private static ExecutionEnvironment EESingleton = new ExecutionEnvironment();
 	private int radix;
+	private DatapathWindow dpWindow;
 	private boolean placingWire;
 	public void setRadix(int rad) {radix=rad;}
 	public int getRadix() {return radix;}
@@ -39,6 +42,10 @@ public class ExecutionEnvironment {
 	}
 	
 	public static ExecutionEnvironment getExecutionEnvironment() { return EESingleton;}
+	public DatapathWindow getDataPathWindow() {
+		return dpWindow;
+	}
+	public void setDataPathWindow(DatapathWindow newDPWindow) {this.dpWindow = newDPWindow;}
 	
 
 }

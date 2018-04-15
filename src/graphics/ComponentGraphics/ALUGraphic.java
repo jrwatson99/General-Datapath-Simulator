@@ -3,7 +3,6 @@ package graphics.ComponentGraphics;
 import graphics.GUIElements.ALUConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;

@@ -28,6 +28,7 @@ public class ComponentWindow extends ScrollPane {
             "Wire Splitter",
             "Constant Value",
             "Controller",
+            "Clock",
 //            "Pipeline Register"
             };
 
