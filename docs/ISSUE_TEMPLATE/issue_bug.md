@@ -8,5 +8,5 @@ Enter description here
 3. Step three.
 ...
 
-**Expected Result**: What you expect to happen.
+**Expected Result**: What you expect to happen.<br>
 **Actual Result**: What actually happens.
