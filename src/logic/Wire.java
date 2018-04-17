@@ -16,7 +16,7 @@ public class Wire {
 	}
 	
 	public void setValue(DataValue newValue) {
-		if(this.value!=newValue && listener != null) {
+		if(!this.value.equals(newValue) && listener != null) {
 			value = newValue;
 			listener.onValueChange();
 		}
