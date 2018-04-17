@@ -34,7 +34,9 @@ public class ComponentOutputWireNode extends Line {
     public ComponentGraphic getComponentGraphic() { return componentGraphic; }
     public Wire getWire() {return logicalWire;}
     public String getName() { return name; }
+
     public ArrayList<Line> getLines() {return wireGraphicLines;}
+
     public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName){
         setStrokeWidth(3);
         wireGraphicLines = new ArrayList<Line>();
@@ -54,12 +56,22 @@ public class ComponentOutputWireNode extends Line {
             @Override
             public void handle(MouseEvent e) {
 
-                if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() == true) {
-                    ExecutionEnvironment.getExecutionEnvironment().stopPlacingWire();
-
-                    //remove all lines to reset wire
+                if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
+                    System.out.println("selected");
                     Pane parentPane = ((Pane) getParent());
 
+                    if (ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
+                        System.out.println("second selected");
+                        //remove all lines from the previous output node to reset it
+                        ArrayList<Line> oldWireGraphicLines = ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode().getLines();
+                        for (int i = oldWireGraphicLines.size() - 1; i >= 0; i--) {
+                            parentPane.getChildren().remove(oldWireGraphicLines.remove(i));
+                        }
+
+                        ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
+                    }
+
+                    //remove all lines to reset wire
                     for (int i = wireGraphicLines.size() - 1; i >= 0; i--) {
                         parentPane.getChildren().remove(wireGraphicLines.remove(i));
                     }
@@ -72,6 +84,8 @@ public class ComponentOutputWireNode extends Line {
                     Line firstLineVertical = new Line(getEndX(), getEndY(), getEndX(), getEndY());
                     wireGraphicLines.add(firstLineVertical);
                     parentPane.getChildren().add(firstLineVertical);
+
+                    ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode((ComponentOutputWireNode)e.getSource());
 
                     addParentPaneWirePlacingListener(parentPane);
                 }
@@ -90,7 +104,7 @@ public class ComponentOutputWireNode extends Line {
 		@Override
 		public void onValueChange() {
 			value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
-//			System.out.println(logicalWire.getValue().toString());
+            //System.out.println(logicalWire.getValue().toString());
 		}
     	
     }
@@ -109,9 +123,9 @@ public class ComponentOutputWireNode extends Line {
                     lastLineVertical.setEndX(e.getX());
                     lastLineVertical.setEndY(e.getY());
 
-                    ExecutionEnvironment.getExecutionEnvironment().startPlacingWire();
+                    ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(true);
                 }
-                else if (e.getEventType() == MouseEvent.MOUSE_CLICKED && ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() == true) {
+                else if (e.getEventType() == MouseEvent.MOUSE_CLICKED && ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
 
                     ComponentInputWireNode connectingInputNode = null;
 
@@ -162,7 +176,7 @@ public class ComponentOutputWireNode extends Line {
                         
                         value.setX(lastLineVertical.getStartX());
                         value.setY(lastLineVertical.getStartY());
-//                        System.out.println("x: "+value.getX()+"    y: "+value.getY());
+                        //System.out.println("x: "+value.getX()+"    y: "+value.getY());
                         Component outputComponent = getComponentGraphic().getComponent();
                         Component inputComponent = connectingInputNode.getComponentGraphic().getComponent();
 
@@ -171,6 +185,8 @@ public class ComponentOutputWireNode extends Line {
                         outputComponent.connectOutputWire(logicalWire, getName());
                         inputComponent.connectInputWire(logicalWire, connectingInputNode.getName());
 
+                        ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
+                        ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode(null);
                         getParent().removeEventHandler(MouseEvent.ANY, this);
                     }
                     else {

@@ -1,5 +1,6 @@
 package logic;
 
+import graphics.ComponentGraphics.ComponentOutputWireNode;
 import graphics.GUIElements.DatapathWindow;
 
 /*
@@ -14,31 +15,40 @@ public class ExecutionEnvironment {
 	private static ExecutionEnvironment EESingleton = new ExecutionEnvironment();
 	private int radix;
 	private DatapathWindow dpWindow;
-	private boolean placingWire;
-	public void setRadix(int rad) {radix=rad;}
+	private boolean placingWireStatus;
+	private boolean wireSelectedStatus;
+	private ComponentOutputWireNode currentlySelectedOutputNode;
+
+	public void setRadix(int rad) {radix = rad;}
 	public int getRadix() {return radix;}
+
 	public void startPlacingWire() {
-		placingWire = true;
+		placingWireStatus = true;
 	}
 	public void stopPlacingWire() {
-		placingWire = false;
+		placingWireStatus = false;
 	}
 	public void togglePlacingWire() {
-		if (placingWire) {
+		if (placingWireStatus) {
 			stopPlacingWire();
 		}
 		else {
 			startPlacingWire();
 		}
 	}
+    public boolean getPlacingWireStatus() { return placingWireStatus;}
 
-	public boolean getPlacingWireStatus() {
-		return placingWire;
-	}
+	public void setWireSelectedStatus(boolean isWireSelected) { wireSelectedStatus = isWireSelected;}
+	public boolean getWireSelectedStatus() { return wireSelectedStatus;}
+
+    public void setCurrentlySelectedOutputNode(ComponentOutputWireNode outputNode) { currentlySelectedOutputNode = outputNode;}
+    public ComponentOutputWireNode getCurrentlySelectedOutputNode() { return currentlySelectedOutputNode;}
 
 	//Do not instantiate any instance other than EESingleton
 	private ExecutionEnvironment() {
-		placingWire = false;
+		placingWireStatus = false;
+		wireSelectedStatus = false;
+		currentlySelectedOutputNode = null;
 	}
 	
 	public static ExecutionEnvironment getExecutionEnvironment() { return EESingleton;}
