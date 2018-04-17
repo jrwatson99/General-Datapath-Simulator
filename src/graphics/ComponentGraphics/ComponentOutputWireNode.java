@@ -58,11 +58,9 @@ public class ComponentOutputWireNode extends Line {
             public void handle(MouseEvent e) {
 
                 if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
-                    System.out.println("selected");
                     Pane parentPane = ((Pane) getParent());
 
                     if (ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
-                        System.out.println("second selected");
                         //remove all lines from the previous output node to reset it
                         ArrayList<Line> oldWireGraphicLines = ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode().getLines();
                         for (int i = oldWireGraphicLines.size() - 1; i >= 0; i--) {
@@ -187,7 +185,18 @@ public class ComponentOutputWireNode extends Line {
                             parentPane.getChildren().remove(outputNode.getLines().remove(outputNode.getLines().size() - 1));
                             lastLineHorizontal.setEndX(connectingInputNode.getStartX());
                         }
-                        
+
+                        ComponentOutputWireNode previouslyConnectedOutputNode = connectingInputNode.getOutputNode();
+
+                        if (previouslyConnectedOutputNode != null && !outputNode.equals(previouslyConnectedOutputNode)) {
+                            //remove all lines to reset previously connecting output node
+                            for (int i = previouslyConnectedOutputNode.getLines().size() - 1; i >= 0; i--) {
+                                parentPane.getChildren().remove(previouslyConnectedOutputNode.getLines().remove(i));
+                            }
+                        }
+
+                        connectingInputNode.setOutputNode(outputNode);
+
                         outputNode.getValue().setX(lastLineVertical.getStartX());
                         outputNode.getValue().setY(lastLineVertical.getStartY());
                         //System.out.println("x: "+value.getX()+"    y: "+value.getY());
