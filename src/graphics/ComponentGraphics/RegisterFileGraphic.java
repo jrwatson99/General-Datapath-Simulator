@@ -87,7 +87,7 @@ public class RegisterFileGraphic extends MemoryGraphic {
 	public Text[] getValueText() {
 		Text[] t = new Text[] {
 				readData1.getValue(),
-				readData1.getValue()
+				readData2.getValue()
 		};
 		return t;
 	}
