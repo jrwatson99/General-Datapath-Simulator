@@ -1,9 +1,11 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.WireSplitterConfigWindow;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
-import logic.components.Component;
 import logic.components.WireSplitter;
 
 public class WireSplitterGraphic extends ComponentGraphic {
@@ -60,9 +62,26 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		cfg.showAndWait();
 	}
 
-	@Override
-	public void addMouseHandler() {
 
+	 @Override
+	 public void addMouseHandler() {
+      inputNode.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+              if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                  updateLoc(e.getX(), e.getY());
+              }
+              else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                  if(e.getButton()==MouseButton.PRIMARY) {
+                  	
+                  }
+                  else {
+                  	getMenu().show(inputNode, e.getX(),e.getY());
+                  }
+              }
+          }
+      });
+	            
 	}
 	@Override
 	public void updateWireText() {

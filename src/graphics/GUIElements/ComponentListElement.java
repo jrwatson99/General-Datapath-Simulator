@@ -1,21 +1,13 @@
 package graphics.GUIElements;
 
 import graphics.ComponentGraphics.*;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import logic.ExecutionEnvironment;
-import logic.Wire;
-import logic.components.Adder;
-
-import java.awt.*;
 
 public class ComponentListElement extends HBox {
 

@@ -1,7 +1,9 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.DefaultConfigWindow;
+import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -75,17 +77,27 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		updateWireText();
 	}
 
-	@Override
-	public void addMouseHandler() {
-		rectangle.setOnMouseClicked(e -> {
-			if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
-				this.config();
-			}
-			else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
-				//TODO add click and drag;
-			}
-		});
-	}
+
+	  @Override
+	    public void addMouseHandler() {
+          rectangle.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent e) {
+                  if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                      updateLoc(e.getX(), e.getY());
+                  }
+                  else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                      if(e.getButton()==MouseButton.PRIMARY) {
+                      	
+                      }
+                      else {
+                      	getMenu().show(rectangle, e.getX(),e.getY());
+                      }
+                  }
+              }
+          });
+	            
+	    }
 
 	@Override
 	public Text[] getValueText() {

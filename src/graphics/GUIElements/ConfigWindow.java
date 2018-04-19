@@ -1,9 +1,6 @@
 package graphics.GUIElements;
 
 
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

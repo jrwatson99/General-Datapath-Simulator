@@ -1,7 +1,6 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.RegisterFileConfigWindow;
-import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.memories.RegisterFile;
@@ -91,19 +90,7 @@ public class RegisterFileGraphic extends MemoryGraphic {
 		};
 		return t;
 	}
-	@Override
-	public void changeMouseHandler() {
-		getRect().setOnMouseClicked(e-> {
-			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
-				this.config2();
-			}
-			else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
-				//TODO add click and drag;
-				
-			}
-		});
-	}
-	
+
 	public void config2() {
 		RegisterFileConfigWindow cfg = new RegisterFileConfigWindow("config", this);
 		cfg.showAndWait();

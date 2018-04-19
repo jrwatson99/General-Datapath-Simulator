@@ -1,7 +1,6 @@
 package graphics.GUIElements;
 
 import graphics.ComponentGraphics.MemoryGraphic;
-import graphics.GUIElements.ConfigWindow.InputLine;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

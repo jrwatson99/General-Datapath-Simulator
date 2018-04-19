@@ -3,22 +3,17 @@ package graphics.ComponentGraphics;
 
 import graphics.GUIElements.DefaultConfigWindow;
 import javafx.event.EventHandler;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
-import logic.ExecutionEnvironment;
 import logic.components.Adder;
 
 public class AdderGraphic extends ComponentGraphic {
 	private Polygon shape;
     private Adder adder;
-    private ContextMenu menu;
     
     private ComponentInputWireNode inputANode;
     private ComponentInputWireNode inputBNode;
@@ -45,7 +40,6 @@ public class AdderGraphic extends ComponentGraphic {
         adder = new Adder();
 
         addMouseHandler();
-        createContextMenu();
     }
 
     public void updateLoc(double x, double y) {
@@ -94,29 +88,7 @@ public class AdderGraphic extends ComponentGraphic {
 		cfg.showAndWait();		
 	}
 
-//    @Override
-//    public void addMouseHandler() {
-//        shape.setOnMouseClicked(e -> {
-//            if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
-//                this.config();
-//            }
-//            else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
-//                shape.getParent().addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent e) {
-//                        if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
-//                            updateLoc(e.getX(), e.getY());
-//                        }
-//                        else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-//                            shape.getParent().removeEventHandler(MouseEvent.ANY, this);
-////                            e.consume();
-////                            addMouseHandler();
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
+
 	  @Override
 	    public void addMouseHandler() {
             shape.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
@@ -127,34 +99,17 @@ public class AdderGraphic extends ComponentGraphic {
                     }
                     else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
                         if(e.getButton()==MouseButton.PRIMARY) {
-                        	//do we want anything here? maybe highlight it?
-//                        	config();
+                        	
                         }
                         else {
-                        	menu.show(shape, e.getX(),e.getY());
+                        	getMenu().show(shape, e.getX(),e.getY());
                         }
                     }
                 }
             });
 	            
 	    }
-    protected void createContextMenu() { //this should probably be moved to componentgraphic class
-    	menu = new ContextMenu();
-    	MenuItem cfg = new MenuItem("Config");
-    	MenuItem del = new MenuItem("Delete");
-    	cfg.setOnAction(e -> config());
-    	del.setOnAction(e -> delete());
-    	menu.getItems().addAll(cfg,del);
-    }
 
-	protected void delete() {
-    	Pane dp;
-    	dp = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
-    	dp.getChildren().removeAll(getGraphics());
-    	dp.getChildren().removeAll(getValueText());
-    	dp.getChildren().removeAll(outputNode.getLines());
-    	dp.getChildren().remove(getText());
-    }
 
 	@Override
 	public Text[] getValueText() {

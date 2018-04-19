@@ -1,6 +1,7 @@
 package graphics.ComponentGraphics;
 
 import logic.DataValue;
+import logic.ExecutionEnvironment;
 import logic.components.ConstantValue;
 
 public class ClockGraphic extends ConstantValueGraphic {
@@ -20,6 +21,7 @@ public class ClockGraphic extends ConstantValueGraphic {
 					getOutput().getWire().setValue(DataValue.ONE);
 				}
 				updateWireText();
+				ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().updateText();
 			}
 		});
 	}

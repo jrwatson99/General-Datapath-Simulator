@@ -1,20 +1,14 @@
 package graphics;
 
-import graphics.ComponentGraphics.ALUGraphic;
-import graphics.GUIElements.ALUConfigWindow;
 import graphics.GUIElements.ComponentWindow;
 import graphics.GUIElements.DatapathWindow;
 import logic.ExecutionEnvironment;
 import javafx.geometry.Rectangle2D;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 public class GUI extends Application {
