@@ -12,8 +12,6 @@ import logic.components.Component;
 public class BitShifterGraphic extends ComponentGraphic{
 
     private Rectangle rectangle;
-    
-    private BitShifter bitShifter;
 
     private ComponentInputWireNode inputNode;
     private ComponentOutputWireNode outputNode;
@@ -22,7 +20,7 @@ public class BitShifterGraphic extends ComponentGraphic{
     private static final double WIDTH = 60;
     
     public BitShifterGraphic() {
-    	bitShifter = new BitShifter();
+    	component = new BitShifter();
     	
         rectangle = new Rectangle();
         rectangle.setHeight(HEIGHT);
@@ -71,9 +69,10 @@ public class BitShifterGraphic extends ComponentGraphic{
 		};
 		return t;
 	}
+
 	@Override
 	public Component getComponent() {
-		return bitShifter;
+		return component;
 	}
 
 	@Override

@@ -5,10 +5,10 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import logic.components.Component;
 import logic.components.memories.Memory;
 
 public abstract class MemoryGraphic extends ComponentGraphic{
-	private Memory mem;
 	private Rectangle rectangle;
 	
 
@@ -16,9 +16,9 @@ public abstract class MemoryGraphic extends ComponentGraphic{
     protected static final double WIDTH = 100;
 
 	@Override
-	public Memory getComponent() {return mem;}
+	public Component getComponent() {return component;}
 	
-	public void setComponent(Memory newMemory) {mem=newMemory;}
+	public void setComponent(Memory newMemory) {component = newMemory;}
 	
     public MemoryGraphic() {
         rectangle = new Rectangle();

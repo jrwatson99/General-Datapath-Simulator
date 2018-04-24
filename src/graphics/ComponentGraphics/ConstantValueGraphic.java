@@ -18,8 +18,6 @@ public class ConstantValueGraphic extends ComponentGraphic{
     private static final double WIDTH = 30;
     private static final double HEIGHT = 30;
     
-    private ConstantValue val;
-    
     public Rectangle getRect() {return rectangle;}
     public ComponentOutputWireNode getOutput() {return outputNode;}
     
@@ -31,7 +29,7 @@ public class ConstantValueGraphic extends ComponentGraphic{
 		rectangle.setStroke(Color.BLACK);
 		outputNode = new ComponentOutputWireNode(this, "output");
 		
-		val = new ConstantValue();
+		component = new ConstantValue();
 
 		addMouseHandler();
 	}
@@ -63,15 +61,15 @@ public class ConstantValueGraphic extends ComponentGraphic{
 
 	@Override
 	public Component getComponent() {
-		return val;
+		return component;
 	}
 
 	@Override
 	public void config() {
 		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
 		cfg.showAndWait();	
-		val.setValue(new DataValue(cfg.getName()));
-		val.Update();
+		((ConstantValue)component).setValue(new DataValue(cfg.getName()));
+		((ConstantValue)component).Update();
 		updateWireText();
 	}
 

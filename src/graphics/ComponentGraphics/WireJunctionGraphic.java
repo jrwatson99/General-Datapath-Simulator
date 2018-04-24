@@ -10,14 +10,12 @@ public class WireJunctionGraphic extends ComponentGraphic {
 	private ComponentOutputWireNode outputANode;
 	private ComponentOutputWireNode outputBNode;
 	private ComponentInputWireNode inputNode;
-    
-	private WireJunction junct;
 	
 	public WireJunctionGraphic() {
 		outputANode = new ComponentOutputWireNode(this, "outputA");
 		outputBNode = new ComponentOutputWireNode(this, "outputB");
 		inputNode = new ComponentInputWireNode(this, "input");
-		junct = new WireJunction();
+		component = new WireJunction();
 		
 	}
 
@@ -58,7 +56,7 @@ public class WireJunctionGraphic extends ComponentGraphic {
 		return t;
 	}
 	public Component getComponent() {
-		return junct;
+		return component;
 	}
 
 	public void config() {

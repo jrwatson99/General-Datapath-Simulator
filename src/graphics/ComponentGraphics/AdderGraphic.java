@@ -14,10 +14,10 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.ExecutionEnvironment;
 import logic.components.Adder;
+import logic.components.Component;
 
 public class AdderGraphic extends ComponentGraphic {
 	private Polygon shape;
-    private Adder adder;
     private ContextMenu menu;
     
     private ComponentInputWireNode inputANode;
@@ -30,8 +30,9 @@ public class AdderGraphic extends ComponentGraphic {
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
     private static final double STRAIGHT_LENGTH = 30;
 
-    public Adder getComponent() {
-        return adder;
+    @Override
+    public Component getComponent() {
+        return component;
     }
 
     public AdderGraphic() {
@@ -42,7 +43,7 @@ public class AdderGraphic extends ComponentGraphic {
         inputBNode = new ComponentInputWireNode(this, "inputB");
         outputNode = new ComponentOutputWireNode(this, "output");
 
-        adder = new Adder();
+        component = new Adder();
 
         addMouseHandler();
         createContextMenu();

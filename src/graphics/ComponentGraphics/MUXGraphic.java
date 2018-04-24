@@ -5,6 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import logic.components.Component;
 import logic.components.MUX;
 
 public class MUXGraphic extends ComponentGraphic {
@@ -14,10 +15,8 @@ public class MUXGraphic extends ComponentGraphic {
     private Arc arcTop;
     private Arc arcBottom;
 
-    private MUX mux;
-
-    public MUX getComponent() {
-        return mux;
+    public Component getComponent() {
+        return component;
     }
 
     private static final double STRAIGHT_LENGTH = 40;
@@ -52,7 +51,7 @@ public class MUXGraphic extends ComponentGraphic {
         arcBottom.setFill(Color.TRANSPARENT);
         arcBottom.setStroke(Color.BLACK);
 
-        mux = new MUX();
+        component = new MUX();
 
         inputA = new ComponentInputWireNode(this, "inputA");
         inputB = new ComponentInputWireNode(this, "inputB");
