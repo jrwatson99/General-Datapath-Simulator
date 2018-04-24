@@ -2,6 +2,7 @@ package graphics.GUIElements;
 
 import graphics.ComponentGraphics.ALUGraphic;
 import javafx.scene.control.TextField;
+import logic.components.ALU;
 
 public class ALUConfigWindow extends ConfigWindow {
 	private ALUGraphic alug;
@@ -28,7 +29,7 @@ public class ALUConfigWindow extends ConfigWindow {
 	public void updateComponent() throws Exception {
 		alug.setName(getName());
 		alug.getComponent().setBitLength(getInOutWidth());
-		alug.getComponent().setOPBitLength(getALUOPWidth());
+		((ALU)alug.getComponent()).setOPBitLength(getALUOPWidth());
 	}
 
 

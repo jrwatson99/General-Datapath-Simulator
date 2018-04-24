@@ -2,7 +2,6 @@ package logic.components;
 
 import logic.DataValue;
 import logic.Wire;
-import logic.components.Component.basicListener;
 
 public class BitExtender extends Component {
 	
@@ -13,7 +12,7 @@ public class BitExtender extends Component {
 	
 	public void setInput(Wire newInput) {
 		input = newInput;
-		input.addWireListener(new basicListener());
+		//input.addWireListener(new basicListener());
 	}
 	public Wire getInput() {return input;}
 	

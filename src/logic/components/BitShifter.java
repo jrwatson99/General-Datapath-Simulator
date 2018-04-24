@@ -24,7 +24,7 @@ public class BitShifter extends Component {
 	
 	public void setInput(Wire newInput) {
 		input = newInput;
-		input.addWireListener(new basicListener());
+		//input.addWireListener(new basicListener());
 	}
 	public Wire getInput() {return input;}
 	

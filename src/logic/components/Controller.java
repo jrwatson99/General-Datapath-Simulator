@@ -65,7 +65,7 @@ public class Controller extends Component {
 
 	public void setInput(Wire input) {
 		this.input = input;
-		this.input.addWireListener(new basicListener());
+		//this.input.addWireListener(new basicListener());
 	}
 
 	public int getNumOutputs() {

@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import logic.components.memories.DataMemory;
+import logic.components.memories.Memory;
 
 public class MemoryConfigWindow extends ConfigWindow{
 	MemoryGraphic memg;
@@ -20,9 +21,9 @@ public class MemoryConfigWindow extends ConfigWindow{
 		}
 		else {
 			this.addInputLine(new InputLine("Name",memg.getName()));
-			this.addInputLine(new InputLine("Address Bit Width",Integer.toString(memg.getComponent().getAddressWidth())));
-			this.addInputLine(new InputLine("Data Bit Width",Integer.toString(memg.getComponent().getDataWidth())));
-			this.addInputLine(new InputLine("Memory Size/ Number of registers",Integer.toString(memg.getComponent().getSize())));
+			this.addInputLine(new InputLine("Address Bit Width",Integer.toString(((Memory)memg.getComponent()).getAddressWidth())));
+			this.addInputLine(new InputLine("Data Bit Width",Integer.toString(((Memory)memg.getComponent()).getDataWidth())));
+			this.addInputLine(new InputLine("Memory Size/ Number of registers",Integer.toString(((Memory)memg.getComponent()).getSize())));
 		}
 		if(memg.getComponent().getClass()==DataMemory.class) {
 
@@ -54,9 +55,9 @@ public class MemoryConfigWindow extends ConfigWindow{
 		if(Math.pow(2, getAddressWidth()) < getSize()) {
 			throw new Exception(" Address too small");
 		}
-		memg.getComponent().setAddressWidth(getAddressWidth());
-		memg.getComponent().setDataWidth(getDataWidth());
-		memg.getComponent().resize(getSize());
+		((Memory)memg.getComponent()).setAddressWidth(getAddressWidth());
+		((Memory)memg.getComponent()).setDataWidth(getDataWidth());
+		((Memory)memg.getComponent()).resize(getSize());
 		if(memg.getComponent().getClass()==DataMemory.class && cb.isSelected()) {
 			((DataMemory)memg.getComponent()).initFromFile(((TextField)getLayout().getChildren().get(11)).getText(), 10);
 		}

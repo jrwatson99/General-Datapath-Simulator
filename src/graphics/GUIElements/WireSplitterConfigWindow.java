@@ -2,6 +2,8 @@ package graphics.GUIElements;
 
 import graphics.ComponentGraphics.WireSplitterGraphic;
 import javafx.scene.control.TextField;
+import logic.components.WireSplitter;
+import logic.components.memories.Memory;
 
 public class WireSplitterConfigWindow extends ConfigWindow {
 	
@@ -20,10 +22,10 @@ public class WireSplitterConfigWindow extends ConfigWindow {
 
 	@Override
 	public void updateComponent() throws Exception {
-		wireg.getComponent().setStartBit(getStartBit());
-		wireg.getComponent().setInWidth(getInWidth());
-		wireg.getComponent().setOutWidth(getOutWidth());
-		wireg.getComponent().setStopBit(getStopBit());
+		((WireSplitter)wireg.getComponent()).setStartBit(getStartBit());
+		((WireSplitter)wireg.getComponent()).setInWidth(getInWidth());
+		((WireSplitter)wireg.getComponent()).setOutWidth(getOutWidth());
+		((WireSplitter)wireg.getComponent()).setStopBit(getStopBit());
 		if(getInWidth() < getOutWidth() || getStopBit() > getInWidth() || getStopBit()-getStartBit() != getOutWidth()-1 ) {
 			throw new Exception("Bad input values");
 		}
