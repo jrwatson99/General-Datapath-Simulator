@@ -25,7 +25,7 @@ public class ComponentWindow extends ScrollPane {
             "Constant Value",
             "Controller",
             "Clock",
-//            "Pipeline Register"
+            "Register"
             };
 
     public ComponentWindow(DatapathWindow datapathWindow) {
