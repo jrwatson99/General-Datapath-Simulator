@@ -11,8 +11,6 @@ import logic.components.Component;
 
 public class BitExtenderGraphic extends ComponentGraphic{
     private Rectangle rectangle;
-    
-    private BitExtender bitExtender;
 
     private ComponentInputWireNode inputNode;
     private ComponentOutputWireNode outputNode;
@@ -21,7 +19,7 @@ public class BitExtenderGraphic extends ComponentGraphic{
     private static final double WIDTH = 60;
     
     public BitExtenderGraphic() {
-    	bitExtender = new BitExtender();
+    	component = new BitExtender();
     	
         rectangle = new Rectangle();
         rectangle.setHeight(HEIGHT);
@@ -72,7 +70,7 @@ public class BitExtenderGraphic extends ComponentGraphic{
 	}
 	@Override
 	public Component getComponent() {
-		return bitExtender;
+		return component;
 	}
 
 	@Override

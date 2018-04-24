@@ -6,6 +6,7 @@ import logic.components.Component;
 
 public abstract class ComponentGraphic {
 	private Text name;
+	protected Component component;
 	
 	public abstract void updateLoc(double x, double y);
 	

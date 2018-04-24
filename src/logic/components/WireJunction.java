@@ -2,7 +2,6 @@ package logic.components;
 
 import logic.Wire;
 import logic.WireListener;
-import logic.components.Component.basicListener;
 
 public class WireJunction extends Component{
 	private Wire input;
@@ -14,7 +13,7 @@ public class WireJunction extends Component{
 	}
 	public void setInput(Wire input) {
 		this.input = input;
-		this.input.addWireListener(new basicListener());
+		//this.input.addWireListener(new basicListener());
 	}
 	public Wire getOutputA() {
 		return out1;

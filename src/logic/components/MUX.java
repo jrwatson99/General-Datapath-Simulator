@@ -1,7 +1,6 @@
 package logic.components;
 
 import logic.Wire;
-import logic.components.Component.basicListener;
 
 /**
  * Mux Class
@@ -20,17 +19,17 @@ public class MUX extends Component{
 	
 	public void setInputA(Wire newInput) {
 		inputA = newInput;
-		inputA.addWireListener(new basicListener());
+		//inputA.addWireListener(new basicListener());
 	}
 	public Wire getInputA() {return inputA;}
 	public void setInputB(Wire newInput) {
 		inputB = newInput;
-		inputB.addWireListener(new basicListener());
+		//inputB.addWireListener(new basicListener());
 	}
 	public Wire getInputB() {return inputB;}
 	public void setSelect(Wire newInput) {
 		select = newInput;
-		select.addWireListener(new basicListener());
+		//select.addWireListener(new basicListener());
 	}
 	public Wire getSelect() {return select;}
 	public void setoutput(Wire newInput) {output= newInput;}

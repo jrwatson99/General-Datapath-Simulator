@@ -7,11 +7,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.Comparator;
+import logic.components.Component;
 
 public class ComparatorGraphic extends ComponentGraphic {
     private Rectangle rectangle;
-
-    private Comparator comparator;
 
     private ComponentInputWireNode inputANode;
     private ComponentInputWireNode inputBNode;
@@ -19,8 +18,9 @@ public class ComparatorGraphic extends ComponentGraphic {
     private ComponentOutputWireNode outputEQNode;
     private ComponentOutputWireNode outputGTNode;
 
-    public Comparator getComponent() {
-        return comparator;
+    @Override
+    public Component getComponent() {
+        return component;
     }
 
     private static final double HEIGHT = 60;
@@ -40,7 +40,7 @@ public class ComparatorGraphic extends ComponentGraphic {
         outputEQNode = new ComponentOutputWireNode(this, "outputEQ");
         outputGTNode = new ComponentOutputWireNode(this, "outputGT");
 
-        comparator = new Comparator();
+        component = new Comparator();
 
         addMouseHandler();
     }

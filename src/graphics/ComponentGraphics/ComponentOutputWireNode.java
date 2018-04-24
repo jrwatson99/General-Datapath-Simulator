@@ -99,12 +99,23 @@ public class ComponentOutputWireNode extends Line {
     }
     private class TextUpdater implements WireListener{
 
-        
+        private Component outputComponent;
+
+        public TextUpdater(Component outputComponent) {
+            this.outputComponent = outputComponent;
+        }
+
 		@Override
 		public void onValueChange() {
 			value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
-            //System.out.println(logicalWire.getValue().toString());
-		}
+
+            try {
+                outputComponent.Update();
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+        }
     	
     }
 
@@ -204,7 +215,7 @@ public class ComponentOutputWireNode extends Line {
                         Component inputComponent = connectingInputNode.getComponentGraphic().getComponent();
 
                         outputNode.setWire(new Wire());
-                        outputNode.getWire().addWireListener(new TextUpdater());
+                        outputNode.getWire().addWireListener(new TextUpdater(connectingInputNode.getComponent()));
                         outputComponent.connectOutputWire(outputNode.getWire(), outputNode.getName());
                         inputComponent.connectInputWire(outputNode.getWire(), connectingInputNode.getName());
 

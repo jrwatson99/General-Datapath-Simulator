@@ -7,12 +7,11 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.ALU;
+import logic.components.Component;
 
 public class ALUGraphic extends ComponentGraphic {
 
 	private Polygon shape;
-    private ALU alu;
-    
 
     private ComponentInputWireNode inputANode;
     private ComponentInputWireNode aluOpNode;
@@ -25,8 +24,9 @@ public class ALUGraphic extends ComponentGraphic {
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
     private static final double STRAIGHT_LENGTH = 30;
 
-    public ALU getComponent() {
-        return alu;
+    @Override
+    public Component getComponent() {
+        return component;
     }
 
     public ALUGraphic() {
@@ -38,7 +38,7 @@ public class ALUGraphic extends ComponentGraphic {
         inputANode = new ComponentInputWireNode(this, "inputA");
         inputBNode = new ComponentInputWireNode(this, "inputB");
         outputNode = new ComponentOutputWireNode(this, "output");
-        alu = new ALU();
+        component = new ALU();
         addMouseHandler();
     }
 

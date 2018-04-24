@@ -4,7 +4,6 @@ package logic.components;
 
 import logic.DataValue;
 import logic.Wire;
-import logic.components.Component.basicListener;
 
 /**
  * Adder class. Performs simple mathematical addition.
@@ -21,13 +20,13 @@ public class Adder extends Component {
 	
 	public void setInputA(Wire newInput) {
 		inputA = newInput;
-		inputA.addWireListener(new basicListener());
+		//inputA.addWireListener(new basicListener());
 	}
 	public Wire getInputA() {return inputA;}
 	
 	public void setInputB(Wire newInput) {
 		inputB = newInput;
-		inputB.addWireListener(new basicListener());
+		//inputB.addWireListener(new basicListener());
 	}
 	public Wire getInputB() {return inputB;}
 	

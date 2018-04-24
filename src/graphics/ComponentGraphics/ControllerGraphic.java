@@ -21,10 +21,8 @@ public class ControllerGraphic extends ComponentGraphic {
 	private final static int WIDTH = 50;
 	private final static int HEIGHT = 80;
 	
-	private Controller controller;
-	
 	public ControllerGraphic() {
-		controller = new Controller();
+		component = new Controller();
 		
 		shape = new Rectangle();
 		outputs = new ArrayList<ComponentOutputWireNode>();
@@ -73,7 +71,7 @@ public class ControllerGraphic extends ComponentGraphic {
 
 	@Override
 	public Component getComponent() {
-		return controller;
+		return component;
 	}
 
 	@Override

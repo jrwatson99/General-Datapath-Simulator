@@ -10,13 +10,11 @@ public class WireSplitterGraphic extends ComponentGraphic {
 
 	private ComponentOutputWireNode outputNode;
 	private ComponentInputWireNode inputNode;
-    
-	private WireSplitter junct;
 	
 	public WireSplitterGraphic() {
 		outputNode = new ComponentOutputWireNode(this, "output");
 		inputNode = new ComponentInputWireNode(this, "input");
-		junct = new WireSplitter();
+		component = new WireSplitter();
 		
 	}
 
@@ -50,8 +48,10 @@ public class WireSplitterGraphic extends ComponentGraphic {
 		};
 		return t;
 	}
-	public WireSplitter getComponent() {
-		return junct;
+
+	@Override
+	public Component getComponent() {
+		return component;
 	}
 
 
