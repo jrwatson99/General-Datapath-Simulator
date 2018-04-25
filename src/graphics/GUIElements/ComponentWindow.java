@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
@@ -45,6 +47,15 @@ public class ComponentWindow extends ScrollPane {
            @Override
             public void handle(ActionEvent e) {
                ExecutionEnvironment.getExecutionEnvironment().togglePlacingWire();
+               getScene().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+                   @Override
+                   public void handle(KeyEvent event) {
+                       if (event.getCode() == KeyCode.ESCAPE) {
+                           ExecutionEnvironment.getExecutionEnvironment().stopPlacingWire();
+                           getScene().removeEventHandler(KeyEvent.KEY_PRESSED, this);
+                       }
+                   }
+               });
            }
         });
 
