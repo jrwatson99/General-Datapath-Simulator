@@ -9,6 +9,8 @@ import javafx.scene.text.Text;
 import logic.components.ALU;
 import logic.components.Component;
 
+import java.util.ArrayList;
+
 public class ALUGraphic extends ComponentGraphic {
 
 	private Polygon shape;
@@ -17,6 +19,7 @@ public class ALUGraphic extends ComponentGraphic {
     private ComponentInputWireNode aluOpNode;
     private ComponentInputWireNode inputBNode;
     private ComponentOutputWireNode outputNode;
+    private ComponentOutputWireNode zeroNode;
 
     private static final double BIG_DIAGONAL_LENGTH_X = 50;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
@@ -38,6 +41,7 @@ public class ALUGraphic extends ComponentGraphic {
         inputANode = new ComponentInputWireNode(this, "inputA");
         inputBNode = new ComponentInputWireNode(this, "inputB");
         outputNode = new ComponentOutputWireNode(this, "output");
+        zeroNode = new ComponentOutputWireNode(this, "zero");
         component = new ALU();
         addMouseHandler();
     }
@@ -75,6 +79,11 @@ public class ALUGraphic extends ComponentGraphic {
         outputNode.setStartY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
         outputNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
         outputNode.setEndY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
+
+        zeroNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
+        zeroNode.setStartY(y + (STRAIGHT_LENGTH * 1.5) + LITTLE_DIAGONAL_LENGTH_Y);
+        zeroNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
+        zeroNode.setEndY(y + (STRAIGHT_LENGTH * 1.5) + LITTLE_DIAGONAL_LENGTH_Y);
     }
 
     public Shape[] getGraphics() {
@@ -83,7 +92,8 @@ public class ALUGraphic extends ComponentGraphic {
         		aluOpNode,
                 inputANode,
                 inputBNode,
-                outputNode};
+                outputNode,
+                zeroNode};
 
         return graphics;
     }
@@ -92,7 +102,7 @@ public class ALUGraphic extends ComponentGraphic {
 	public void config() {
 		ALUConfigWindow cfg = new ALUConfigWindow("ALU Configuration", this);
 		cfg.showAndWait();
-		
+
 	}
 
 	@Override
@@ -108,12 +118,18 @@ public class ALUGraphic extends ComponentGraphic {
 	@Override
 	public Text[] getValueText() {
 		Text[] t = new Text[] {
-				outputNode.getValue()
+				outputNode.getValue(),
+                zeroNode.getValue()
 		};
 		return t;
 	}
 	@Override
 	public void updateWireText() {
-		outputNode.updateText();		
+		outputNode.updateText();
+		zeroNode.updateText();
+	}
+
+	public void setOpOrder(ArrayList<ALU.Operation> opOrder) {
+		((ALU)component).setOpOrder(opOrder);
 	}
 }

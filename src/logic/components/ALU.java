@@ -61,6 +61,7 @@ public class ALU extends Component {
 		MULTIPLY,
 		SLL,
 		SRL,
+		INVALID
 	}
 	
 	
@@ -77,7 +78,11 @@ public class ALU extends Component {
 		opOrder.add(Operation.MULTIPLY);
 		opOrder.add(Operation.SLL);
 		opOrder.add(Operation.SRL);		
-	}	
+	}
+
+	public void setOpOrder(ArrayList<Operation> newOpOrder) {
+        opOrder = newOpOrder;
+    }
 	
 	/**
 	 * Updates output based on selected opCode, and sets the zero flag high if the result is 0;
@@ -102,19 +107,23 @@ public class ALU extends Component {
 			
 			DataValue result;
 			Operation op=opOrder.get(aluOP.getValue().intValue());
-			
-			result=performOperation(inputAVal,inputBVal, op);
-	
-	
-			if(result.intValue()==0) {
-				zero.setValue(new DataValue("1"));
+
+			if (op != Operation.INVALID) {
+				result = performOperation(inputAVal, inputBVal, op);
+
+
+				if (result.intValue() == 0) {
+					zero.setValue(DataValue.ONE);
+				} else {
+					zero.setValue(DataValue.ZERO);
+				}
+
+
+				getOutput().setValue(result);
 			}
 			else {
-				zero.setValue(new DataValue("0"));
-			}
-			
-			 
-			getOutput().setValue(result);
+			    getOutput().setValue(DataValue.ZERO);
+            }
 		}
 	}
 	
@@ -189,6 +198,9 @@ public class ALU extends Component {
 			case "output":
 				setOutput(connectingWire);
 				break;
+            case "zero":
+                setZero(connectingWire);
+                break;
 			default:
 				System.out.println("ERROR: invalid output name");
 		}

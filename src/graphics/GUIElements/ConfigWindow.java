@@ -17,7 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public abstract class ConfigWindow extends Stage {
-	private GridPane layout;
+	protected GridPane layout;
 	private Button confirm;
 	
 	public ConfigWindow(String title) {
