@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import logic.ExecutionEnvironment;
 import logic.Wire;
 import logic.components.Adder;
@@ -98,8 +99,28 @@ public class ComponentListElement extends HBox {
                                 finalNewComponentGraphic.updateLoc(e.getX(), e.getY());
                             }
                             else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-                                datapathWindow.removeEventHandler(MouseEvent.ANY, this);
-                                finalNewComponentGraphic.config();
+                                boolean collisionDetected = false;
+                                int i = 0;
+                                while (i < ((Pane)datapathWindow.getContent()).getChildren().size() && collisionDetected == false) {
+                                    if (((Pane)datapathWindow.getContent()).getChildren().get(i) instanceof javafx.scene.shape.Shape) {
+                                        Node potentiallyCollidingShape = ((Pane)datapathWindow.getContent()).getChildren().get(i);
+                                        javafx.scene.shape.Shape[] newComponentGraphicList = newComponentGraphic.getGraphics();
+                                        for (int j = 0; j < newComponentGraphicList.length; j++) {
+                                            if (!(potentiallyCollidingShape instanceof ComponentInputWireNode || newComponentGraphicList[j] instanceof ComponentInputWireNode) && !(potentiallyCollidingShape instanceof ComponentOutputWireNode || newComponentGraphicList[j] instanceof ComponentOutputWireNode) && !(potentiallyCollidingShape.equals(newComponentGraphicList[j])) && !(potentiallyCollidingShape instanceof Text || newComponentGraphicList[j] instanceof Text)) {
+                                                if (newComponentGraphicList[j].intersects(potentiallyCollidingShape.getBoundsInParent())) {
+                                                    System.out.print(newComponentGraphicList[j].getId() + " " + potentiallyCollidingShape.getId() + " ");
+                                                    System.out.println("Collision");
+                                                    collisionDetected = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    i++;
+                                }
+                                if (!collisionDetected) {
+                                    datapathWindow.removeEventHandler(MouseEvent.ANY, this);
+                                    finalNewComponentGraphic.config();
+                                }
                             }
                         }
                     });
