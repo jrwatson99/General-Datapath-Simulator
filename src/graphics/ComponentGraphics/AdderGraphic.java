@@ -1,7 +1,7 @@
 package graphics.ComponentGraphics;
 
 
-import graphics.GUIElements.DefaultConfigWindow;
+import graphics.GUIElements.configWindow.DefaultConfigWindow;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;

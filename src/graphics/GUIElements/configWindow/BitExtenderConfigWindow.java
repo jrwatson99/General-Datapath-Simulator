@@ -1,7 +1,7 @@
-package graphics.GUIElements;
+package graphics.GUIElements.configWindow;
 
 import graphics.ComponentGraphics.BitExtenderGraphic;
-import graphics.ComponentGraphics.ComponentGraphic;
+import graphics.GUIElements.AlertWindow;
 import javafx.scene.control.TextField;
 import logic.components.BitExtender;
 

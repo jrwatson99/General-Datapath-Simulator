@@ -1,6 +1,6 @@
 package graphics.ComponentGraphics;
 
-import graphics.GUIElements.DataMemoryConfigWindow;
+import graphics.GUIElements.configWindow.DataMemoryConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;

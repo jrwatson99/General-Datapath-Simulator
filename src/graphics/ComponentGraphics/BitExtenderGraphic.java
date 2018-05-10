@@ -1,7 +1,6 @@
 package graphics.ComponentGraphics;
 
-import graphics.GUIElements.BitExtenderConfigWindow;
-import graphics.GUIElements.DefaultConfigWindow;
+import graphics.GUIElements.configWindow.BitExtenderConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

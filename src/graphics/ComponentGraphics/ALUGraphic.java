@@ -1,6 +1,6 @@
 package graphics.ComponentGraphics;
 
-import graphics.GUIElements.ALUConfigWindow;
+import graphics.GUIElements.configWindow.ALUConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;

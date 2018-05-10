@@ -1,6 +1,6 @@
 package graphics.ComponentGraphics;
 
-import graphics.GUIElements.DefaultConfigWindow;
+import graphics.GUIElements.configWindow.DefaultConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

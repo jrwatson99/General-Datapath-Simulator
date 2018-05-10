@@ -1,6 +1,6 @@
 package graphics.ComponentGraphics;
 
-import graphics.GUIElements.WireSplitterConfigWindow;
+import graphics.GUIElements.configWindow.WireSplitterConfigWindow;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.Component;

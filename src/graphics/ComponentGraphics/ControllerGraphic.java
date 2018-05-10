@@ -2,8 +2,8 @@ package graphics.ComponentGraphics;
 
 import java.util.ArrayList;
 
-import graphics.GUIElements.ControllerConfigWindow1;
-import graphics.GUIElements.ControllerConfigWindow2;
+import graphics.GUIElements.configWindow.ControllerConfigWindow1;
+import graphics.GUIElements.configWindow.ControllerConfigWindow2;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
