@@ -17,12 +17,6 @@ import logic.components.Adder;
 import logic.components.Component;
 
 public class AdderGraphic extends ComponentGraphic {
-	private Polygon shape;
-    private ContextMenu menu;
-    
-    private ComponentInputWireNode inputANode;
-    private ComponentInputWireNode inputBNode;
-    private ComponentOutputWireNode outputNode;
 
     private static final double BIG_DIAGONAL_LENGTH_X = 50;
     private static final double BIG_DIAGONAL_LENGTH_Y = 20;
@@ -30,53 +24,94 @@ public class AdderGraphic extends ComponentGraphic {
     private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
     private static final double STRAIGHT_LENGTH = 30;
 
+	private Polygon shape;
+    private ContextMenu menu;
+    
+    private ComponentInputWireNode inputANode;
+    private ComponentInputWireNode inputBNode;
+    private ComponentOutputWireNode outputNode;
+
     @Override
     public Component getComponent() {
         return component;
     }
 
     public AdderGraphic() {
-    	shape = new Polygon();
-    	shape.setFill(Color.WHITE);
-    	shape.setStroke(Color.BLACK);
-        inputANode = new ComponentInputWireNode(this, "inputA");
-        inputBNode = new ComponentInputWireNode(this, "inputB");
-        outputNode = new ComponentOutputWireNode(this, "output");
-
-        component = new Adder();
-
+        init();
         addMouseHandler();
         createContextMenu();
     }
 
-    public void updateLoc(double x, double y) {
-    	updateTextLoc(x + 2,y + STRAIGHT_LENGTH);
-    	
-    	shape.getPoints().clear();
-    	shape.getPoints().addAll(new Double[] {
-    	         x,y,
-    	         x + BIG_DIAGONAL_LENGTH_X, y + BIG_DIAGONAL_LENGTH_Y,
-    	         x + BIG_DIAGONAL_LENGTH_X, y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH),
-    	         x, y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH,
-    	         x, y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)),
-    	         x + LITTLE_DIAGONAL_LENGTH_X, y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y),
-    	         x, y + STRAIGHT_LENGTH
-    	});
+    private void init() {
+        initShape();
+        initNodes();
+        initComponent();
+    }
 
+    private void initShape() {
+        shape = new Polygon();
+        shape.setFill(Color.WHITE);
+        shape.setStroke(Color.BLACK);
+    }
+
+    private void initNodes() {
+        inputANode = new ComponentInputWireNode(this, "inputA");
+        inputBNode = new ComponentInputWireNode(this, "inputB");
+        outputNode = new ComponentOutputWireNode(this, "output");
+    }
+
+    private void initComponent() {
+        component = new Adder();
+    }
+
+    private void changeInputANodeLoc(double x, double y) {
         inputANode.setStartX(x - inputANode.getLength());
         inputANode.setStartY(y + (STRAIGHT_LENGTH / 2));
         inputANode.setEndX(x);
         inputANode.setEndY(y + (STRAIGHT_LENGTH / 2));
+    }
 
+    private void changeInputBNodeLoc(double x, double y) {
         inputBNode.setStartX(x - inputANode.getLength());
         inputBNode.setStartY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
         inputBNode.setEndX(x);
         inputBNode.setEndY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
+    }
 
+    private void changeOutputNodeLoc(double x, double y) {
         outputNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
         outputNode.setStartY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
         outputNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
         outputNode.setEndY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
+    }
+
+    private void changeNodeLocs(double x, double y) {
+        changeInputANodeLoc(x, y);
+        changeInputBNodeLoc(x, y);
+        changeOutputNodeLoc(x, y);
+    }
+
+    private void changeShapeLoc(double x, double y) {
+        shape.getPoints().clear();
+        shape.getPoints().addAll(
+                x,y,
+                x + BIG_DIAGONAL_LENGTH_X, y + BIG_DIAGONAL_LENGTH_Y,
+                x + BIG_DIAGONAL_LENGTH_X, y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH),
+                x, y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH,
+                x, y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)),
+                x + LITTLE_DIAGONAL_LENGTH_X, y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y),
+                x, y + STRAIGHT_LENGTH
+        );
+    }
+
+    private void updateNameTextLoc(double x, double y) {
+        updateTextLoc(x + 2,y + STRAIGHT_LENGTH);
+    }
+
+    public void updateLoc(double x, double y) {
+    	updateNameTextLoc(x, y);
+    	changeShapeLoc(x, y);
+    	changeNodeLocs(x, y);
     }
 
     public Shape[] getGraphics() {
