@@ -16,6 +16,8 @@ import logic.ExecutionEnvironment;
 import logic.components.Adder;
 import logic.components.Component;
 
+import javax.swing.plaf.basic.BasicTreeUI;
+
 public class AdderGraphic extends ComponentGraphic {
 
     private static final double BIG_DIAGONAL_LENGTH_X = 50;
@@ -130,66 +132,64 @@ public class AdderGraphic extends ComponentGraphic {
 		cfg.showAndWait();		
 	}
 
-//    @Override
-//    public void addMouseHandler() {
-//        shape.setOnMouseClicked(e -> {
-//            if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
-//                this.config();
-//            }
-//            else if (e.getButton().compareTo(MouseButton.PRIMARY) == 0) {
-//                shape.getParent().addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
-//                    @Override
-//                    public void handle(MouseEvent e) {
-//                        if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
-//                            updateLoc(e.getX(), e.getY());
-//                        }
-//                        else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-//                            shape.getParent().removeEventHandler(MouseEvent.ANY, this);
-////                            e.consume();
-////                            addMouseHandler();
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
-	  @Override
-	    public void addMouseHandler() {
-            shape.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                    if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                        updateLoc(e.getX(), e.getY());
-                    }
-                    else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-                        if(e.getButton()==MouseButton.PRIMARY) {
-                        	//do we want anything here? maybe highlight it?
-//                        	config();
-                        }
-                        else {
-                        	menu.show(shape, e.getX(),e.getY());
-                        }
-                    }
+    @Override
+    public void addMouseHandler() {
+        shape.addEventHandler(MouseEvent.ANY, new AdderGraphicMouseHandler());
+    }
+
+    private class AdderGraphicMouseHandler implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent e) {
+            if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                updateLoc(e.getX(), e.getY());
+            }
+            else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                if(e.getButton() == MouseButton.PRIMARY) {
+                    //do we want anything here? maybe highlight it?
+                    //                        	config();
                 }
-            });
-	            
-	    }
+                else {
+                    menu.show(shape, e.getX(), e.getY());
+                }
+            }
+        }
+    }
+
     protected void createContextMenu() { //this should probably be moved to componentgraphic class
     	menu = new ContextMenu();
+
     	MenuItem cfg = new MenuItem("Config");
-    	MenuItem del = new MenuItem("Delete");
     	cfg.setOnAction(e -> config());
+
+        MenuItem del = new MenuItem("Delete");
     	del.setOnAction(e -> delete());
+
     	menu.getItems().addAll(cfg,del);
     }
 
 	protected void delete() {
-    	Pane dp;
-    	dp = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
-    	dp.getChildren().removeAll(getGraphics());
-    	dp.getChildren().removeAll(getValueText());
-    	dp.getChildren().removeAll(outputNode.getLines());
-    	dp.getChildren().remove(getText());
+        removeOutputLines();
+        removeFromParent();
+    }
+
+    private void removeFromParent() {
+        Pane parentPane = getParentPane();
+
+        parentPane.getChildren().removeAll(getGraphics());
+        parentPane.getChildren().removeAll(getValueText());
+        parentPane.getChildren().remove(getText());
+    }
+
+    private void removeOutputLines() {
+        Pane parentPane = getParentPane();
+        outputNode.clearLines(parentPane);
+    }
+
+    private Pane getParentPane() {
+        Pane parentPane;
+        parentPane = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
+
+        return parentPane;
     }
 
 	@Override
