@@ -156,15 +156,24 @@ public class AdderGraphic extends ComponentGraphic {
     }
 
     protected void createContextMenu() { //this should probably be moved to componentgraphic class
-    	menu = new ContextMenu();
+    	MenuItem cfg = createConfigMenuItem();
+    	MenuItem del = createDeleteMenuItem();
 
-    	MenuItem cfg = new MenuItem("Config");
-    	cfg.setOnAction(e -> config());
+        menu = new ContextMenu(cfg, del);
+    }
 
+    private MenuItem createConfigMenuItem() {
+        MenuItem cfg = new MenuItem("Config");
+        cfg.setOnAction(e -> config());
+
+        return cfg;
+    }
+
+    private MenuItem createDeleteMenuItem() {
         MenuItem del = new MenuItem("Delete");
-    	del.setOnAction(e -> delete());
+        del.setOnAction(e -> delete());
 
-    	menu.getItems().addAll(cfg,del);
+        return del;
     }
 
 	protected void delete() {
