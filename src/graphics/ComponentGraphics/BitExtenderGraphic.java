@@ -1,5 +1,6 @@
 package graphics.ComponentGraphics;
 
+import graphics.GUIElements.BitExtenderConfigWindow;
 import graphics.GUIElements.DefaultConfigWindow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -75,7 +76,7 @@ public class BitExtenderGraphic extends ComponentGraphic{
 
 	@Override
 	public void config() {
-		DefaultConfigWindow cfg = new DefaultConfigWindow("config",this);
+		BitExtenderConfigWindow cfg = new BitExtenderConfigWindow("config",this);
 		cfg.showAndWait();
 		
 	}
