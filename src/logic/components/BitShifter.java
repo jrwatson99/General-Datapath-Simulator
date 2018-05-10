@@ -74,10 +74,10 @@ public class BitShifter extends Component {
 	private DataValue shiftData(DataValue dataToShift) throws Exception {
 		DataValue newOutput = dataToShift;
 		if (direction == Direction.RIGHT) {
-			newOutput = (DataValue)dataToShift.shiftRight(getShiftAmount());
+			newOutput = new DataValue(dataToShift.shiftRight(getShiftAmount()));
 		}
 		else if (direction == Direction.LEFT) {
-			newOutput = (DataValue)dataToShift.shiftLeft(getShiftAmount());
+			newOutput = new DataValue(dataToShift.shiftLeft(getShiftAmount()));
 		}
 		else {
 			throw new Exception("ERROR: Invalid Signedness value in Bitshifter");
