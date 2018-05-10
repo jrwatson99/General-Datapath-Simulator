@@ -17,6 +17,7 @@ import logic.Wire;
 import logic.components.Adder;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class ComponentListElement extends HBox {
 
@@ -101,14 +102,14 @@ public class ComponentListElement extends HBox {
                             else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
                                 boolean collisionDetected = false;
                                 int i = 0;
-                                while (i < ((Pane)datapathWindow.getContent()).getChildren().size() && collisionDetected == false) {
+                                while (i < ((Pane)datapathWindow.getContent()).getChildren().size() && !collisionDetected) {
                                     if (((Pane)datapathWindow.getContent()).getChildren().get(i) instanceof javafx.scene.shape.Shape) {
                                         Node potentiallyCollidingShape = ((Pane)datapathWindow.getContent()).getChildren().get(i);
                                         javafx.scene.shape.Shape[] newComponentGraphicList = newComponentGraphic.getGraphics();
-                                        for (int j = 0; j < newComponentGraphicList.length; j++) {
-                                            if (!(potentiallyCollidingShape instanceof ComponentInputWireNode || newComponentGraphicList[j] instanceof ComponentInputWireNode) && !(potentiallyCollidingShape instanceof ComponentOutputWireNode || newComponentGraphicList[j] instanceof ComponentOutputWireNode) && !(potentiallyCollidingShape.equals(newComponentGraphicList[j])) && !(potentiallyCollidingShape instanceof Text || newComponentGraphicList[j] instanceof Text)) {
+                                        if (!(Arrays.asList(newComponentGraphicList).contains(potentiallyCollidingShape) || potentiallyCollidingShape instanceof Text)) {
+                                            for (int j = 0; j < newComponentGraphicList.length; j++) {
                                                 if (newComponentGraphicList[j].intersects(potentiallyCollidingShape.getBoundsInParent())) {
-                                                    System.out.print(newComponentGraphicList[j].getId() + " " + potentiallyCollidingShape.getId() + " ");
+                                                    System.out.print(newComponentGraphicList[j].toString() + " " + potentiallyCollidingShape.toString() + " ");
                                                     System.out.println("Collision");
                                                     collisionDetected = true;
                                                 }

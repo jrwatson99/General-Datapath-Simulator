@@ -10,10 +10,11 @@ import logic.components.MUX;
 
 public class MUXGraphic extends ComponentGraphic {
 
-    private Line lineStraightLeft;
-    private Line lineStraightRight;
+    private Rectangle rectangle;
     private Arc arcTop;
     private Arc arcBottom;
+    private Line lineStraightLeft;
+    private Line lineStraightRight;
 
     public Component getComponent() {
         return component;
@@ -29,26 +30,31 @@ public class MUXGraphic extends ComponentGraphic {
     private ComponentOutputWireNode out;
     
     public MUXGraphic() {
-        lineStraightLeft = new Line();
-        lineStraightRight = new Line();
+        rectangle = new Rectangle();
         arcTop = new Arc();
         arcBottom = new Arc();
+        lineStraightLeft = new Line();
+        lineStraightRight = new Line();
+
+        rectangle.setWidth(STRAIGHT_SEPARATION_DISTANCE);
+        rectangle.setHeight(STRAIGHT_LENGTH);
+        rectangle.setFill(Color.WHITE);
+        rectangle.setStroke(Color.TRANSPARENT);
 
         arcTop.setRadiusX(ARC_RADIUS);
         arcTop.setRadiusY(ARC_RADIUS);
         arcTop.setLength(180);
         arcTop.setStartAngle(0);
         arcTop.setType(ArcType.OPEN);
-        arcTop.setFill(Color.TRANSPARENT);
+        arcTop.setFill(Color.WHITE);
         arcTop.setStroke(Color.BLACK);
-
 
         arcBottom.setRadiusX(ARC_RADIUS);
         arcBottom.setRadiusY(ARC_RADIUS);
         arcBottom.setLength(180);
         arcBottom.setStartAngle(180);
         arcBottom.setType(ArcType.OPEN);
-        arcBottom.setFill(Color.TRANSPARENT);
+        arcBottom.setFill(Color.WHITE);
         arcBottom.setStroke(Color.BLACK);
 
         component = new MUX();
@@ -62,6 +68,15 @@ public class MUXGraphic extends ComponentGraphic {
     }
 
     public void updateLoc(double x, double y) {
+        rectangle.setX(x);
+        rectangle.setY(y);
+
+        arcTop.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
+        arcTop.setCenterY(y);
+
+        arcBottom.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
+        arcBottom.setCenterY(y + STRAIGHT_LENGTH);
+
         lineStraightLeft.setStartX(x);
         lineStraightLeft.setStartY(y);
         lineStraightLeft.setEndX(x);
@@ -71,12 +86,6 @@ public class MUXGraphic extends ComponentGraphic {
         lineStraightRight.setStartY(y);
         lineStraightRight.setEndX(x + STRAIGHT_SEPARATION_DISTANCE);
         lineStraightRight.setEndY(y + STRAIGHT_LENGTH);
-
-        arcTop.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
-        arcTop.setCenterY(y);
-
-        arcBottom.setCenterX(x + (STRAIGHT_SEPARATION_DISTANCE / 2));
-        arcBottom.setCenterY(y + STRAIGHT_LENGTH);
         
         inputA.setStartX(x);
         inputA.setStartY(y+8);
@@ -102,10 +111,11 @@ public class MUXGraphic extends ComponentGraphic {
 
     public Shape[] getGraphics() {
         Shape[] graphics = {
-                lineStraightLeft,
-                lineStraightRight,
+                rectangle,
                 arcTop,
                 arcBottom,
+                lineStraightLeft,
+                lineStraightRight,
                 inputA,
                 inputB,
                 sel,
@@ -131,7 +141,7 @@ public class MUXGraphic extends ComponentGraphic {
 
     @Override
     public void addMouseHandler() {
-        lineStraightLeft.setOnMouseClicked(e -> {
+        rectangle.setOnMouseClicked(e -> {
             if (e.getButton().compareTo(MouseButton.SECONDARY) == 0) {
                 this.config();
             }
