@@ -109,8 +109,6 @@ public class ComponentListElement extends HBox {
                                         if (!(Arrays.asList(newComponentGraphicList).contains(potentiallyCollidingShape) || potentiallyCollidingShape instanceof Text)) {
                                             for (int j = 0; j < newComponentGraphicList.length; j++) {
                                                 if (newComponentGraphicList[j].intersects(potentiallyCollidingShape.getBoundsInParent())) {
-                                                    System.out.print(newComponentGraphicList[j].toString() + " " + potentiallyCollidingShape.toString() + " ");
-                                                    System.out.println("Collision");
                                                     collisionDetected = true;
                                                 }
                                             }
@@ -121,6 +119,9 @@ public class ComponentListElement extends HBox {
                                 if (!collisionDetected) {
                                     datapathWindow.removeEventHandler(MouseEvent.ANY, this);
                                     finalNewComponentGraphic.config();
+                                    if (finalNewComponentGraphic instanceof MUXGraphic) {
+                                        ((MUXGraphic)finalNewComponentGraphic).changeTextLoc(e.getX(), e.getY());
+                                    }
                                 }
                             }
                         }
