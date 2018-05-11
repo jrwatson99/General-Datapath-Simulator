@@ -34,9 +34,30 @@ public class BitShifter extends Component {
 	public void setShiftAmount(int newShiftAmount) {shiftAmount = newShiftAmount;}
 	public int getShiftAmount() {return shiftAmount;}
 	
-	public void setDirection(Direction newDirection) {direction = newDirection;}
+	private void setDirection(Direction newDirection) {direction = newDirection;}
 	public Direction getDirection() {return direction;}
-	
+
+	public void setShiftDirection(String dirAsString) {
+		try {
+			trySetShiftDirection(dirAsString);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	private void trySetShiftDirection(String dirAsString) throws Exception {
+		if (dirAsString.equals("Left")) {
+
+		}
+		else if (dirAsString.equals("Right")) {
+
+		}
+		else {
+			throw new Exception("Invalid shift direction");
+		}
+	}
+
 	public BitShifter() {
 		setBitLength(32);
 		setShiftAmount(0);
