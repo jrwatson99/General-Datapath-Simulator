@@ -1,11 +1,17 @@
 package graphics.ComponentGraphics;
 
 import graphics.GUIElements.ALUConfigWindow;
+import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
+import logic.ExecutionEnvironment;
 import logic.components.ALU;
 import logic.components.Component;
 
@@ -13,7 +19,14 @@ import java.util.ArrayList;
 
 public class ALUGraphic extends ComponentGraphic {
 
+    private static final double BIG_DIAGONAL_LENGTH_X = 50;
+    private static final double BIG_DIAGONAL_LENGTH_Y = 20;
+    private static final double LITTLE_DIAGONAL_LENGTH_X = 10;
+    private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
+    private static final double STRAIGHT_LENGTH = 30;
+
 	private Polygon shape;
+    private ContextMenu menu;
 
     private ComponentInputWireNode inputANode;
     private ComponentInputWireNode aluOpNode;
@@ -21,65 +34,101 @@ public class ALUGraphic extends ComponentGraphic {
     private ComponentOutputWireNode outputNode;
     private ComponentOutputWireNode zeroNode;
 
-    private static final double BIG_DIAGONAL_LENGTH_X = 50;
-    private static final double BIG_DIAGONAL_LENGTH_Y = 20;
-    private static final double LITTLE_DIAGONAL_LENGTH_X = 10;
-    private static final double LITTLE_DIAGONAL_LENGTH_Y = 5;
-    private static final double STRAIGHT_LENGTH = 30;
-
     @Override
     public Component getComponent() {
         return component;
     }
 
     public ALUGraphic() {
+        init();
+        addMouseHandler();
+        createContextMenu();
+    }
 
-    	shape = new Polygon();
+    private void init() {
+        initShape();
+        initNodes();
+        initComponent();
+    }
+
+    private void initShape() {
+        shape = new Polygon();
         shape.setFill(Color.WHITE);
-    	shape.setStroke(Color.BLACK);
+        shape.setStroke(Color.BLACK);
+    }
+
+    private void initNodes() {
         aluOpNode = new ComponentInputWireNode(this, "opCode");
         inputANode = new ComponentInputWireNode(this, "inputA");
         inputBNode = new ComponentInputWireNode(this, "inputB");
         outputNode = new ComponentOutputWireNode(this, "output");
         zeroNode = new ComponentOutputWireNode(this, "zero");
+    }
+
+    private void initComponent() {
         component = new ALU();
-        addMouseHandler();
     }
 
     public void updateLoc(double x, double y) {
-    	updateTextLoc(x+LITTLE_DIAGONAL_LENGTH_X, y+STRAIGHT_LENGTH+LITTLE_DIAGONAL_LENGTH_Y );
-    	
-    	shape.getPoints().clear();
-    	shape.getPoints().addAll(new Double[] {
-    	         x,y,
-    	         x + BIG_DIAGONAL_LENGTH_X, y + BIG_DIAGONAL_LENGTH_Y,
-    	         x + BIG_DIAGONAL_LENGTH_X, y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH),
-    	         x, y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH,
-    	         x, y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)),
-    	         x + LITTLE_DIAGONAL_LENGTH_X, y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y),
-    	         x, y + STRAIGHT_LENGTH
-    	});
+    	changeTextLoc(x, y);
+    	changeShapeLoc(x, y);
+        changeNodeLocs(x, y);
+    }
 
-    	aluOpNode.setStartX(x+STRAIGHT_LENGTH);
-    	aluOpNode.setStartY(y + 5);
+    private void changeTextLoc(double x, double y) {
+        updateTextLoc(x+LITTLE_DIAGONAL_LENGTH_X, y+STRAIGHT_LENGTH+LITTLE_DIAGONAL_LENGTH_Y );
+    }
+
+    private void changeShapeLoc(double x, double y) {
+        shape.getPoints().clear();
+        shape.getPoints().addAll(
+                x,y,
+                x + BIG_DIAGONAL_LENGTH_X, y + BIG_DIAGONAL_LENGTH_Y,
+                x + BIG_DIAGONAL_LENGTH_X, y + (BIG_DIAGONAL_LENGTH_Y + STRAIGHT_LENGTH),
+                x, y + (2 * BIG_DIAGONAL_LENGTH_Y) + STRAIGHT_LENGTH,
+                x, y + (STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y)),
+                x + LITTLE_DIAGONAL_LENGTH_X, y + (STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y),
+                x, y + STRAIGHT_LENGTH
+        );
+    }
+
+    private void changeNodeLocs(double x, double y) {
+        changeOpCodeNodeLoc(x, y);
+        changeInputANodeLoc(x, y);
+        changeInputBNodeLoc(x, y);
+        changeOutputNodeLoc(x, y);
+        changeZeroNodeLoc(x, y);
+    }
+
+    private void changeOpCodeNodeLoc(double x, double y) {
+        aluOpNode.setStartX(x+STRAIGHT_LENGTH);
+        aluOpNode.setStartY(y + 5);
         aluOpNode.setEndX(x+STRAIGHT_LENGTH);
         aluOpNode.setEndY(y + (STRAIGHT_LENGTH / 2)-5);
-        
+    }
+
+    private void changeInputANodeLoc(double x, double y) {
         inputANode.setStartX(x - inputANode.getLength());
         inputANode.setStartY(y + (STRAIGHT_LENGTH / 2));
         inputANode.setEndX(x);
         inputANode.setEndY(y + (STRAIGHT_LENGTH / 2));
+    }
 
+    private void changeInputBNodeLoc(double x, double y) {
         inputBNode.setStartX(x - inputANode.getLength());
         inputBNode.setStartY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
         inputBNode.setEndX(x);
         inputBNode.setEndY(y + STRAIGHT_LENGTH + (2 * LITTLE_DIAGONAL_LENGTH_Y) + (STRAIGHT_LENGTH / 2));
+    }
 
+    private void changeOutputNodeLoc(double x, double y) {
         outputNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
         outputNode.setStartY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
         outputNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
         outputNode.setEndY(y + STRAIGHT_LENGTH + LITTLE_DIAGONAL_LENGTH_Y);
+    }
 
+    private void changeZeroNodeLoc(double x, double y) {
         zeroNode.setStartX(x + BIG_DIAGONAL_LENGTH_X);
         zeroNode.setStartY(y + (STRAIGHT_LENGTH * 1.5) + LITTLE_DIAGONAL_LENGTH_Y);
         zeroNode.setEndX(x + BIG_DIAGONAL_LENGTH_X + outputNode.getLength());
@@ -102,19 +151,77 @@ public class ALUGraphic extends ComponentGraphic {
 	public void config() {
 		ALUConfigWindow cfg = new ALUConfigWindow("ALU Configuration", this);
 		cfg.showAndWait();
-
 	}
 
 	@Override
-	public void addMouseHandler() {shape.setOnMouseClicked(e-> {
-			if(e.getButton().compareTo(MouseButton.SECONDARY)==0) {
-				this.config();
-			}
-			else if(e.getButton().compareTo(MouseButton.PRIMARY)==0) {
-				//TODO add click and drag;
-			}
-		});
+	public void addMouseHandler() {
+        shape.addEventHandler(MouseEvent.ANY, new ALUGraphicMouseHandler());
 	}
+
+	private class ALUGraphicMouseHandler implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent e) {
+            if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                updateLoc(e.getX(), e.getY());
+            }
+            else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
+                if(e.getButton()==MouseButton.PRIMARY) {
+                    //do we want anything here? maybe highlight it?
+//                        	config();
+                }
+                else {
+                    menu.show(shape, e.getX(),e.getY());
+                }
+            }
+        }
+    }
+
+    protected void createContextMenu() { //this should probably be moved to componentgraphic class
+        MenuItem cfg = createConfigMenuItem();
+        MenuItem del = createDeleteMenuItem();
+
+        menu = new ContextMenu(cfg, del);
+    }
+
+    private MenuItem createConfigMenuItem() {
+        MenuItem cfg = new MenuItem("Config");
+        cfg.setOnAction(e -> config());
+
+        return cfg;
+    }
+
+    private MenuItem createDeleteMenuItem() {
+        MenuItem del = new MenuItem("Delete");
+        del.setOnAction(e -> delete());
+
+        return del;
+    }
+
+    protected void delete() {
+        removeOutputLines();
+        removeFromParent();
+    }
+
+    private void removeFromParent() {
+        Pane parentPane = getParentPane();
+        parentPane.getChildren().removeAll(getGraphics());
+        parentPane.getChildren().removeAll(getValueText());
+        parentPane.getChildren().removeAll(getText());
+    }
+
+    private void removeOutputLines() {
+        Pane parentPane = getParentPane();
+        outputNode.clearLines(parentPane);
+        zeroNode.clearLines(parentPane);
+    }
+
+    private Pane getParentPane() {
+        Pane parentPane;
+        parentPane = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
+
+        return parentPane;
+    }
+
 	@Override
 	public Text[] getValueText() {
 		Text[] t = new Text[] {
@@ -130,6 +237,20 @@ public class ALUGraphic extends ComponentGraphic {
 	}
 
 	public void setOpOrder(ArrayList<ALU.Operation> opOrder) {
-		((ALU)component).setOpOrder(opOrder);
+        try {
+            trySetOpOrder(opOrder);
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
 	}
+
+	private void trySetOpOrder(ArrayList<ALU.Operation> opOrder) throws Exception {
+        if (component instanceof ALU) {
+            ((ALU) component).setOpOrder(opOrder);
+        }
+        else {
+            throw new Exception("Component instance in ALUGraphic is not of type ALU");
+        }
+    }
 }
