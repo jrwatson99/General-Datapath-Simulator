@@ -18,14 +18,15 @@ import logic.components.Component;
 import java.util.ArrayList;
 
 public class ComponentOutputWireNode extends Line {
+
     private static final double LENGTH = 5;
+    private static final double MAX_CONNECTION_DISTANCE = 10.0;
+
     private ArrayList<Line> wireGraphicLines;
     private ComponentGraphic componentGraphic;
     private String name;
     private Wire logicalWire;
     private Text value;
-    
-    private static final double MAX_CONNECTION_DISTANCE = 10.0;
 
     public double getLength() {
         return LENGTH;
@@ -39,11 +40,23 @@ public class ComponentOutputWireNode extends Line {
     public ArrayList<Line> getLines() {return wireGraphicLines;}
 
     public ComponentOutputWireNode(ComponentGraphic parentComponentGraphic, String outputName){
-        setStrokeWidth(3);
-        wireGraphicLines = new ArrayList<Line>();
+        init();
         componentGraphic = parentComponentGraphic;
         name = outputName;
         addOutputNodeClickListener();
+    }
+
+    private void init() {
+        initShape();
+        initValueText();
+    }
+
+    private void initShape() {
+        setStrokeWidth(3);
+        wireGraphicLines = new ArrayList<Line>();
+    }
+
+    private void initValueText() {
         value = new Text();
         value.setFill(Color.RED);
         value.setFont(Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 20));
@@ -58,35 +71,36 @@ public class ComponentOutputWireNode extends Line {
     
     
     private void addOutputNodeClickListener() {
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, new OutputNodeClickListener());
+    }
 
-                if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
-                    Pane parentPane = ((Pane) getParent());
+    private class OutputNodeClickListener implements EventHandler<MouseEvent> {
+        @Override
+        public void handle(MouseEvent e) {
+            if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
+                Pane parentPane = ((Pane) getParent());
 
-                    if (ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
-                        ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode().clearLines(parentPane);
-                        ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
-                    }
-
-                    clearLines(parentPane);
-
-                    //Add first line in wire
-                    Line firstLineHorizontal = new Line(getEndX(), getEndY(), getEndX(), getEndY());
-                    wireGraphicLines.add(firstLineHorizontal);
-                    parentPane.getChildren().add(firstLineHorizontal);
-
-                    Line firstLineVertical = new Line(getEndX(), getEndY(), getEndX(), getEndY());
-                    wireGraphicLines.add(firstLineVertical);
-                    parentPane.getChildren().add(firstLineVertical);
-
-                    ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode((ComponentOutputWireNode)e.getSource());
-
-                    addParentPaneWirePlacingListener(parentPane, (ComponentOutputWireNode)e.getSource());
+                if (ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
+                    ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode().clearLines(parentPane);
+                    ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
                 }
+
+                clearLines(parentPane);
+
+                //Add first line in wire
+                Line firstLineHorizontal = new Line(getEndX(), getEndY(), getEndX(), getEndY());
+                wireGraphicLines.add(firstLineHorizontal);
+                parentPane.getChildren().add(firstLineHorizontal);
+
+                Line firstLineVertical = new Line(getEndX(), getEndY(), getEndX(), getEndY());
+                wireGraphicLines.add(firstLineVertical);
+                parentPane.getChildren().add(firstLineVertical);
+
+                ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode((ComponentOutputWireNode) e.getSource());
+
+                addParentPaneWirePlacingListener(parentPane, (ComponentOutputWireNode) e.getSource());
             }
-        });
+        }
     }
     
     public void updateText() {
