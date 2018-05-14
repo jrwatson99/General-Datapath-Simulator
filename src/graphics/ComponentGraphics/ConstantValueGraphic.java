@@ -96,4 +96,9 @@ public class ConstantValueGraphic extends ComponentGraphic{
 	public void updateWireText() {
 		outputNode.updateText();		
 	}
+
+	@Override
+	protected void removeOutputLines() {
+
+	}
 }

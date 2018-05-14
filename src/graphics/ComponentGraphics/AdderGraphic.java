@@ -40,8 +40,8 @@ public class AdderGraphic extends ComponentGraphic {
 
     public AdderGraphic() {
         init();
+        menu = createContextMenu();
         addMouseHandler();
-        createContextMenu();
     }
 
     private void init() {
@@ -155,50 +155,10 @@ public class AdderGraphic extends ComponentGraphic {
         }
     }
 
-    protected void createContextMenu() { //this should probably be moved to componentgraphic class
-    	MenuItem cfg = createConfigMenuItem();
-    	MenuItem del = createDeleteMenuItem();
-
-        menu = new ContextMenu(cfg, del);
-    }
-
-    private MenuItem createConfigMenuItem() {
-        MenuItem cfg = new MenuItem("Config");
-        cfg.setOnAction(e -> config());
-
-        return cfg;
-    }
-
-    private MenuItem createDeleteMenuItem() {
-        MenuItem del = new MenuItem("Delete");
-        del.setOnAction(e -> delete());
-
-        return del;
-    }
-
-	protected void delete() {
-        removeOutputLines();
-        removeFromParent();
-    }
-
-    private void removeFromParent() {
-        Pane parentPane = getParentPane();
-
-        parentPane.getChildren().removeAll(getGraphics());
-        parentPane.getChildren().removeAll(getValueText());
-        parentPane.getChildren().remove(getText());
-    }
-
-    private void removeOutputLines() {
+    @Override
+    protected void removeOutputLines() {
         Pane parentPane = getParentPane();
         outputNode.clearLines(parentPane);
-    }
-
-    private Pane getParentPane() {
-        Pane parentPane;
-        parentPane = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
-
-        return parentPane;
     }
 
 	@Override

@@ -4,7 +4,7 @@ import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import logic.components.Component;
 
-public class RegisterGraphic extends ComponentGraphic{
+public class RegisterGraphic extends ComponentGraphic {
 
 	@Override
 	public void updateLoc(double x, double y) {
@@ -50,4 +50,8 @@ public class RegisterGraphic extends ComponentGraphic{
 		
 	}
 
+	@Override
+	protected void removeOutputLines() {
+
+	}
 }

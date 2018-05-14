@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import logic.components.BitShifter;
 import logic.components.Component;
 
-public class BitShifterGraphic extends ComponentGraphic{
+public class BitShifterGraphic extends ComponentGraphic {
 
     private Rectangle rectangle;
 
@@ -98,4 +98,9 @@ public class BitShifterGraphic extends ComponentGraphic{
 	public void updateWireText() {
 		outputNode.updateText();		
 	}
+
+	@Override
+    protected void removeOutputLines() {
+
+    }
 }

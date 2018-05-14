@@ -68,4 +68,9 @@ public class WireSplitterGraphic extends ComponentGraphic {
 	public void updateWireText() {
 		outputNode.updateText();		
 	}
+
+	@Override
+	protected void removeOutputLines() {
+
+	}
 }

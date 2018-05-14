@@ -114,4 +114,7 @@ public class ControllerGraphic extends ComponentGraphic {
 		}
 	}
 
+	protected void removeOutputLines() {
+
+	}
 }
