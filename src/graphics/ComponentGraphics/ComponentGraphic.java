@@ -74,10 +74,18 @@ public abstract class ComponentGraphic {
     }
 
     protected ContextMenu createContextMenu() { //this should probably be moved to componentgraphic class
-        MenuItem cfg = createConfigMenuItem();
+        MenuItem[] items;
         MenuItem del = createDeleteMenuItem();
 
-        return new ContextMenu(cfg, del);
+        if (!(this instanceof WireJunctionGraphic)) {
+            MenuItem cfg = createConfigMenuItem();
+            items = new MenuItem[] {cfg, del};
+        }
+        else {
+            items = new MenuItem[] {del};
+        }
+
+        return new ContextMenu(items);
     }
 
     private MenuItem createConfigMenuItem() {
