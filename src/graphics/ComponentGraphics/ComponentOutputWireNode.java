@@ -77,12 +77,12 @@ public class ComponentOutputWireNode extends Line {
     private class OutputNodeClickListener implements EventHandler<MouseEvent> {
         @Override
         public void handle(MouseEvent e) {
-            if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
+            if (ExecutionEnvironment.getPlacingWireStatus() && e.getSource() instanceof ComponentOutputWireNode) {
                 Pane parentPane = ((Pane) getParent());
 
-                if (ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
-                    ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode().clearLines(parentPane);
-                    ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
+                if (ExecutionEnvironment.getWireSelectedStatus()) {
+                    ExecutionEnvironment.getCurrentlySelectedOutputNode().clearLines(parentPane);
+                    ExecutionEnvironment.setWireSelectedStatus(false);
                 }
 
                 clearLines(parentPane);
@@ -96,7 +96,7 @@ public class ComponentOutputWireNode extends Line {
                 wireGraphicLines.add(firstLineVertical);
                 parentPane.getChildren().add(firstLineVertical);
 
-                ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode((ComponentOutputWireNode) e.getSource());
+                ExecutionEnvironment.setCurrentlySelectedOutputNode((ComponentOutputWireNode) e.getSource());
 
                 addParentPaneWirePlacingListener(parentPane, (ComponentOutputWireNode) e.getSource());
             }
@@ -105,7 +105,7 @@ public class ComponentOutputWireNode extends Line {
     
     public void updateText() {
     	if(value != null && logicalWire !=null) {
-    		value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
+    		value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getRadix()));
     	}
     }
     private class TextUpdater implements WireListener{
@@ -118,7 +118,7 @@ public class ComponentOutputWireNode extends Line {
 
 		@Override
 		public void onValueChange() {
-			value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getExecutionEnvironment().getRadix()));
+			value.setText(logicalWire.getValue().toString(ExecutionEnvironment.getRadix()));
 
             try {
                 outputComponent.Update();
@@ -134,7 +134,7 @@ public class ComponentOutputWireNode extends Line {
         parentPane.addEventHandler(MouseEvent.ANY, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus()) {
+                if (ExecutionEnvironment.getPlacingWireStatus()) {
                     if (e.getEventType() == MouseEvent.MOUSE_MOVED) {
 
                         Line lastLineVertical = outputNode.getLines().get(outputNode.getLines().size() - 1);
@@ -146,9 +146,9 @@ public class ComponentOutputWireNode extends Line {
                         lastLineVertical.setEndX(e.getX());
                         lastLineVertical.setEndY(e.getY());
 
-                        ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(true);
+                        ExecutionEnvironment.setWireSelectedStatus(true);
                     }
-                    else if (e.getEventType() == MouseEvent.MOUSE_CLICKED && ExecutionEnvironment.getExecutionEnvironment().getWireSelectedStatus()) {
+                    else if (e.getEventType() == MouseEvent.MOUSE_CLICKED && ExecutionEnvironment.getWireSelectedStatus()) {
 
                         ComponentInputWireNode connectingInputNode = null;
                         ComponentOutputWireNode newOutputNode = null;
@@ -165,7 +165,7 @@ public class ComponentOutputWireNode extends Line {
                                 if (distanceBetweenWireAndNode < MAX_CONNECTION_DISTANCE) {
                                     connectingInputNode = (ComponentInputWireNode) nodeInPane;
                                 }
-                            } else if ((nodeInPane instanceof ComponentOutputWireNode) && !((ComponentOutputWireNode) nodeInPane).equals((ComponentOutputWireNode) ExecutionEnvironment.getExecutionEnvironment().getCurrentlySelectedOutputNode())) {
+                            } else if ((nodeInPane instanceof ComponentOutputWireNode) && !((ComponentOutputWireNode) nodeInPane).equals((ComponentOutputWireNode) ExecutionEnvironment.getCurrentlySelectedOutputNode())) {
                                 double distanceBetweenWireAndNode =
                                         Math.sqrt(
                                             Math.pow(outputNode.getLines().get(outputNode.getLines().size() - 1).getEndX() - ((ComponentOutputWireNode) nodeInPane).getStartX(), 2)
@@ -225,8 +225,8 @@ public class ComponentOutputWireNode extends Line {
                             outputComponent.connectOutputWire(outputNode.getWire(), outputNode.getName());
                             inputComponent.connectInputWire(outputNode.getWire(), connectingInputNode.getName());
 
-                            ExecutionEnvironment.getExecutionEnvironment().setWireSelectedStatus(false);
-                            ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode(null);
+                            ExecutionEnvironment.setWireSelectedStatus(false);
+                            ExecutionEnvironment.setCurrentlySelectedOutputNode(null);
                             getParent().removeEventHandler(MouseEvent.ANY, this);
                         } else if (newOutputNode != null) {
 
@@ -249,8 +249,8 @@ public class ComponentOutputWireNode extends Line {
                             newOutputNode.getLines().add(firstLineVertical);
                             parentPane.getChildren().add(firstLineVertical);
 
-                            ExecutionEnvironment.getExecutionEnvironment().setCurrentlySelectedOutputNode(newOutputNode);
-
+                            ExecutionEnvironment.setCurrentlySelectedOutputNode(newOutputNode);
+                            getParent().removeEventHandler(MouseEvent.ANY, this);
                             addParentPaneWirePlacingListener(parentPane, newOutputNode);
                         }
                         else {

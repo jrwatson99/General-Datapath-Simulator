@@ -118,7 +118,7 @@ public abstract class ComponentGraphic {
 
     protected Pane getParentPane() {
         Pane parentPane;
-        parentPane = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
+        parentPane = ExecutionEnvironment.get().getDataPathWindow().getPane();
 
         return parentPane;
     }

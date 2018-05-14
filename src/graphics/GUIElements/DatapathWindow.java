@@ -21,7 +21,7 @@ public class DatapathWindow extends ScrollPane {
         this.setContent(datapathPane);
         this.setFitToHeight(true);
         this.setFitToWidth(true);
-        ExecutionEnvironment.getExecutionEnvironment().setDataPathWindow(this);
+        ExecutionEnvironment.get().setDataPathWindow(this);
     }
     
     public Pane getPane() {return datapathPane;}
