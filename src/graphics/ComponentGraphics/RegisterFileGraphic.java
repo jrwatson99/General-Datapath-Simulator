@@ -113,4 +113,9 @@ public class RegisterFileGraphic extends MemoryGraphic {
 	  	readData1.updateText();
 		readData2.updateText();
 	}
+
+	@Override
+	protected void removeOutputLines() {
+
+	}
 }

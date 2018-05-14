@@ -39,8 +39,8 @@ public class MUXGraphic extends ComponentGraphic {
     
     public MUXGraphic() {
         init();
+        menu = createContextMenu();
         addMouseHandler();
-        createContextMenu();
     }
 
     private void init() {
@@ -239,49 +239,10 @@ public class MUXGraphic extends ComponentGraphic {
         }
     }
 
-    private void createContextMenu() { //this should probably be moved to componentgraphic class
-        MenuItem cfg = createConfigMenuItem();
-        MenuItem del = createDeleteMenuItem();
-
-        menu = new ContextMenu(cfg, del);
-    }
-
-    private MenuItem createConfigMenuItem() {
-        MenuItem cfg = new MenuItem("Config");
-        cfg.setOnAction(e -> config());
-
-        return cfg;
-    }
-
-    private MenuItem createDeleteMenuItem() {
-        MenuItem del = new MenuItem("Delete");
-        del.setOnAction(e -> delete());
-
-        return del;
-    }
-
-    private void delete() {
-        removeOutputLines();
-        removeFromParent();
-    }
-
-    private void removeFromParent() {
-        Pane parentPane = getParentPane();
-        parentPane.getChildren().removeAll(getGraphics());
-        parentPane.getChildren().removeAll(getValueText());
-        parentPane.getChildren().removeAll(getText());
-    }
-
-    private void removeOutputLines() {
+    @Override
+    protected void removeOutputLines() {
         Pane parentPane = getParentPane();
         out.clearLines(parentPane);
-    }
-
-    private Pane getParentPane() {
-        Pane parentPane;
-        parentPane = ExecutionEnvironment.getExecutionEnvironment().getDataPathWindow().getPane();
-
-        return parentPane;
     }
 
     @Override

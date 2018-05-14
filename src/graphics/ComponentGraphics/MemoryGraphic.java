@@ -8,7 +8,7 @@ import javafx.scene.shape.Shape;
 import logic.components.Component;
 import logic.components.memories.Memory;
 
-public abstract class MemoryGraphic extends ComponentGraphic{
+public abstract class MemoryGraphic extends ComponentGraphic {
 	private Rectangle rectangle;
 	
 

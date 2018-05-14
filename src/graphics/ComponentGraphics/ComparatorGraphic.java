@@ -120,4 +120,9 @@ public class ComparatorGraphic extends ComponentGraphic {
     	outputGTNode.updateText();
     	outputEQNode.updateText();
 	}
+
+	@Override
+    protected void removeOutputLines() {
+
+    }
 }

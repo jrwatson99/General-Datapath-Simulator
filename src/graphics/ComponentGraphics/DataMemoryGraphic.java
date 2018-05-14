@@ -102,4 +102,9 @@ public class  DataMemoryGraphic extends MemoryGraphic {
 	public void updateWireText() {
     	readData.updateText();
 	}
+
+	@Override
+	protected void removeOutputLines() {
+
+	}
 }
