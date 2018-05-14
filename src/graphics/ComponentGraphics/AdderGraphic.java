@@ -134,25 +134,7 @@ public class AdderGraphic extends ComponentGraphic {
 
     @Override
     public void addMouseHandler() {
-        shape.addEventHandler(MouseEvent.ANY, new AdderGraphicMouseHandler());
-    }
-
-    private class AdderGraphicMouseHandler implements EventHandler<MouseEvent> {
-        @Override
-        public void handle(MouseEvent e) {
-            if (e.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                updateLoc(e.getX(), e.getY());
-            }
-            else if (e.getEventType() == MouseEvent.MOUSE_CLICKED) {
-                if(e.getButton() == MouseButton.PRIMARY) {
-                    //do we want anything here? maybe highlight it?
-                    //                        	config();
-                }
-                else {
-                    menu.show(shape, e.getX(), e.getY());
-                }
-            }
-        }
+        shape.addEventHandler(MouseEvent.ANY, new ComponentGraphicMouseHandler(menu, getGraphics()));
     }
 
     @Override
