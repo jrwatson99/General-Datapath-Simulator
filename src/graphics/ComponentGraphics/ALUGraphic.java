@@ -164,7 +164,6 @@ public class ALUGraphic extends ComponentGraphic {
         zeroNode.clearLines(parentPane);
     }
 
-
 	@Override
 	public Text[] getValueText() {
 		Text[] t = new Text[] {
@@ -173,6 +172,7 @@ public class ALUGraphic extends ComponentGraphic {
 		};
 		return t;
 	}
+
 	@Override
 	public void updateWireText() {
 		outputNode.updateText();
