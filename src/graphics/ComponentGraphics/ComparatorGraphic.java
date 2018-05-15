@@ -163,8 +163,8 @@ public class ComparatorGraphic extends ComponentGraphic {
 	@Override
     protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        outputLTNode.clearLines(parentPane);
-        outputEQNode.clearLines(parentPane);
-        outputGTNode.clearLines(parentPane);
+        outputLTNode.clearLines();
+        outputEQNode.clearLines();
+        outputGTNode.clearLines();
     }
 }

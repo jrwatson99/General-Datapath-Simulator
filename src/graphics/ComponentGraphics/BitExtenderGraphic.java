@@ -125,7 +125,7 @@ public class BitExtenderGraphic extends ComponentGraphic {
     @Override
     protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        outputNode.clearLines(parentPane);
+        outputNode.clearLines();
     }
 
     @Override
