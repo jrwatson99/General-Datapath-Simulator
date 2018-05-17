@@ -111,11 +111,11 @@ public class ComponentOutputWireNode extends Line {
 
             addParentPaneWirePlacingHandler(getParentPane(), outputNode);
         }
+    }
 
-        private void addFirstLinesToNodeAndWindow() {
-            addLine(new Line(getEndX(), getEndY(), getEndX(), getEndY()));
-            addLine(new Line(getEndX(), getEndY(), getEndX(), getEndY()));
-        }
+    private void addFirstLinesToNodeAndWindow() {
+        addLine(new Line(getEndX(), getEndY(), getEndX(), getEndY()));
+        addLine(new Line(getEndX(), getEndY(), getEndX(), getEndY()));
     }
 
     private void addLine(Line line) {
@@ -197,12 +197,12 @@ public class ComponentOutputWireNode extends Line {
         private void handleMouseClicked() {
             ArrayList<ComponentInputWireNode> proximalInputNodes = findProximalInputNodes();
             if (proximalInputNodes.size() == 1) {
-                connectOutputToInput(findProximalInputNodes().get(0));
+                connectOutputToInput(proximalInputNodes.get(0));
             }
             else {
                 ArrayList<ComponentOutputWireNode> proximalOutputNodes = findProximalOutputNodes();
                 if (proximalOutputNodes.size() == 1) {
-                    changeSelectedOutputNode(findProximalOutputNodes().get(0));
+                    changeSelectedOutputNode(proximalOutputNodes.get(0));
                 }
                 else {
                     setWireJoint();
@@ -281,13 +281,13 @@ public class ComponentOutputWireNode extends Line {
         }
 
         private void moveValueTextLoc() {
-            Line lastLineVertical = getLastLineVertical();
+            Line lastLineVertical = outputNode.getLastLineVertical();
             outputNode.getValue().setX(lastLineVertical.getStartX());
             outputNode.getValue().setY(lastLineVertical.getStartY());
         }
 
         private void alignWireWithInput(ComponentInputWireNode connectingInputNode) {
-            if (connectingInputNode.getStartY() != getLastLineHorizontal().getStartY()) {
+            if (connectingInputNode.getStartY() != outputNode.getLastLineHorizontal().getStartY()) {
                 alignWireWithInputDifferentY(connectingInputNode);
             }
             else {
@@ -296,7 +296,7 @@ public class ComponentOutputWireNode extends Line {
         }
 
         private void alignWireWithInputDifferentY(ComponentInputWireNode connectingInputNode) {
-            if (connectingInputNode.getStartX() > getLastLineHorizontal().getStartX()) {
+            if (connectingInputNode.getStartX() > outputNode.getLastLineHorizontal().getStartX()) {
                 double intermediateX = getWireTurnX(connectingInputNode);
                 moveLastLines(intermediateX, connectingInputNode.getStartY());
                 outputNode.addLine(new Line(intermediateX, connectingInputNode.getStartY(), connectingInputNode.getStartX(), connectingInputNode.getStartY()));
@@ -316,24 +316,10 @@ public class ComponentOutputWireNode extends Line {
         }
 
         private void changeSelectedOutputNode(ComponentOutputWireNode newOutputNode) {
-            //remove all lines to reset current output node
-            for (int i = outputNode.getLines().size() - 1; i >= 0; i--) {
-                parentPane.getChildren().remove(outputNode.getLines().remove(i));
-            }
+            outputNode.clearLines();
 
-            //remove all lines from the new output node to reset it
-            for (int i = newOutputNode.getLines().size() - 1; i >= 0; i--) {
-                parentPane.getChildren().remove(newOutputNode.getLines().remove(i));
-            }
-
-            //Add first line in wire
-            Line firstLineHorizontal = new Line(newOutputNode.getEndX(), newOutputNode.getEndY(), newOutputNode.getEndX(), newOutputNode.getEndY());
-            newOutputNode.getLines().add(firstLineHorizontal);
-            parentPane.getChildren().add(firstLineHorizontal);
-
-            Line firstLineVertical = new Line(newOutputNode.getEndX(), newOutputNode.getEndY(), newOutputNode.getEndX(), newOutputNode.getEndY());
-            newOutputNode.getLines().add(firstLineVertical);
-            parentPane.getChildren().add(firstLineVertical);
+            newOutputNode.clearLines();
+            newOutputNode.addFirstLinesToNodeAndWindow();
 
             ExecutionEnvironment.setCurrentlySelectedOutputNode(newOutputNode);
             getParent().removeEventHandler(MouseEvent.ANY, this);
@@ -342,15 +328,9 @@ public class ComponentOutputWireNode extends Line {
 
         private void setWireJoint() {
             Line lastLineVertical = outputNode.getLastLineVertical();
-            Line lastLineHorizontal = outputNode.getLastLineHorizontal();
 
-            Line newLineVertical = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
-            outputNode.getLines().add(newLineVertical);
-            parentPane.getChildren().add(newLineVertical);
-
-            Line newLineHorizontal = new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY());
-            outputNode.getLines().add(newLineHorizontal);
-            parentPane.getChildren().add(newLineHorizontal);
+            outputNode.addLine(new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY()));
+            outputNode.addLine(new Line(lastLineVertical.getEndX(), lastLineVertical.getEndY(), lastLineVertical.getEndX(), lastLineVertical.getEndY()));
         }
 
         private void cancelWirePlacement() {
@@ -380,7 +360,7 @@ public class ComponentOutputWireNode extends Line {
             int numberOfNodesInWindow = parentPane.getChildren().size();
             for (int i = 0; i < numberOfNodesInWindow; i++) {
                 Node nodeInPane = outputNode.getParentPane().getChildren().get(i);
-                if (nodeInPane instanceof ComponentOutputWireNode) {
+                if (nodeInPane instanceof ComponentOutputWireNode && !nodeInPane.equals(outputNode)) {
                     if (getDistanceBetweenWireAndNode(nodeInPane) < MAX_CONNECTION_DISTANCE) {
                         proximalOutputNodes.add((ComponentOutputWireNode) nodeInPane);
                     }
