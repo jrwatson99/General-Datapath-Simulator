@@ -84,8 +84,8 @@ public class ComponentListElement extends HBox {
                 }
                 if (newComponentGraphic != null) {
 
-                    if (ExecutionEnvironment.getExecutionEnvironment().getPlacingWireStatus()) {
-                        ExecutionEnvironment.getExecutionEnvironment().stopPlacingWire();
+                    if (ExecutionEnvironment.get().getPlacingWireStatus()) {
+                        ExecutionEnvironment.get().stopPlacingWire();
                     }
 
                 	((Pane)datapathWindow.getContent()).getChildren().addAll(newComponentGraphic.getGraphics());    

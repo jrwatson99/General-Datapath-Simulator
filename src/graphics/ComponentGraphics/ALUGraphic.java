@@ -160,8 +160,8 @@ public class ALUGraphic extends ComponentGraphic {
 
     protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        outputNode.clearLines(parentPane);
-        zeroNode.clearLines(parentPane);
+        outputNode.clearLines();
+        zeroNode.clearLines();
     }
 
 	@Override

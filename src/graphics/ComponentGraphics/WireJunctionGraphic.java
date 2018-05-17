@@ -110,7 +110,7 @@ public class WireJunctionGraphic extends ComponentGraphic {
 	@Override
 	protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        outputANode.clearLines(parentPane);
-        outputBNode.clearLines(parentPane);
+        outputANode.clearLines();
+        outputBNode.clearLines();
 	}
 }

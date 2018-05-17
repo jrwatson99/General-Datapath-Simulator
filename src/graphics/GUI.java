@@ -50,15 +50,15 @@ public class GUI extends Application {
         MenuItem dec = new MenuItem("decimal");
         MenuItem hex = new MenuItem("hexadecimal");
         bin.setOnAction(e -> {
-        	ExecutionEnvironment.getExecutionEnvironment().setRadix(2);
+        	ExecutionEnvironment.get().setRadix(2);
         	datapathWindow.updateText();
         }); 
         dec.setOnAction( e -> {
-        	ExecutionEnvironment.getExecutionEnvironment().setRadix(10);
+        	ExecutionEnvironment.get().setRadix(10);
         	datapathWindow.updateText();
         }); 
         hex.setOnAction(e -> {
-    		ExecutionEnvironment.getExecutionEnvironment().setRadix(16);
+    		ExecutionEnvironment.get().setRadix(16);
         	datapathWindow.updateText();
         });
         optionsMenu.getItems().addAll(bin,dec,hex);

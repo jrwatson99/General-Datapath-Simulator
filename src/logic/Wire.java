@@ -27,6 +27,10 @@ public class Wire {
 	
 	public DataValue getValue() {return value;}
 
+	public String getValueAsString() {
+		return getValue().toString(ExecutionEnvironment.getRadix());
+	}
+
 	public void addWireListener(WireListener wireListener) {
 		listener=wireListener;
 	}

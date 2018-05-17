@@ -242,7 +242,7 @@ public class MUXGraphic extends ComponentGraphic {
     @Override
     protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        out.clearLines(parentPane);
+        out.clearLines();
     }
 
     @Override
