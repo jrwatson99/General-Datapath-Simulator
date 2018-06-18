@@ -4,9 +4,12 @@ import javafx.scene.shape.Line;
 import logic.components.Component;
 
 public class ComponentInputWireNode extends Line {
+
     private static final double LENGTH = 5;
-    private ComponentGraphic componentGraphic;
+
     private String name;
+
+    private ComponentGraphic componentGraphic;
     private ComponentOutputWireNode outputNode;
 
     public double getLength() {

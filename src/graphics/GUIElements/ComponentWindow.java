@@ -46,12 +46,12 @@ public class ComponentWindow extends ScrollPane {
         placingWireButton.setOnAction(new EventHandler<ActionEvent>() {
            @Override
             public void handle(ActionEvent e) {
-               ExecutionEnvironment.getExecutionEnvironment().togglePlacingWire();
+               ExecutionEnvironment.get().togglePlacingWire();
                getScene().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
                    @Override
                    public void handle(KeyEvent event) {
                        if (event.getCode() == KeyCode.ESCAPE) {
-                           ExecutionEnvironment.getExecutionEnvironment().stopPlacingWire();
+                           ExecutionEnvironment.get().stopPlacingWire();
                            getScene().removeEventHandler(KeyEvent.KEY_PRESSED, this);
                        }
                    }

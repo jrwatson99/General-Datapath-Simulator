@@ -19,30 +19,50 @@ public class ExecutionEnvironment {
 	private boolean wireSelectedStatus;
 	private ComponentOutputWireNode currentlySelectedOutputNode;
 
-	public void setRadix(int rad) {radix = rad;}
-	public int getRadix() {return radix;}
+	public static void setRadix(int rad) {
+	    EESingleton.radix = rad;
+	}
 
-	public void startPlacingWire() {
-		placingWireStatus = true;
+	public static int getRadix() {
+	    return EESingleton.radix;
 	}
-	public void stopPlacingWire() {
-		placingWireStatus = false;
+
+	private static void startPlacingWire() {
+	    EESingleton.placingWireStatus = true;
 	}
-	public void togglePlacingWire() {
-		if (placingWireStatus) {
+
+	public static void stopPlacingWire() {
+	    EESingleton.placingWireStatus = false;
+	}
+
+	public static void togglePlacingWire() {
+		if (EESingleton.placingWireStatus) {
 			stopPlacingWire();
 		}
 		else {
 			startPlacingWire();
 		}
 	}
-    public boolean getPlacingWireStatus() { return placingWireStatus;}
 
-	public void setWireSelectedStatus(boolean isWireSelected) { wireSelectedStatus = isWireSelected;}
-	public boolean getWireSelectedStatus() { return wireSelectedStatus;}
+    public static boolean getPlacingWireStatus() {
+	    return EESingleton.placingWireStatus;
+	}
 
-    public void setCurrentlySelectedOutputNode(ComponentOutputWireNode outputNode) { currentlySelectedOutputNode = outputNode;}
-    public ComponentOutputWireNode getCurrentlySelectedOutputNode() { return currentlySelectedOutputNode;}
+	public static void setWireSelectedStatus(boolean isWireSelected) {
+	    EESingleton.wireSelectedStatus = isWireSelected;
+	}
+
+	public static boolean getWireSelectedStatus() {
+	    return EESingleton.wireSelectedStatus;
+	}
+
+    public static void setCurrentlySelectedOutputNode(ComponentOutputWireNode outputNode) {
+	    EESingleton.currentlySelectedOutputNode = outputNode;
+	}
+
+    public static ComponentOutputWireNode getCurrentlySelectedOutputNode() {
+	    return EESingleton.currentlySelectedOutputNode;
+	}
 
 	//Do not instantiate any instance other than EESingleton
 	private ExecutionEnvironment() {
@@ -51,11 +71,15 @@ public class ExecutionEnvironment {
 		currentlySelectedOutputNode = null;
 	}
 	
-	public static ExecutionEnvironment getExecutionEnvironment() { return EESingleton;}
-	public DatapathWindow getDataPathWindow() {
-		return dpWindow;
+	public static ExecutionEnvironment get() {
+	    return EESingleton;
 	}
-	public void setDataPathWindow(DatapathWindow newDPWindow) {this.dpWindow = newDPWindow;}
-	
 
+	public static DatapathWindow getDataPathWindow() {
+		return EESingleton.dpWindow;
+	}
+
+	public static void setDataPathWindow(DatapathWindow newDPWindow) {
+	    EESingleton.dpWindow = newDPWindow;
+	}
 }

@@ -127,6 +127,6 @@ public class BitShifterGraphic extends ComponentGraphic {
 	@Override
     protected void removeOutputLines() {
         Pane parentPane = getParentPane();
-        outputNode.clearLines(parentPane);
+        outputNode.clearLines();
     }
 }
