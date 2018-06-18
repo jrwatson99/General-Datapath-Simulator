@@ -110,7 +110,22 @@ public class AdderGraphic extends ComponentGraphic {
         updateTextLoc(x + 2,y + STRAIGHT_LENGTH);
     }
 
+    private void disconnectWires() {
+        if (inputANode.getOutputNode() != null) {
+            inputANode.getOutputNode().disconnectWire();
+            inputANode.setOutputNode(null);
+        }
+
+        if (inputBNode.getOutputNode() != null) {
+            inputBNode.getOutputNode().disconnectWire();
+            inputBNode.setOutputNode(null);
+        }
+
+        outputNode.disconnectWire();
+    }
+
     public void updateLoc(double x, double y) {
+        disconnectWires();
     	updateNameTextLoc(x, y);
     	changeShapeLoc(x, y);
     	changeNodeLocs(x, y);
