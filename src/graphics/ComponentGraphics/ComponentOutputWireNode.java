@@ -28,6 +28,7 @@ public class ComponentOutputWireNode extends Line {
     private String name;
     private Wire logicalWire;
     private Text value;
+    private ComponentInputWireNode inputNode;
 
     public double getLength() {
         return LENGTH;
@@ -63,7 +64,12 @@ public class ComponentOutputWireNode extends Line {
         value.setFont(Font.font("Times New Roman", FontWeight.BOLD, FontPosture.REGULAR, 20));
     }
 
-    private void disconnectWire() {
+    public void disconnectWire() {
+        value.setY(-40);
+        if (inputNode != null) {
+            inputNode.setOutputNode(null);
+            inputNode = null;
+        }
         logicalWire = null;
         clearLines();
     }
@@ -243,6 +249,7 @@ public class ComponentOutputWireNode extends Line {
                 previouslyConnectedOutputNode.disconnectWire();
             }
 
+            inputNode = connectingInputNode;
             connectingInputNode.setOutputNode(outputNode);
             moveValueTextLoc();
             Wire connectingWire = createWire(connectingInputNode);
