@@ -46,21 +46,21 @@ public class ComponentWindow extends ScrollPane {
         placingWireButton.setOnAction(new EventHandler<ActionEvent>() {
            @Override
             public void handle(ActionEvent e) {
-               ExecutionEnvironment.get().togglePlacingWire();
+               ExecutionEnvironment.togglePlacingWire();
                getScene().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
                    @Override
                    public void handle(KeyEvent event) {
                        if (event.getCode() == KeyCode.ESCAPE) {
-                           ExecutionEnvironment.get().stopPlacingWire();
+                           ExecutionEnvironment.stopPlacingWire();
                            getScene().removeEventHandler(KeyEvent.KEY_PRESSED, this);
                        }
                    }
                });
            }
         });
-
         VBox componentList = new VBox();
         componentList.getChildren().add(placingWireButton);
+        componentList.getChildren().add(ExecutionEnvironment.getClockButton());
 
         int i = 0;
         for (i = 0; i < componentNames.length; i++) {
