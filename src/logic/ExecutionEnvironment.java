@@ -1,6 +1,8 @@
 package logic;
 
+import graphics.ComponentGraphics.ClockGraphic;
 import graphics.ComponentGraphics.ComponentOutputWireNode;
+import graphics.GUIElements.ClockButton;
 import graphics.GUIElements.DatapathWindow;
 
 /*
@@ -18,6 +20,7 @@ public class ExecutionEnvironment {
 	private boolean placingWireStatus;
 	private boolean wireSelectedStatus;
 	private ComponentOutputWireNode currentlySelectedOutputNode;
+	private ClockButton clockButton;
 
 	public static void setRadix(int rad) {
 	    EESingleton.radix = rad;
@@ -64,11 +67,20 @@ public class ExecutionEnvironment {
 	    return EESingleton.currentlySelectedOutputNode;
 	}
 
+	public static ClockButton getClockButton() {
+	    return EESingleton.clockButton;
+    }
+
+	public static void addClockGraphic(ClockGraphic clockGraphic) {
+	    EESingleton.clockButton.addClockToList(clockGraphic);
+    }
+
 	//Do not instantiate any instance other than EESingleton
 	private ExecutionEnvironment() {
 		placingWireStatus = false;
 		wireSelectedStatus = false;
 		currentlySelectedOutputNode = null;
+		clockButton = new ClockButton();
 	}
 	
 	public static ExecutionEnvironment get() {
